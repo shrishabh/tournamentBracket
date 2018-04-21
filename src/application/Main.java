@@ -77,8 +77,6 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-		@Override
-	public void start(Stage primaryStage) {
 			primaryStage.setTitle("Tournament Bracket");
 			primaryStage.show();
 			primaryStage.setTitle("Stage and Scene");
