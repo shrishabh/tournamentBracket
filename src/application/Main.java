@@ -1,5 +1,8 @@
-package src.applicationapplication;
+package src.application;
 	
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -9,7 +12,8 @@ import javafx.scene.layout.GridPane;
 
 
 public class Main extends Application {
-	Challenger[] list;
+	private List<Challenger> list = new ArrayList<Challenger>();
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
