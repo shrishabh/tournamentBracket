@@ -32,8 +32,8 @@ public class Main extends Application {
 			primaryStage.setTitle("Stage and Scene");
 			BorderPane bPane = new BorderPane();
 			/////////
-			int N = 2; // must be a power of 2 
-			 Label teams[] = new Label[N];
+			 Label teams[] = new Label[list.size()];
+			 for(int teams)
 			 GridPane grid = new GridPane();
 			 int column = 0;
 			 if(teams.length == 1)
