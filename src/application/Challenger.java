@@ -19,6 +19,11 @@ public class Challenger {
 		this.name = "";
 	}
 
+	public Challenger(String name,int seed) {
+		this.seed = seed;
+		this.rank = 0;
+		this.name = name;
+	}
 	/**
 	 * @return the seed
 	 */

@@ -1,6 +1,9 @@
 package src.application;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,7 +15,60 @@ import javafx.scene.layout.GridPane;
 
 
 public class Main extends Application {
-	private List<Challenger> list = new ArrayList<Challenger>();
+	private static List<Challenger> list = new ArrayList<Challenger>();
+	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
+	
+	public static void main(String[] args) {
+			
+		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
+		processFile(fileName);
+		if(checkForNumTeams()){
+			for (Challenger temp : list) {
+				System.out.println(temp.getName());
+			}
+			launch();
+		}
+		else {
+			System.out.println("Please enter valid number of teams");
+			System.exit(-1);
+		}
+		
+	}
+	
+	private static void processFile(String fileName) {
+		File inputFile = null;
+		Scanner sc = null;
+		
+		try {
+			inputFile = new File(fileName);
+			sc = new Scanner(inputFile);
+			int seed = 1;
+			Challenger newChallenger;
+			while(sc.hasNextLine()) {
+				String name = sc.nextLine();
+				newChallenger = new Challenger(name,seed);
+				list.add(newChallenger);
+				seed = seed + 1;
+			}
+			sc.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.exit(-1);
+		}
+	}
+	
+	private static boolean checkForNumTeams(){
+		int numTeams = list.size();
+		boolean checkPassed = false;
+		for (int num : allowedTeams) {
+			if (num == numTeams) {
+				checkPassed = true;
+				break;
+			}
+		}
+		return checkPassed;
+		
+	}
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -34,9 +90,5 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 }
