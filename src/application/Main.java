@@ -38,7 +38,48 @@ public class Main extends Application {
 			System.out.println("Please enter valid number of teams");
 			System.exit(-1);
 		}
-		primaryStage.setTitle("Tournament Bracket");
+
+	
+	private static void processFile(String fileName) {
+		File inputFile = null;
+		Scanner sc = null;
+		
+		try {
+			inputFile = new File(fileName);
+			sc = new Scanner(inputFile);
+			int seed = 1;
+			Challenger newChallenger;
+			while(sc.hasNextLine()) {
+				String name = sc.nextLine();
+				newChallenger = new Challenger(name,seed);
+				list.add(newChallenger);
+				seed = seed + 1;
+			}
+			sc.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.exit(-1);
+		}
+	}
+	
+	private static boolean checkForNumTeams(){
+		int numTeams = list.size();
+		boolean checkPassed = false;
+		for (int num : allowedTeams) {
+			if (num == numTeams) {
+				checkPassed = true;
+				break;
+			}
+		}
+		return checkPassed;
+		
+	}
+	
+	@Override
+	public void start(Stage primaryStage) {
+		@Override
+	public void start(Stage primaryStage) {
+			primaryStage.setTitle("Tournament Bracket");
 			primaryStage.show();
 			primaryStage.setTitle("Stage and Scene");
 			BorderPane bPane = new BorderPane();
@@ -86,61 +127,6 @@ public class Main extends Application {
 	primaryStage.setScene(scene);
 	primaryStage.show();
 	}
-	
-	private static void processFile(String fileName) {
-		File inputFile = null;
-		Scanner sc = null;
-		
-		try {
-			inputFile = new File(fileName);
-			sc = new Scanner(inputFile);
-			int seed = 1;
-			Challenger newChallenger;
-			while(sc.hasNextLine()) {
-				String name = sc.nextLine();
-				newChallenger = new Challenger(name,seed);
-				list.add(newChallenger);
-				seed = seed + 1;
-			}
-			sc.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			System.exit(-1);
-		}
-	}
-	
-	private static boolean checkForNumTeams(){
-		int numTeams = list.size();
-		boolean checkPassed = false;
-		for (int num : allowedTeams) {
-			if (num == numTeams) {
-				checkPassed = true;
-				break;
-			}
-		}
-		return checkPassed;
-		
-	}
-	
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			
-			GridPane grid = new GridPane();
-			Label[] teams = new Label[list.size()];
-			for(int i=0; i<list.size()/2; i++)
-			{
-				grid.add(teams[i], 0, i);
-				grid.add(teams[i], 0, i);
-				grid.add(teams[i], 0, i);
-			}
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
 		}
 	}
 }
