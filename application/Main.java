@@ -1,4 +1,4 @@
-package src.application;
+package application;
 	
 import java.io.File;
 import java.util.ArrayList;
@@ -126,18 +126,18 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
-		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
-		processFile(fileName);
-		if(checkForNumTeams()){
-			for (Challenger temp : list) {
-				System.out.println(temp.getName());
-			}
-			launch();
-		}
-		else {
-			System.out.println("Please enter valid number of teams");
-			System.exit(-1);
-		}
+		launch();
+//		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
+//		processFile(fileName);
+//		if(checkForNumTeams()){
+//			for (Challenger temp : list) {
+//				System.out.println(temp.getName());
+//			}
+//			launch();
+//		}
+//		else {
+//			System.out.println("Please enter valid number of teams");
+//			System.exit(-1);
+//		}
 	}
 }

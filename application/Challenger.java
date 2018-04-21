@@ -1,7 +1,7 @@
 /**
  * 
  */
-package src.application;
+package application;
 
 /**
  * @author rkhandelwal
