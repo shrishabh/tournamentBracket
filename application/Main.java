@@ -14,8 +14,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+<<<<<<< HEAD:application/Main.java
+<<<<<<< HEAD:src/application/Main.java
+import javafx.scene.layout.VBox;
+=======
+=======
+>>>>>>> a61bd9116cc62641cbcfda0995c20ade257322e8:application/Main.java
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+>>>>>>> a61bd9116cc62641cbcfda0995c20ade257322e8:application/Main.java
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -70,8 +77,8 @@ public class Main extends Application {
 			 /////////
 			
 			primaryStage.setTitle("TextField");
-			HBox hbox = new HBox();
-			Scene scene = new Scene(hbox, 1500, 800, Color.DARKGRAY);
+			VBox hbox = new VBox();
+			Scene scene = new Scene(hbox, 50, 50, Color.DARKGRAY);
 			
 			Label label = new Label();
 			label.setAlignment(Pos.CENTER);
@@ -163,6 +170,24 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+<<<<<<< HEAD:application/Main.java
+<<<<<<< HEAD:src/application/Main.java
+		launch(args);
+		/* String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
+		processFile(fileName);
+		if(checkForNumTeams()){
+			for (Challenger temp : list) {
+				System.out.println(temp.getName());
+			}
+			launch();
+		}
+		else {
+			System.out.println("Please enter valid number of teams");
+			System.exit(-1);
+		} */
+=======
+=======
+>>>>>>> a61bd9116cc62641cbcfda0995c20ade257322e8:application/Main.java
 		launch();
 //		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
 //		processFile(fileName);
@@ -176,5 +201,9 @@ public class Main extends Application {
 //			System.out.println("Please enter valid number of teams");
 //			System.exit(-1);
 //		}
+<<<<<<< HEAD:application/Main.java
+>>>>>>> a61bd9116cc62641cbcfda0995c20ade257322e8:application/Main.java
+=======
+>>>>>>> a61bd9116cc62641cbcfda0995c20ade257322e8:application/Main.java
 	}
 }
