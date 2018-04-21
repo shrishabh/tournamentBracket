@@ -1,5 +1,5 @@
 package src.application;
-
+	
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -24,22 +23,58 @@ public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
 	
-	public static void main(String[] args) {
-			
-		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
-		processFile(fileName);
-		if(checkForNumTeams()){
-			for (Challenger temp : list) {
-				System.out.println(temp.getName());
-			}
-			launch();
-		}
-		else {
-			System.out.println("Please enter valid number of teams");
-			System.exit(-1);
-		}
-
 	
+	@Override
+	public void start(Stage primaryStage) {
+			primaryStage.setTitle("Tournament Bracket");
+			primaryStage.show();
+			primaryStage.setTitle("Stage and Scene");
+			BorderPane bPane = new BorderPane();
+
+			
+			primaryStage.setTitle("TextField");
+			HBox hbox = new HBox();
+			Scene scene = new Scene(hbox, 1500, 800, Color.DARKGRAY);
+			
+			Label label = new Label();
+			label.setAlignment(Pos.CENTER);
+			label.setMinHeight(25);
+			label.setText("Team 1 ");
+			
+			Label label2 = new Label();
+			label2.setAlignment(Pos.CENTER);
+			label2.setMinHeight(25);
+			label2.setText("Team 2 ");
+			
+			TextField input = new TextField();
+			TextField input2 = new TextField();
+			input.setMaxHeight(20); input.setMaxWidth(75);
+			input2.setMaxHeight(20); input2.setMaxWidth(75);
+			input.setPromptText("Score");
+			input2.setPromptText("Score");
+			input.setFocusTraversable(false);
+			input2.setFocusTraversable(false);
+			
+			
+			Button submitButton = new Button();
+			submitButton.setText("Submit");
+			submitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					int score1 = Integer.parseInt(input.getText());
+					int score2 = Integer.parseInt(input.getText()); // TODO fix this
+					
+					System.out.println(score1>score2);
+				}
+			});
+	
+			hbox.getChildren().addAll(label, label2, input, input2, submitButton);
+	
+	primaryStage.setScene(scene);
+	primaryStage.show();
+	}
+
 	private static void processFile(String fileName) {
 		File inputFile = null;
 		Scanner sc = null;
@@ -74,57 +109,19 @@ public class Main extends Application {
 		return checkPassed;
 		
 	}
-	
-	@Override
-	public void start(Stage primaryStage) {
-			primaryStage.setTitle("Tournament Bracket");
-			primaryStage.show();
-			primaryStage.setTitle("Stage and Scene");
-			BorderPane bPane = new BorderPane();
-
-			
-			primaryStage.setTitle("TextField");
-			HBox hbox = new HBox();
-			Scene scene = new Scene(hbox, 1500, 800, Color.DARKGRAY);
-			
-			Label label = new Label();
-			label.setAlignment(Pos.CENTER);
-			label.setMinHeight(25);
-			label.setText("Team 1 ");
-			
-			Label label2 = new Label();
-			label2.setAlignment(Pos.CENTER);
-			label2.setMinHeight(25);
-			label2.setText("Team 2 ");
-			
-			TextField input = new TextField();
-			TextField input2 = new TextField();
-			input.setMaxHeight(20); input.setMaxWidth(75);
-			input2.setMaxHeight(20); input2.setMaxWidth(75);
-			input.setPromptText("Score");
-			input2.setPromptText("Score");
-			input.setFocusTraversable(false);
-			input2.setFocusTraversable(false);
-			hbox.getChildren().addAll(label, label2, input, input2);
-			
-			Button submitButton = new Button();
-			submitButton.setText("Submit");
-			submitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					int score1 = Integer.parseInt(input.getText());
-					int score2 = Integer.parseInt(input.getText()); // TODO fix this
-					
-					System.out.println(score1>score2);
-				}
-			});
-	
-	hbox.getChildren().add(submitButton);
-	
-	primaryStage.setScene(scene);
-	primaryStage.show();
-	}
+	public static void main(String[] args) {
+		launch(args);
+		/* String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
+		processFile(fileName);
+		if(checkForNumTeams()){
+			for (Challenger temp : list) {
+				System.out.println(temp.getName());
+			}
+			launch();
 		}
+		else {
+			System.out.println("Please enter valid number of teams");
+			System.exit(-1);
+		} */
 	}
 }
