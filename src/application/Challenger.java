@@ -12,18 +12,36 @@ public class Challenger {
 	private int seed;
 	private int rank;
 	private String name;
+	private int score;
 	
 	public Challenger() {
 		this.seed = 0;
 		this.rank = 0;
 		this.name = "";
+		this.score = 0;
+		
 	}
 
 	public Challenger(String name,int seed) {
 		this.seed = seed;
 		this.rank = 0;
 		this.name = name;
+		this.score = 0;
 	}
+	/**
+	 * @return the score
+	 */
+	public int getScore() {
+		return score;
+	}
+
+	/**
+	 * @param score the score to set
+	 */
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	/**
 	 * @return the seed
 	 */
