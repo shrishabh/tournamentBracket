@@ -1,10 +1,10 @@
 package src.application;
-	
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import src.application.Challenger;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -19,12 +19,12 @@ public class Main extends Application {
 		try {
 			
 			GridPane grid = new GridPane();
-			Label[] teams = new Label[list[].length()];
-			for(int i=0; i<list[].lenght()/2; i++)
+			Label[] teams = new Label[list.size()];
+			for(int i=0; i<list.size()/2; i++)
 			{
-				GridPane[i][0] = teams[i];
-				GridPane[i+1][0] = new Button();
-				GridPane[i+2][0] = teams[list.length()-i];
+				grid.add(teams[i], 0, i);
+				grid.add(teams[i], 0, i);
+				grid.add(teams[i], 0, i);
 			}
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
