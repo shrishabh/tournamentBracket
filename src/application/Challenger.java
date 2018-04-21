@@ -1,11 +1,12 @@
 /**
  * 
  */
-package tournamentBracket;
+package src.application;
 
 /**
  * @author rkhandelwal
- *
+ * @author phwang4
+ * @author vmanoharan
  */
 public class Challenger {
 	private int seed;
