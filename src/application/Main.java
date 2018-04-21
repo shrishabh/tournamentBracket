@@ -32,7 +32,53 @@ public class Main extends Application {
 			System.out.println("Please enter valid number of teams");
 			System.exit(-1);
 		}
-		
+		primaryStage.setTitle("Tournament Bracket");
+			primaryStage.show();
+			primaryStage.setTitle("Stage and Scene");
+			BorderPane bPane = new BorderPane();
+
+			
+			primaryStage.setTitle("TextField");
+			HBox hbox = new HBox();
+			Scene scene = new Scene(hbox, 1500, 800, Color.DARKGRAY);
+			
+			Label label = new Label();
+			label.setAlignment(Pos.CENTER);
+			label.setMinHeight(25);
+			label.setText("Team 1 ");
+			
+			Label label2 = new Label();
+			label2.setAlignment(Pos.CENTER);
+			label2.setMinHeight(25);
+			label2.setText("Team 2 ");
+			
+			TextField input = new TextField();
+			TextField input2 = new TextField();
+			input.setMaxHeight(20); input.setMaxWidth(75);
+			input2.setMaxHeight(20); input2.setMaxWidth(75);
+			input.setPromptText("Score");
+			input2.setPromptText("Score");
+			input.setFocusTraversable(false);
+			input2.setFocusTraversable(false);
+			hbox.getChildren().addAll(label, label2, input, input2);
+			
+			Button submitButton = new Button();
+			submitButton.setText("Submit");
+			submitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					int score1 = Integer.parseInt(input.getText());
+					int score2 = Integer.parseInt(input.getText()); // TODO fix this
+					
+					System.out.println(score1>score2);
+				}
+			});
+	
+	hbox.getChildren().add(submitButton);
+	
+	primaryStage.setScene(scene);
+	primaryStage.show();
 	}
 	
 	private static void processFile(String fileName) {
