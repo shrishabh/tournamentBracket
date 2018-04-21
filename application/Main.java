@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -30,7 +31,43 @@ public class Main extends Application {
 			primaryStage.show();
 			primaryStage.setTitle("Stage and Scene");
 			BorderPane bPane = new BorderPane();
-
+			/////////
+			int N = 2; // must be a power of 2 
+			 Label teams[] = new Label[N];
+			 GridPane grid = new GridPane();
+			 int column = 0;
+			 if(teams.length == 1)
+			 {
+				 grid.add(teams[0], 0, 0);
+			 }
+			 else if(teams.length == 2)
+			 {
+				 grid.add(teams[0], 0, 0);
+				 grid.add(new Button(), 0, 1);
+				 grid.add(teams[1], 0, 2);
+			 }
+			 else if(teams.length == 4)
+			 {
+				 grid.add(teams[0], 0, 0);
+				 grid.add(new Button(), 0, 1);
+				 grid.add(teams[3], 0, 2);
+				 grid.add(teams[1], 0, 3);
+				 grid.add(new Button(), 0, 4);
+				 grid.add(teams[2], 0, 5);
+			 }
+			 else if(teams.length == 8)
+			 {
+				 
+			 }
+			 else if(teams.length == 16)
+			 {
+				 
+			 }
+			 else if(teams.length == 32)
+			 {
+				 
+			 }
+			 /////////
 			
 			primaryStage.setTitle("TextField");
 			HBox hbox = new HBox();
