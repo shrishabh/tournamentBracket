@@ -109,9 +109,25 @@ public class Main extends Application {
 		return checkPassed;
 		
 	}
+	
+	private Challenger getWinner(Challenger team1, Challenger team2) {
+		if (team1.getScore() > team2.getScore()) {
+			return team1;
+		}
+		else if (team1.getScore() < team2.getScore()) {
+			return team2;
+		}
+		else {
+			if (team1.getSeed() > team2.getSeed()) {
+				return team1;
+			}
+			else return team2;
+		}
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
-		/* String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
+		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
 		processFile(fileName);
 		if(checkForNumTeams()){
 			for (Challenger temp : list) {
@@ -122,6 +138,6 @@ public class Main extends Application {
 		else {
 			System.out.println("Please enter valid number of teams");
 			System.exit(-1);
-		} */
+		}
 	}
 }
