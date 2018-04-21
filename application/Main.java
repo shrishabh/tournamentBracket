@@ -1,4 +1,4 @@
-package src.application;
+package application;
 	
 import java.io.File;
 import java.util.ArrayList;
@@ -14,7 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+<<<<<<< HEAD:src/application/Main.java
+import javafx.scene.layout.VBox;
+=======
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+>>>>>>> a61bd9116cc62641cbcfda0995c20ade257322e8:application/Main.java
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -30,11 +35,47 @@ public class Main extends Application {
 			primaryStage.show();
 			primaryStage.setTitle("Stage and Scene");
 			BorderPane bPane = new BorderPane();
-
+			/////////
+			int N = 2; // must be a power of 2 
+			 Label teams[] = new Label[N];
+			 GridPane grid = new GridPane();
+			 int column = 0;
+			 if(teams.length == 1)
+			 {
+				 grid.add(teams[0], 0, 0);
+			 }
+			 else if(teams.length == 2)
+			 {
+				 grid.add(teams[0], 0, 0);
+				 grid.add(new Button(), 0, 1);
+				 grid.add(teams[1], 0, 2);
+			 }
+			 else if(teams.length == 4)
+			 {
+				 grid.add(teams[0], 0, 0);
+				 grid.add(new Button(), 0, 1);
+				 grid.add(teams[3], 0, 2);
+				 grid.add(teams[1], 0, 3);
+				 grid.add(new Button(), 0, 4);
+				 grid.add(teams[2], 0, 5);
+			 }
+			 else if(teams.length == 8)
+			 {
+				 
+			 }
+			 else if(teams.length == 16)
+			 {
+				 
+			 }
+			 else if(teams.length == 32)
+			 {
+				 
+			 }
+			 /////////
 			
 			primaryStage.setTitle("TextField");
-			HBox hbox = new HBox();
-			Scene scene = new Scene(hbox, 1500, 800, Color.DARKGRAY);
+			VBox hbox = new VBox();
+			Scene scene = new Scene(hbox, 50, 50, Color.DARKGRAY);
 			
 			Label label = new Label();
 			label.setAlignment(Pos.CENTER);
@@ -126,8 +167,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+<<<<<<< HEAD:src/application/Main.java
 		launch(args);
-		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
+		/* String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
 		processFile(fileName);
 		if(checkForNumTeams()){
 			for (Challenger temp : list) {
@@ -138,6 +180,21 @@ public class Main extends Application {
 		else {
 			System.out.println("Please enter valid number of teams");
 			System.exit(-1);
-		}
+		} */
+=======
+		launch();
+//		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
+//		processFile(fileName);
+//		if(checkForNumTeams()){
+//			for (Challenger temp : list) {
+//				System.out.println(temp.getName());
+//			}
+//			launch();
+//		}
+//		else {
+//			System.out.println("Please enter valid number of teams");
+//			System.exit(-1);
+//		}
+>>>>>>> a61bd9116cc62641cbcfda0995c20ade257322e8:application/Main.java
 	}
 }
