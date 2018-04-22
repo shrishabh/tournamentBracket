@@ -28,11 +28,7 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-			primaryStage.setTitle("Tournament Bracket");
-			primaryStage.show();
-			primaryStage.setTitle("Stage and Scene");
-			BorderPane bPane = new BorderPane();
-			/////////
+
 			 Label teams[] = new Label[list.size()];
 			 for(int i = 0; i<teams.length; i++)
 			 {
@@ -45,6 +41,9 @@ public class Main extends Application {
 				 teamsScore[i].getChildren().addAll(teams[i], new TextField());
 			 }
 			 GridPane grid = new GridPane();
+			 
+			 Scene scene = new Scene(grid, 1500, 800, Color.DARKGRAY);
+				primaryStage.setTitle("Tournament Bracket");
 			 if(teams.length == 1)
 			 {
 				 grid.add(teamsScore[0], 0, 0);
@@ -77,10 +76,11 @@ public class Main extends Application {
 				 
 			 }
 			 /////////
-			
-			primaryStage.setTitle("TextField");
+				primaryStage.setScene(scene);
+				primaryStage.show();
+
 			VBox vbox = new VBox(10);
-			Scene scene = new Scene(vbox, 1500, 800, Color.DARKGRAY);
+			
 			
 			Label label = new Label();
 			label.setAlignment(Pos.CENTER);
@@ -117,8 +117,7 @@ public class Main extends Application {
 	
 			vbox.getChildren().addAll(label, label2, input, input2, submitButton);
 	
-	primaryStage.setScene(scene);
-	primaryStage.show();
+
 	}
 
 	private static void processFile(String fileName) {
@@ -172,8 +171,8 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
-		/* String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
+
+		String fileName = "challengerList.txt";
 		processFile(fileName);
 		if(checkForNumTeams()){
 			for (Challenger temp : list) {
@@ -184,8 +183,8 @@ public class Main extends Application {
 		else {
 			System.out.println("Please enter valid number of teams");
 			System.exit(-1);
-		} */
-
+		}
+		launch(args);
 
 	}
 }
