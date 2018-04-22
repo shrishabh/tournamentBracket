@@ -74,8 +74,8 @@ public class Main extends Application {
 			 /////////
 			
 			primaryStage.setTitle("TextField");
-			VBox hbox = new VBox();
-			Scene scene = new Scene(grid, 1500, 800, Color.DARKGRAY);
+			VBox vbox = new VBox(10);
+			Scene scene = new Scene(vbox, 1500, 800, Color.DARKGRAY);
 			
 			Label label = new Label();
 			label.setAlignment(Pos.CENTER);
@@ -110,7 +110,7 @@ public class Main extends Application {
 				}
 			});
 	
-			hbox.getChildren().addAll(label, label2, input, input2, submitButton);
+			vbox.getChildren().addAll(label, label2, input, input2, submitButton);
 	
 	primaryStage.setScene(scene);
 	primaryStage.show();
