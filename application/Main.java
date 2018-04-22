@@ -66,7 +66,18 @@ public class Main extends Application {
 			 }
 			 else if(teams.length == 8)
 			 {
-				 
+				 grid.add(teamsScore[0], 0, 0);
+				 grid.add(new Button(), 0, 1);
+				 grid.add(teamsScore[7], 0, 2);
+				 grid.add(teamsScore[3], 0, 3);
+				 grid.add(new Button(), 0, 4);
+				 grid.add(teamsScore[4], 0, 5);
+				 grid.add(teamsScore[1], 0, 6);
+				 grid.add(new Button(), 0, 7);
+				 grid.add(teamsScore[6], 0, 8);
+				 grid.add(teamsScore[2], 0, 9);
+				 grid.add(new Button(), 0, 10);
+				 grid.add(teamsScore[5], 0, 11);
 			 }
 			 else if(teams.length == 16)
 			 {
@@ -116,7 +127,7 @@ public class Main extends Application {
 			});
 	
 			vbox.getChildren().addAll(label, label2, input, input2, submitButton);
-	
+			
 	primaryStage.setScene(scene);
 	primaryStage.show();
 	}
