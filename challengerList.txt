@@ -1,2 +1,2 @@
-winner
-loser
+Team1
+Team2
