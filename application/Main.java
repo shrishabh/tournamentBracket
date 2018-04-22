@@ -38,26 +38,31 @@ public class Main extends Application {
 			 {
 				 teams[i].setText(list.get(i).getName());
 			 }
+			 VBox teamsScore[] = new VBox[teams.length];
+			 for(int i = 0; i<teamsScore.length; i++)
+			 {
+				 teamsScore[i] = new VBox();
+				 teamsScore[i].getChildren().addAll(teams[i], new TextField());
+			 }
 			 GridPane grid = new GridPane();
-			 int column = 0;
 			 if(teams.length == 1)
 			 {
-				 grid.add(teams[0], 0, 0);
+				 grid.add(teamsScore[0], 0, 0);
 			 }
 			 else if(teams.length == 2)
 			 {
-				 grid.add(teams[0], 0, 0);
+				 grid.add(teamsScore[0], 0, 0);
 				 grid.add(new Button(), 0, 1);
-				 grid.add(teams[1], 0, 2);
+				 grid.add(teamsScore[1], 0, 2);
 			 }
 			 else if(teams.length == 4)
 			 {
-				 grid.add(teams[0], 0, 0);
+				 grid.add(teamsScore[0], 0, 0);
 				 grid.add(new Button(), 0, 1);
-				 grid.add(teams[3], 0, 2);
-				 grid.add(teams[1], 0, 3);
+				 grid.add(teamsScore[3], 0, 2);
+				 grid.add(teamsScore[1], 0, 3);
 				 grid.add(new Button(), 0, 4);
-				 grid.add(teams[2], 0, 5);
+				 grid.add(teamsScore[2], 0, 5);
 			 }
 			 else if(teams.length == 8)
 			 {
