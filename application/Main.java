@@ -31,9 +31,11 @@ public class Main extends Application {
 
 			 Label teams[] = new Label[list.size()];
 			 for(int i = 0; i<teams.length; i++)
-			 {
-				 teams[i].setText(list.get(i).getName());
+			 {				
+				 teams[i]= new Label(list.get(i).getName());
+				 
 			 }
+
 			 VBox teamsScore[] = new VBox[teams.length];
 			 for(int i = 0; i<teamsScore.length; i++)
 			 {
@@ -41,9 +43,8 @@ public class Main extends Application {
 				 teamsScore[i].getChildren().addAll(teams[i], new TextField());
 			 }
 			 GridPane grid = new GridPane();
-			 
-			 Scene scene = new Scene(grid, 1500, 800, Color.DARKGRAY);
-				primaryStage.setTitle("Tournament Bracket");
+			primaryStage.setTitle("Tournament Bracket");
+
 			 if(teams.length == 1)
 			 {
 				 grid.add(teamsScore[0], 0, 0);
@@ -53,6 +54,9 @@ public class Main extends Application {
 				 grid.add(teamsScore[0], 0, 0);
 				 grid.add(new Button(), 0, 1);
 				 grid.add(teamsScore[1], 0, 2);
+//				 grid.add(teamsScore[0], 1, 0);
+//				 grid.add(new Button(), 1, 1);
+//				 grid.add(teamsScore[1], 1, 2);
 			 }
 			 else if(teams.length == 4)
 			 {
@@ -86,6 +90,7 @@ public class Main extends Application {
 			 {
 				 
 			 }
+			 Scene scene = new Scene(grid, 1500, 800, Color.DARKGRAY);
 			 /////////
 				primaryStage.setScene(scene);
 				primaryStage.show();
@@ -127,7 +132,7 @@ public class Main extends Application {
 			});
 	
 			vbox.getChildren().addAll(label, label2, input, input2, submitButton);
-	
+
 
 			
 	primaryStage.setScene(scene);
@@ -190,7 +195,7 @@ public class Main extends Application {
 		processFile(fileName);
 		if(checkForNumTeams()){
 			for (Challenger temp : list) {
-				System.out.println(temp.getName());
+				//System.out.println(temp.getName());
 			}
 			launch();
 		}
