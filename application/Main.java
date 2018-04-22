@@ -79,8 +79,8 @@ public class Main extends Application {
 			 /////////
 			
 			primaryStage.setTitle("TextField");
-			VBox hbox = new VBox();
-			Scene scene = new Scene(hbox, 50, 50, Color.DARKGRAY);
+			VBox vbox = new VBox(10);
+			Scene scene = new Scene(vbox, 1500, 800, Color.DARKGRAY);
 			
 			Label label = new Label();
 			label.setAlignment(Pos.CENTER);
@@ -115,7 +115,7 @@ public class Main extends Application {
 				}
 			});
 	
-			hbox.getChildren().addAll(label, label2, input, input2, submitButton);
+			vbox.getChildren().addAll(label, label2, input, input2, submitButton);
 	
 	primaryStage.setScene(scene);
 	primaryStage.show();
@@ -185,19 +185,7 @@ public class Main extends Application {
 			System.out.println("Please enter valid number of teams");
 			System.exit(-1);
 		} */
-		launch();
-//		String fileName = "/Users/rkhandelwal/Rishabh/Acads/programming3/Assignments/tournamentBracket/src/filename.txt";
-//		processFile(fileName);
-//		if(checkForNumTeams()){
-//			for (Challenger temp : list) {
-//				System.out.println(temp.getName());
-//			}
-//			launch();
-//		}
-//		else {
-//			System.out.println("Please enter valid number of teams");
-//			System.exit(-1);
-//		}
+
 
 	}
 }
