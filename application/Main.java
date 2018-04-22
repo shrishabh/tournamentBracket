@@ -34,7 +34,10 @@ public class Main extends Application {
 			BorderPane bPane = new BorderPane();
 			/////////
 			 Label teams[] = new Label[list.size()];
-			// for(int teams)
+			 for(int i = 0; i<teams.length; i++)
+			 {
+				 teams[i].setText(list.get(i).getName());
+			 }
 			 GridPane grid = new GridPane();
 			 int column = 0;
 			 if(teams.length == 1)
