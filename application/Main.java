@@ -48,6 +48,13 @@ public class Main extends Application {
 		return null;
 	}
 	
+	private Label getLabel(String name) {
+		Label newLabel = new Label(name);
+		newLabel.setTextFill(Color.CRIMSON);
+		newLabel.setFont(Font.font("Arial", 23));
+		return newLabel;
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 			 //Testing a piece of code - Rishabh
@@ -61,9 +68,7 @@ public class Main extends Application {
 		 Label teams[] = new Label[list.size()];
 		 for(int i = 0; i<teams.length; i++)
 		 {				
-			 teams[i]= new Label(list.get(i).getName());
-			 teams[i].setTextFill(Color.CRIMSON);
-			 teams[i].setFont(Font.font("Arial",23));
+			 teams[i]= getLabel(list.get(i).getName());
 			 
 		 }
 
@@ -141,7 +146,7 @@ public class Main extends Application {
 						Challenger team2 = getChallengerFromName(teamName2.getText());
 						
 						Challenger winner = getWinner(team1,team2);
-						Label newLable = new Label(winner.getName());
+						Label newLable = getLabel(winner.getName());
 						HBox newHBox = new HBox(10);
 						TextField newScore =  new TextField();
 						newScore.setPrefWidth(50);
