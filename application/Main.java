@@ -215,7 +215,7 @@ public class Main extends Application {
 		 {
 			 grid.add(teamsScore[0], 0, 0);
 		 }
-		 else if(teams.length >= 2)  // TODO failing in this part
+		 else if(teams.length >= 2) 
 		 {
 			 int i = 0; int j = 0;
 			 while(itr.hasNext())
@@ -233,7 +233,6 @@ public class Main extends Application {
 //
 //					@Override
 //					public void handle(ActionEvent arg0) {
-//						// TODO Auto-generated method stub
 //						Label teamName1 = (Label) teamsScore[i].getChildren().get(0);
 //						TextField t1 = (TextField) teamsScore[i].getChildren().get(1);
 //						int score1 = Integer.parseInt(t1.getText());
@@ -258,7 +257,6 @@ public class Main extends Application {
 //				 });
 				 
 				 grid.add(teamsScore[teamB], 0, i+1);
-				 System.out.println("i : "+ i);
 				 i = i+2;
 			 }
 		 }
@@ -308,9 +306,7 @@ public class Main extends Application {
 //			 grid.add(b3, 1, );
 //			 grid.setHalignment(b3,HPos.CENTER);
 //		 }
-//<<<<<<< HEAD
 //		 Scene scene = new Scene(grid, 1000, 800, Color.DARKGRAY);
-//=======
 
 		 Group root = new Group();
 		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
@@ -326,7 +322,6 @@ public class Main extends Application {
 	                   grid.setLayoutY(-new_val.doubleValue());
 	            }
 	     });
-//>>>>>>> 029db938e01ebc7710add794e938b063fe0a1742
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
 		 //primaryStage.setScene(scene);
@@ -361,7 +356,7 @@ public class Main extends Application {
 //	            @Override
 //	            public void handle(ActionEvent event) {
 //	                int score1 = Integer.parseInt(input.getText());
-//	                int score2 = Integer.parseInt(input.getText()); // TODO fix this
+//	                int score2 = Integer.parseInt(input.getText());
 //	                
 //	                System.out.println(score1>score2);
 //	            }
