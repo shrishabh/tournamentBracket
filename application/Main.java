@@ -316,7 +316,6 @@ public class Main extends Application {
 		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
 		 ScrollBar sc = new ScrollBar();
 		 root.getChildren().addAll(grid, sc);
-		 sc.setMax(70*teams.length);
 	     sc.setPrefHeight(scene.getHeight());
 	     sc.setLayoutX(scene.getWidth()-sc.getWidth());
 	     sc.setOrientation(Orientation.VERTICAL);
@@ -326,7 +325,6 @@ public class Main extends Application {
 	                   grid.setLayoutY(-new_val.doubleValue());
 	            }
 	     });
-//>>>>>>> 029db938e01ebc7710add794e938b063fe0a1742
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
 		 //primaryStage.setScene(scene);
