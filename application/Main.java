@@ -187,7 +187,6 @@ public class Main extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
-<<<<<<< HEAD
         //grid.setGridLinesVisible(true);
         
 		Scene scene = new Scene(grid, 800, 600, Color.DARKGRAY);
@@ -213,9 +212,7 @@ public class Main extends Application {
             });
     	}
         
-=======
         grid.setGridLinesVisible(true);
->>>>>>> 8043b4731f1d946bc71cb096be6bf3cc8bf00e98
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
