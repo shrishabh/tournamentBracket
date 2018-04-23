@@ -33,14 +33,27 @@ public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
 	
+	
+	/***
+	 * Function to get number of columns based on how many rounds there will be. This
+	 * will be used to set constraints on the column size
+	 * @return number of columns required for the complete matchup (# of rounds)
+	 */
 	private int getNumCol() {
 		int length = list.size();
 		if (length <= 2) return 2;
 		else if (length == 4 ) return 3;
 		else if (length == 8) return 4;
-		return 5;
+		else if (length == 16) return 5;
+		else if (length == 32) return 6;
+		return 7;
 	}
 
+	/****
+	 * Function to get the fixtures given the number of teams
+	 * @param numTeams the number of teams participating in the tournament
+	 * @return an array containing fixtures in order
+	 */
 	private List<Integer> getMatchups(int numTeams){
 		List<Integer> matchupList = new ArrayList<Integer>();
 		matchupList.add(1);
@@ -67,6 +80,10 @@ public class Main extends Application {
 		return matchupList;
 	}
 	
+	/***
+	 * Helper function to get the fixtures. 
+	 */
+	
 	private List<Integer> modifyList(List<Integer> matchupList,int lenList){
 		List<Integer> modifiedList = new ArrayList<Integer>();
 		//for (int i:matchupList) System.out.println(i);
@@ -77,7 +94,11 @@ public class Main extends Application {
 		//for (int i:modifiedList) System.out.println(i);
 		return modifiedList;
 	}
-	
+	/***
+	 * Get the challenger given the name
+	 * @param name of the team
+	 * @return Challenger with the same team
+	 */
 	private Challenger getChallengerFromName(String name) {
 		for (Challenger temp:list) {
 			if (temp.getName().equals(name)) return temp;
@@ -85,6 +106,11 @@ public class Main extends Application {
 		return null;
 	}
 	
+	/***
+	 * Method to create a label with given settings
+	 * @param name name of the label
+	 * @return the label
+	 */
 	private Label getLabel(String name) {
 		Label newLabel = new Label(name);
 		newLabel.setTextFill(Color.CRIMSON);
