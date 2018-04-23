@@ -191,7 +191,6 @@ public class Main extends Application {
             grid.getRowConstraints().add(rowConst);         
         }
 		primaryStage.setTitle("Tournament Bracket");
-		System.out.println("5.6");  // TODO DELETE
 		 if(teams.length == 1)
 		 {
 			 grid.add(teamsScore[0], 0, 0);
@@ -218,7 +217,9 @@ public class Main extends Application {
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, i);
 				 grid.add(submitButtons[i/3], 0, i+1);
-				 GridPane.setHalignment(submitButtons[i/2], HPos.CENTER);
+
+				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
+				 System.out.println(count); // TODO DELETE
 //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
 //
 //					@Override
@@ -248,7 +249,7 @@ public class Main extends Application {
 //				 });
 				 
 				 grid.add(teamsScore[teamB], 0, i+2);
-
+				 System.out.println("i : "+ i);
 				 i = i+3;
 			 }
 		 }
