@@ -115,7 +115,7 @@ public class Main extends Application {
 	private Label getLabel(String name) {
 		Label newLabel = new Label(name);
 		newLabel.setTextFill(Color.CRIMSON);
-		newLabel.setFont(Font.font("Arial", 23));
+		newLabel.setFont(Font.font("Arial", 16));
 		return newLabel;
 	}
 	
@@ -170,6 +170,7 @@ public class Main extends Application {
                      System.out.println("click");
                  }
              });
+             b.setPrefHeight(5);
 			 submitButtons[i] = b;
 		 }
 
@@ -178,7 +179,7 @@ public class Main extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
-        //grid.setGridLinesVisible(true);
+        grid.setGridLinesVisible(true);
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
@@ -190,12 +191,12 @@ public class Main extends Application {
         for (int i = 0; i < numRows; i++) {
             RowConstraints rowConst = new RowConstraints(); 
             if (i==1) {
-            	rowConst.setPrefHeight(50);
+            	rowConst.setPrefHeight(20);
             	lstCount = i;
             }
             else {
-            		if (i == lstCount + 3) rowConst.setPrefHeight(50);
-            		else rowConst.setPercentHeight(80.0/list.size());
+            		if (i == lstCount + 3) rowConst.setPrefHeight(20);
+            		else rowConst.setPercentHeight(70.0/list.size());
             }
             grid.getRowConstraints().add(rowConst);         
         }
@@ -216,7 +217,7 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamA], 0, i);
 				 grid.add(submitButtons[i/3], 0, i+1);
 
-				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
+				 grid.setHalignment(submitButtons[i/3], HPos.CENTER);
 //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
 //
 //					@Override
