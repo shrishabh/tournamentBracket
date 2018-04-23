@@ -43,7 +43,7 @@ public class Main extends Application {
 	private int getNumCol() {
 		int length = list.size();
 		if (length <= 2) return 2;
-		else if (length == 4 ) return 3;
+		else if (length == 4 ) return 3 ;
 		else if (length == 8) return 4;
 		else if (length == 16) return 5;
 		else if (length == 32) return 6;
@@ -133,18 +133,18 @@ public class Main extends Application {
 		int numTeams = list.size();
 		List<Integer> matchup = getMatchups(numTeams);
 		for(int i : matchup) {
-			System.out.print(i + " ");
+			System.out.print(i + " "); // TODO Delete
 		}
 		Iterator<Integer> itr = matchup.iterator();
 		
-		
+		System.out.println("1");  // TODO DELETE
 		 Label teams[] = new Label[list.size()];
 		 for(int i = 0; i<teams.length; i++)
 		 {				
 			 teams[i]= getLabel(list.get(i).getName());
 			 
 		 }
-
+		 System.out.println("2"); // TODO DELETE
 		 int numCol = getNumCol();
 		 
 		 
@@ -158,6 +158,7 @@ public class Main extends Application {
 			 teamsScore[i].getChildren().addAll(teams[i], score);
 			 teamsScore[i].setAlignment(Pos.CENTER);
 		 }
+		 System.out.println("3");  // TODO DELETE
 		GridPane grid = new GridPane();
 		grid.setId("pane");
         grid.setHgap(10);
@@ -169,7 +170,7 @@ public class Main extends Application {
             colConst.setPercentWidth(100.0 / numCol);
             grid.getColumnConstraints().add(colConst);
         }
-        
+        System.out.println("4");  // TODO DELETE
         int numRows = list.size() + list.size()/2;
         int lstCount = 0;
         
@@ -185,13 +186,16 @@ public class Main extends Application {
             }
             grid.getRowConstraints().add(rowConst);         
         }
-        
+        System.out.println("5");  // TODO DELETE
 		primaryStage.setTitle("Tournament Bracket");
+		System.out.println("5.5");  // TODO DELETE
+		System.out.println(teams.length);  // TODO DELETE
+		System.out.println("5.6");  // TODO DELETE
 		 if(teams.length == 1)
 		 {
 			 grid.add(teamsScore[0], 0, 0);
 		 }
-		 else if(teams.length >= 2)
+		 else if(teams.length >= 2)  // failing in this part
 		 {
 			 int i = 0;
 			 while(itr.hasNext())
@@ -204,11 +208,13 @@ public class Main extends Application {
 		 }
 		 else if(teams.length == 4)
 		 {
+		     System.out.println("6");  // TODO DELETE
 			 grid.add(teamsScore[0], 0, 0);
 			 Button b1 = new Button("Submit Scores");
 			 b1.setId("1");
 			 grid.add(b1, 0, 1);
-			 grid.setHalignment(b1,HPos.CENTER);
+			 GridPane.setHalignment(b1,HPos.CENTER);
+			 System.out.println("7");  // TODO DELETE
 			 b1.setOnAction(new EventHandler<ActionEvent>() {
 
 					@Override
@@ -240,7 +246,7 @@ public class Main extends Application {
 			 grid.add(teamsScore[1], 0, 3);
 			 Button b2 = new Button("Submit Scores");
 			 grid.add(b2, 0, 4);
-			 grid.setHalignment(b2,HPos.CENTER);
+			 GridPane.setHalignment(b2,HPos.CENTER);
 			 grid.add(teamsScore[2], 0, 5);
 			 
 //			 grid.add(teamsScore[2], 1, 0,1,2);
