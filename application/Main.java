@@ -118,7 +118,7 @@ public class Main extends Application {
 	private Label getLabel(String name) {
 		Label newLabel = new Label(name);
 		newLabel.setTextFill(Color.CRIMSON);
-		newLabel.setFont(Font.font("Arial", 11));
+		newLabel.setFont(Font.font("Arial", 18));
 		return newLabel;
 	}
 	
@@ -221,7 +221,6 @@ public class Main extends Application {
 			 while(itr.hasNext())
 			 {
 			     
-				 
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, i);
@@ -312,7 +311,6 @@ public class Main extends Application {
 		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
 		 ScrollBar sc = new ScrollBar();
 		 root.getChildren().addAll(grid, sc);
-		 sc.setMax(70*teams.length);
 	     sc.setPrefHeight(scene.getHeight());
 	     sc.setLayoutX(scene.getWidth()-sc.getWidth());
 	     sc.setOrientation(Orientation.VERTICAL);
