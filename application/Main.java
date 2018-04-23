@@ -42,12 +42,12 @@ public class Main extends Application {
 	 */
 	private int getNumCol() {
 		int length = list.size();
-		if (length <= 2) return 2;
-		else if (length == 4 ) return 3 ;
-		else if (length == 8) return 4;
-		else if (length == 16) return 5;
-		else if (length == 32) return 6;
-		return 7;
+		if (length <= 2) return 3;
+		else if (length == 4 ) return 5 ;
+		else if (length == 8) return 7;
+		else if (length == 16) return 9;
+		else if (length == 32) return 11;
+		return 13;
 	}
 
 	/****
@@ -115,7 +115,7 @@ public class Main extends Application {
 	private Label getLabel(String name) {
 		Label newLabel = new Label(name);
 		newLabel.setTextFill(Color.CRIMSON);
-		newLabel.setFont(Font.font("Arial", 16));
+		newLabel.setFont(Font.font("Arial", 11));
 		return newLabel;
 	}
 	
@@ -160,7 +160,7 @@ public class Main extends Application {
 		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)
 		 {
-		     Button b = new Button("Submit Scores");
+		     Button b = new Button("Submit");
 		     b.setId(new Integer(i).toString());
              GridPane.setHalignment(b, HPos.CENTER);
              b.setOnAction(new EventHandler<ActionEvent>() {
@@ -179,7 +179,7 @@ public class Main extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
-        grid.setGridLinesVisible(true);
+        //grid.setGridLinesVisible(true);
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
@@ -188,18 +188,24 @@ public class Main extends Application {
         int numRows = list.size() + list.size()/2;
         int lstCount = 0;
         
-        for (int i = 0; i < numRows; i++) {
-            RowConstraints rowConst = new RowConstraints(); 
-            if (i==1) {
-            	rowConst.setPrefHeight(20);
-            	lstCount = i;
-            }
-            else {
-            		if (i == lstCount + 3) rowConst.setPrefHeight(20);
-            		else rowConst.setPercentHeight(70.0/list.size());
-            }
-            grid.getRowConstraints().add(rowConst);         
-        }
+//        for (int i = 0; i < numRows; i++) {
+//            RowConstraints rowConst = new RowConstraints(); 
+//            if (i==1) {
+//            	rowConst.setPrefHeight(20);
+//            	lstCount = i;
+//            }
+//            else {
+//            		if (i == lstCount + 3) rowConst.setPrefHeight(20);
+//            		else rowConst.setPercentHeight(70.0/list.size());
+//            }
+//            grid.getRowConstraints().add(rowConst);         
+//        }
+        
+        for (int i = 0; i < list.size(); i++) {
+          RowConstraints rowConst = new RowConstraints(); 
+          rowConst.setPercentHeight(100.0/list.size());
+          grid.getRowConstraints().add(rowConst);     
+      }
 		primaryStage.setTitle("Tournament Bracket");
 		 if(teams.length == 1)
 		 {
@@ -207,15 +213,16 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2)  // TODO failing in this part
 		 {
-			 int i = 0;
+			 int i = 0; int j = 0;
 			 while(itr.hasNext())
 			 {
 			     
-		
+				 
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, i);
-				 grid.add(submitButtons[i/3], 0, i+1);
+				 grid.add(submitButtons[i/2], 1, j,1,2);
+				 j = j + 2;
 
 				 grid.setHalignment(submitButtons[i/3], HPos.CENTER);
 //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
@@ -246,9 +253,9 @@ public class Main extends Application {
 //					 
 //				 });
 				 
-				 grid.add(teamsScore[teamB], 0, i+2);
+				 grid.add(teamsScore[teamB], 0, i+1);
 				 System.out.println("i : "+ i);
-				 i = i+3;
+				 i = i+2;
 			 }
 		 }
 //		 else if(teams.length == 4)
@@ -297,7 +304,7 @@ public class Main extends Application {
 //			 grid.add(b3, 1, );
 //			 grid.setHalignment(b3,HPos.CENTER);
 //		 }
-		 Scene scene = new Scene(grid, 800, 600, Color.DARKGRAY);
+		 Scene scene = new Scene(grid, 1000, 800, Color.DARKGRAY);
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		 //primaryStage.setScene(scene);
 		 //primaryStage.show();
