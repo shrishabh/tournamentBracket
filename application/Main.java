@@ -195,26 +195,37 @@ public class Main extends Application {
 		 {
 			 grid.add(teamsScore[0], 0, 0);
 		 }
-		 else if(teams.length >= 2)  // failing in this part
+		 else if(teams.length >= 2)  // TODO failing in this part
 		 {
 			 int i = 0;
+			 int count = 0; // TODO DELETE
 			 while(itr.hasNext())
 			 {
+
+			     count++;
+			     System.out.println(count); // TODO DELETE
+			     Button b = new Button("Submit Scores");
+			     GridPane.setHalignment(b, HPos.CENTER);
+			     b.setOnAction(new EventHandler<ActionEvent>() {
+			         
+			         @Override
+			         public void handle(ActionEvent event) {
+			             
+			         }
+			     });
 				 grid.add(teamsScore[itr.next()-1], 0, i);
-				 grid.add(new Button("Submit Scores"), 0, i+1);
+				 grid.add(b, 0, i+1);
 				 grid.add(teamsScore[itr.next()-1], 0, i+2);
 				 i = i+3;
 			 }
 		 }
 		 else if(teams.length == 4)
 		 {
-		     System.out.println("6");  // TODO DELETE
 			 grid.add(teamsScore[0], 0, 0);
 			 Button b1 = new Button("Submit Scores");
 			 b1.setId("1");
 			 grid.add(b1, 0, 1);
 			 GridPane.setHalignment(b1,HPos.CENTER);
-			 System.out.println("7");  // TODO DELETE
 			 b1.setOnAction(new EventHandler<ActionEvent>() {
 
 					@Override
