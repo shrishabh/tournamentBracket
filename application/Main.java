@@ -160,8 +160,17 @@ public class Main extends Application {
 		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)
 		 {
-			 submitButtons[i] = new Button("SubmitScore");
-			 submitButtons[i].setId(new Integer(i).toString());
+		     Button b = new Button("Submit Scores");
+		     b.setId(new Integer(i).toString());
+             GridPane.setHalignment(b, HPos.CENTER);
+             b.setOnAction(new EventHandler<ActionEvent>() {
+                 
+                 @Override
+                 public void handle(ActionEvent event) {
+                     System.out.println("click");
+                 }
+             });
+			 submitButtons[i] = b;
 		 }
 
 		GridPane grid = new GridPane();
@@ -198,20 +207,9 @@ public class Main extends Application {
 		 else if(teams.length >= 2)  // TODO failing in this part
 		 {
 			 int i = 0;
-			 int count = 0; // TODO DELETE
 			 while(itr.hasNext())
 			 {
-			     count++;
-			     System.out.println(count); // TODO DELETE
-			     Button b = new Button("Submit Scores");
-			     GridPane.setHalignment(b, HPos.CENTER);
-			     b.setOnAction(new EventHandler<ActionEvent>() {
-			         
-			         @Override
-			         public void handle(ActionEvent event) {
-			             System.out.println("click");
-			         }
-			     });
+			     
 		
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
@@ -219,7 +217,6 @@ public class Main extends Application {
 				 grid.add(submitButtons[i/3], 0, i+1);
 
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
-				 System.out.println(count); // TODO DELETE
 //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
 //
 //					@Override
