@@ -7,26 +7,27 @@ import java.util.List;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.geometry.VPos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 
@@ -129,7 +130,6 @@ public class Main extends Application {
 //        primaryStage.setY(bounds.getMinY());
 //        primaryStage.setWidth(bounds.getWidth());
 //        primaryStage.setHeight(bounds.getHeight());
-		
 		int numTeams = list.size();
 		List<Integer> matchup = getMatchups(numTeams);
 		for(int i : matchup) {
@@ -160,7 +160,7 @@ public class Main extends Application {
 		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)
 		 {
-		     Button b = new Button("Submit Scores");
+		     Button b = new Button("Submit");
 		     b.setId(new Integer(i).toString());
              GridPane.setHalignment(b, HPos.CENTER);
              b.setOnAction(new EventHandler<ActionEvent>() {
@@ -182,6 +182,7 @@ public class Main extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
         grid.setGridLinesVisible(true);
+       
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
@@ -219,7 +220,7 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamA], 0, i);
 				 grid.add(submitButtons[i/3], 0, i+1);
 
-				 grid.setHalignment(submitButtons[i/3], HPos.CENTER);
+				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
 //
 //					@Override
@@ -299,7 +300,20 @@ public class Main extends Application {
 //			 grid.add(b3, 1, );
 //			 grid.setHalignment(b3,HPos.CENTER);
 //		 }
-		 Scene scene = new Scene(grid, 800, 600, Color.DARKGRAY);
+		 Group root = new Group();
+		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
+		 ScrollBar sc = new ScrollBar();
+		 root.getChildren().addAll(grid, sc);
+		 
+	        
+	        sc.setLayoutX(scene.getWidth()-sc.getWidth());
+	        sc.setOrientation(Orientation.VERTICAL);
+	        sc.valueProperty().addListener(new ChangeListener<Number>() {
+	            public void changed(ObservableValue<? extends Number> ov,
+	                Number old_val, Number new_val) {
+	                   grid.setLayoutY(-new_val.doubleValue());
+	            }
+	        });
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 		 //primaryStage.setScene(scene);
 		 //primaryStage.show();
