@@ -158,6 +158,14 @@ public class Main extends Application {
 			 teamsScore[i].getChildren().addAll(teams[i], score);
 			 teamsScore[i].setAlignment(Pos.CENTER);
 		 }
+
+		 Button[] submitButtons = new Button[teams.length/2];
+		 for(int i=0; i< submitButtons.length; i++)
+		 {
+			 submitButtons[i] = new Button("SubmitScore");
+			 submitButtons[i].setId(new Integer(i).toString());
+		 }
+
 		 System.out.println("3");  // TODO DELETE
 		GridPane grid = new GridPane();
 		grid.setId("pane");
@@ -216,6 +224,41 @@ public class Main extends Application {
 				 grid.add(teamsScore[itr.next()-1], 0, i);
 				 grid.add(b, 0, i+1);
 				 grid.add(teamsScore[itr.next()-1], 0, i+2);
+=======
+				 int teamA = itr.next()-1;
+				 int teamB = itr.next()-1;
+				 grid.add(teamsScore[teamA], 0, i);
+				 grid.add(submitButtons[i/3], 0, i+1);
+				 grid.setHalignment(submitButtons[i/2], HPos.CENTER);
+//				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
+//
+//					@Override
+//					public void handle(ActionEvent arg0) {
+//						// TODO Auto-generated method stub
+//						Label teamName1 = (Label) teamsScore[i].getChildren().get(0);
+//						TextField t1 = (TextField) teamsScore[i].getChildren().get(1);
+//						int score1 = Integer.parseInt(t1.getText());
+//						
+//						Label teamName2 = (Label) teamsScore[i+2].getChildren().get(0);
+//						TextField t2 = (TextField) teamsScore[i+2].getChildren().get(1);
+//						int score2 = Integer.parseInt(t2.getText());
+//						Challenger team1 = getChallengerFromName(teamName1.getText());
+//						Challenger team2 = getChallengerFromName(teamName2.getText());
+//						
+//						Challenger winner = getWinner(team1,team2);
+//						Label newLable = getLabel(winner.getName());
+//						HBox newHBox = new HBox(10);
+//						TextField newScore =  new TextField();
+//						newScore.setPrefWidth(50);
+//						newHBox.getChildren().addAll(newLable, newScore);
+//						newHBox.setAlignment(Pos.CENTER);
+//						
+//						grid.add(newHBox, 1, i+1, 1,2);
+//					}
+//					 
+//				 });
+				 
+				 grid.add(teamsScore[teamB], 0, i+2);
 				 i = i+3;
 			 }
 		 }
