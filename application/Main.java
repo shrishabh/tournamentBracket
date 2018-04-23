@@ -41,6 +41,43 @@ public class Main extends Application {
 		return 5;
 	}
 
+	private List<Integer> getMatchups(int numTeams){
+		List<Integer> matchupList = new ArrayList<Integer>();
+		matchupList.add(1);
+		matchupList.add(2);
+		//System.out.println(matchupList.indexOf(1));
+		int lenList = 2;
+		int newLenList;
+		int counter;
+		while (lenList != numTeams) {
+			matchupList = modifyList(matchupList,lenList);
+			newLenList = 2*lenList;
+			counter = 1;
+			
+			for (int i = newLenList; i > lenList ; i--) {
+				//System.out.println((i) + "  " +(counter)+ "  "+matchupList.indexOf(counter));
+				matchupList.set(matchupList.indexOf(counter)+1, i);
+				counter = counter + 1;
+				
+			}
+			lenList = newLenList;
+			if(lenList == numTeams) break;
+		}
+		
+		return matchupList;
+	}
+	
+	private List<Integer> modifyList(List<Integer> matchupList,int lenList){
+		List<Integer> modifiedList = new ArrayList<Integer>();
+		//for (int i:matchupList) System.out.println(i);
+		for (int i = 1; i < lenList+1; i++) {
+			modifiedList.add(matchupList.get(i-1));
+			modifiedList.add(-100);
+		}
+		//for (int i:modifiedList) System.out.println(i);
+		return modifiedList;
+	}
+	
 	private Challenger getChallengerFromName(String name) {
 		for (Challenger temp:list) {
 			if (temp.getName().equals(name)) return temp;
@@ -65,6 +102,15 @@ public class Main extends Application {
 //        primaryStage.setY(bounds.getMinY());
 //        primaryStage.setWidth(bounds.getWidth());
 //        primaryStage.setHeight(bounds.getHeight());
+		
+		int numTeams = list.size();
+		List<Integer> matchup = getMatchups(numTeams);
+		for(int i : matchup) {
+			System.out.print(i + " ");
+		}
+		
+		
+		
 		 Label teams[] = new Label[list.size()];
 		 for(int i = 0; i<teams.length; i++)
 		 {				
