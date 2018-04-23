@@ -2,6 +2,7 @@ package application;
 	
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -134,7 +135,7 @@ public class Main extends Application {
 		for(int i : matchup) {
 			System.out.print(i + " ");
 		}
-		
+		Iterator<Integer> itr = matchup.iterator();
 		
 		
 		 Label teams[] = new Label[list.size()];
@@ -190,11 +191,16 @@ public class Main extends Application {
 		 {
 			 grid.add(teamsScore[0], 0, 0);
 		 }
-		 else if(teams.length == 2)
+		 else if(teams.length >= 2)
 		 {
-			 grid.add(teamsScore[0], 0, 0);
-			 grid.add(new Button("Submit Scores"), 0, 1);
-			 grid.add(teamsScore[1], 0, 2);
+			 int i = 0;
+			 while(itr.hasNext())
+			 {
+				 grid.add(teamsScore[itr.next()-1], 0, i);
+				 grid.add(new Button("Submit Scores"), 0, i+1);
+				 grid.add(teamsScore[itr.next()-1], 0, i+2);
+				 i = i+3;
+			 }
 		 }
 		 else if(teams.length == 4)
 		 {
@@ -241,103 +247,6 @@ public class Main extends Application {
 //			 Button b3 = new Button("Submit Scores");
 //			 grid.add(b3, 1, );
 //			 grid.setHalignment(b3,HPos.CENTER);
-		 }
-		 else if(teams.length == 8)
-		 {
-			 grid.add(teamsScore[0], 0, 0);
-			 grid.add(new Button("Submit Scores"), 0, 1);
-			 grid.add(teamsScore[7], 0, 2);
-			 grid.add(teamsScore[3], 0, 3);
-			 grid.add(new Button("Submit Scores"), 0, 4);
-			 grid.add(teamsScore[4], 0, 5);
-			 grid.add(teamsScore[1], 0, 6);
-			 grid.add(new Button("Submit Scores"), 0, 7);
-			 grid.add(teamsScore[6], 0, 8);
-			 grid.add(teamsScore[2], 0, 9);
-			 grid.add(new Button("Submit Scores"), 0, 10);
-			 grid.add(teamsScore[5], 0, 11);
-		 }
-		 else if(teams.length == 16)
-		 {
-			 grid.add(teamsScore[0], 0, 0);
-			 grid.add(new Button("Submit Scores"), 0, 1);
-			 grid.add(teamsScore[15], 0, 2);
-			 grid.add(teamsScore[7], 0, 3);
-			 grid.add(new Button("Submit Scores"), 0, 4);
-			 grid.add(teamsScore[8], 0, 5);
-			 grid.add(teamsScore[3], 0, 6);
-			 grid.add(new Button("Submit Scores"), 0, 7);
-			 grid.add(teamsScore[12], 0, 8);
-			 grid.add(teamsScore[4], 0, 9);
-			 grid.add(new Button("Submit Scores"), 0, 10);
-			 grid.add(teamsScore[11], 0, 11);			 
-			 grid.add(teamsScore[10], 0, 12);
-			 grid.add(new Button("Submit Scores"), 0, 13);
-			 grid.add(teamsScore[5], 0, 14);
-			 grid.add(teamsScore[13], 0, 15);
-			 grid.add(new Button("Submit Scores"), 0, 16);
-			 grid.add(teamsScore[2], 0, 17);
-			 grid.add(teamsScore[9], 0, 18);
-			 grid.add(new Button("Submit Scores"), 0, 19);
-			 grid.add(teamsScore[6], 0, 20);
-			 grid.add(teamsScore[14], 0, 21);
-			 grid.add(new Button("Submit Scores"), 0, 22);
-			 grid.add(teamsScore[1], 0, 23);
-		 }
-		 else if(teams.length == 32)
-		 {
-			 grid.add(teamsScore[0], 0, 0);
-			 grid.add(new Button("Submit Scores"), 0, 1);
-			 grid.add(teamsScore[31], 0, 2);
-			 grid.add(teamsScore[15], 0, 3);
-			 grid.add(new Button("Submit Scores"), 0, 4);
-			 grid.add(teamsScore[16], 0, 5);
-			 grid.add(teamsScore[23], 0, 6);
-			 grid.add(new Button("Submit Scores"), 0, 7);
-			 grid.add(teamsScore[8], 0, 8);
-			 grid.add(teamsScore[7], 0, 9);
-			 grid.add(new Button("Submit Scores"), 0, 10);
-			 grid.add(teamsScore[24], 0, 11);			 
-			 grid.add(teamsScore[3], 0, 12);
-			 grid.add(new Button("Submit Scores"), 0, 13);
-			 grid.add(teamsScore[28], 0, 14);
-			 grid.add(teamsScore[12], 0, 15);
-			 grid.add(new Button("Submit Scores"), 0, 16);
-			 grid.add(teamsScore[19], 0, 17);
-			 grid.add(teamsScore[11], 0, 18);
-			 grid.add(new Button("Submit Scores"), 0, 19);
-			 grid.add(teamsScore[20], 0, 20);
-			 grid.add(teamsScore[4], 0, 21);
-			 grid.add(new Button("Submit Scores"), 0, 22);
-			 grid.add(teamsScore[27], 0, 23);
-			 grid.add(teamsScore[1], 0, 24);
-			 grid.add(new Button("Submit Scores"), 0, 25);
-			 grid.add(teamsScore[30], 0, 26);
-			 grid.add(teamsScore[14], 0, 27);
-			 grid.add(new Button("Submit Scores"), 0, 28);
-			 grid.add(teamsScore[17], 0, 29);
-			 grid.add(teamsScore[9], 0, 30);
-			 grid.add(new Button("Submit Scores"), 0, 31);
-			 grid.add(teamsScore[22], 0, 32);
-			 grid.add(teamsScore[6], 0, 33);
-			 grid.add(new Button("Submit Scores"), 0, 34);
-			 grid.add(teamsScore[25], 0, 35);			 
-			 grid.add(teamsScore[2], 0, 36);
-			 grid.add(new Button("Submit Scores"), 0, 37);
-			 grid.add(teamsScore[29], 0, 38);
-			 grid.add(teamsScore[13], 0, 39);
-			 grid.add(new Button("Submit Scores"), 0, 40);
-			 grid.add(teamsScore[18], 0, 41);
-			 grid.add(teamsScore[10], 0, 42);
-			 grid.add(new Button("Submit Scores"), 0, 43);
-			 grid.add(teamsScore[21], 0, 44);
-			 grid.add(teamsScore[5], 0, 45);
-			 grid.add(new Button("Submit Scores"), 0, 46);
-			 grid.add(teamsScore[26], 0, 47);
-		 }
-		 else if(teams.length == 64)
-		 {
-			 //TO-DO
 		 }
 		 Scene scene = new Scene(grid, 800, 600, Color.DARKGRAY);
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
