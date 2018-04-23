@@ -7,16 +7,21 @@ import java.util.List;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -130,6 +135,7 @@ public class Main extends Application {
 //        primaryStage.setWidth(bounds.getWidth());
 //        primaryStage.setHeight(bounds.getHeight());
 		
+
 		int numTeams = list.size();
 		List<Integer> matchup = getMatchups(numTeams);
 		for(int i : matchup) {
@@ -179,6 +185,30 @@ public class Main extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
         //grid.setGridLinesVisible(true);
+        
+		Scene scene = new Scene(grid, 800, 600, Color.DARKGRAY);
+		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        
+    	if(teams.length > 4)
+    	{
+    		ScrollBar sc = new ScrollBar();
+    		grid.getChildren().add(sc);
+    		sc.setMin(0);
+    		sc.setMax(200*teams.length);
+    		sc.setPrefHeight(scene.getHeight());
+    		sc.setValue(0);
+    		sc.setLayoutX(scene.getWidth()-sc.getWidth());
+    		sc.setOrientation(Orientation.VERTICAL);
+//    		sc.setBlockIncrement(100);
+//    		sc.setUnitIncrement(200);
+            sc.valueProperty().addListener(new ChangeListener<Number>() {
+                public void changed(ObservableValue<? extends Number> ov,
+                        Number old_val, Number new_val) {
+                    grid.setLayoutY(-new_val.doubleValue());
+                }
+            });
+    	}
+        
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
@@ -296,8 +326,7 @@ public class Main extends Application {
 //			 grid.add(b3, 1, );
 //			 grid.setHalignment(b3,HPos.CENTER);
 //		 }
-		 Scene scene = new Scene(grid, 800, 600, Color.DARKGRAY);
-		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
 		 //primaryStage.setScene(scene);
 		 //primaryStage.show();
 //		    VBox vbox = new VBox(10);
@@ -339,7 +368,11 @@ public class Main extends Application {
 //	        vbox.getChildren().addAll(label, label2, input, input2, submitButton);
 //
 //	
+
 	primaryStage.setScene(scene);
+
+	
+	
 	primaryStage.show();
 	}
 
