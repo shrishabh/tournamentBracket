@@ -156,7 +156,7 @@ public class Main extends Application {
 			 teamsScore[i].getChildren().addAll(teams[i], score);
 			 teamsScore[i].setAlignment(Pos.CENTER);
 		 }
-
+		 
 		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)
 		 {
@@ -167,7 +167,9 @@ public class Main extends Application {
                  
                  @Override
                  public void handle(ActionEvent event) {
-                     System.out.println("click");
+                     TextField t = (TextField) teamsScore[0].getChildren().get(1); // prints team's score
+                     TextField t2 = (TextField) teamsScore[1].getChildren().get(1); // input functionality for milestone 3
+                     System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
                  }
              });
 			 submitButtons[i] = b;
