@@ -311,15 +311,15 @@ public class Main extends Application {
 		 ScrollBar sc = new ScrollBar();
 		 root.getChildren().addAll(grid, sc);
 		 
-	        sc.setPrefHeight(scene.getHeight());
-	        sc.setLayoutX(scene.getWidth()-sc.getWidth());
-	        sc.setOrientation(Orientation.VERTICAL);
-	        sc.valueProperty().addListener(new ChangeListener<Number>() {
-	            public void changed(ObservableValue<? extends Number> ov,
+	     sc.setPrefHeight(scene.getHeight());
+	     sc.setLayoutX(scene.getWidth()-sc.getWidth());
+	     sc.setOrientation(Orientation.VERTICAL);
+	     sc.valueProperty().addListener(new ChangeListener<Number>() {
+	    	 public void changed(ObservableValue<? extends Number> ov,
 	                Number old_val, Number new_val) {
 	                   grid.setLayoutY(-new_val.doubleValue());
 	            }
-	        });
+	     });
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
 		 //primaryStage.setScene(scene);
