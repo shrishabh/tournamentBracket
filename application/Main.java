@@ -15,11 +15,8 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-<<<<<<< HEAD
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
-=======
->>>>>>> f701daf331119b3ae0867d4ada9f5064648beac2
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -135,11 +132,6 @@ public class Main extends Application {
 //        primaryStage.setY(bounds.getMinY());
 //        primaryStage.setWidth(bounds.getWidth());
 //        primaryStage.setHeight(bounds.getHeight());
-<<<<<<< HEAD
-		
-
-=======
->>>>>>> f701daf331119b3ae0867d4ada9f5064648beac2
 		int numTeams = list.size();
 		List<Integer> matchup = getMatchups(numTeams);
 		for(int i : matchup) {
@@ -193,28 +185,6 @@ public class Main extends Application {
         grid.setPadding(new Insets(10));
         //grid.setGridLinesVisible(true);
         
-		Scene scene = new Scene(grid, 800, 600, Color.DARKGRAY);
-		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-        
-    	if(teams.length > 4)
-    	{
-    		ScrollBar sc = new ScrollBar();
-    		grid.getChildren().add(sc);
-    		sc.setMin(0);
-    		sc.setMax(200*teams.length);
-    		sc.setPrefHeight(scene.getHeight());
-    		sc.setValue(0);
-    		sc.setLayoutX(scene.getWidth()-sc.getWidth());
-    		sc.setOrientation(Orientation.VERTICAL);
-//    		sc.setBlockIncrement(100);
-//    		sc.setUnitIncrement(200);
-            sc.valueProperty().addListener(new ChangeListener<Number>() {
-                public void changed(ObservableValue<? extends Number> ov,
-                        Number old_val, Number new_val) {
-                    grid.setLayoutY(-new_val.doubleValue());
-                }
-            });
-    	}
         
         grid.setGridLinesVisible(true);
        
@@ -335,15 +305,13 @@ public class Main extends Application {
 //			 grid.add(b3, 1, );
 //			 grid.setHalignment(b3,HPos.CENTER);
 //		 }
-<<<<<<< HEAD
 
-=======
 		 Group root = new Group();
 		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
 		 ScrollBar sc = new ScrollBar();
 		 root.getChildren().addAll(grid, sc);
 		 
-	        
+	        sc.setPrefHeight(scene.getHeight());
 	        sc.setLayoutX(scene.getWidth()-sc.getWidth());
 	        sc.setOrientation(Orientation.VERTICAL);
 	        sc.valueProperty().addListener(new ChangeListener<Number>() {
@@ -353,7 +321,7 @@ public class Main extends Application {
 	            }
 	        });
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
->>>>>>> f701daf331119b3ae0867d4ada9f5064648beac2
+
 		 //primaryStage.setScene(scene);
 		 //primaryStage.show();
 //		    VBox vbox = new VBox(10);
