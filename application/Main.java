@@ -15,23 +15,24 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+<<<<<<< HEAD
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
+=======
+>>>>>>> f701daf331119b3ae0867d4ada9f5064648beac2
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 
@@ -134,8 +135,11 @@ public class Main extends Application {
 //        primaryStage.setY(bounds.getMinY());
 //        primaryStage.setWidth(bounds.getWidth());
 //        primaryStage.setHeight(bounds.getHeight());
+<<<<<<< HEAD
 		
 
+=======
+>>>>>>> f701daf331119b3ae0867d4ada9f5064648beac2
 		int numTeams = list.size();
 		List<Integer> matchup = getMatchups(numTeams);
 		for(int i : matchup) {
@@ -166,7 +170,7 @@ public class Main extends Application {
 		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)
 		 {
-		     Button b = new Button("Submit Scores");
+		     Button b = new Button("Submit");
 		     b.setId(new Integer(i).toString());
              GridPane.setHalignment(b, HPos.CENTER);
              b.setOnAction(new EventHandler<ActionEvent>() {
@@ -213,6 +217,7 @@ public class Main extends Application {
     	}
         
         grid.setGridLinesVisible(true);
+       
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
@@ -250,7 +255,7 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamA], 0, i);
 				 grid.add(submitButtons[i/3], 0, i+1);
 
-				 grid.setHalignment(submitButtons[i/3], HPos.CENTER);
+				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
 //
 //					@Override
@@ -330,7 +335,25 @@ public class Main extends Application {
 //			 grid.add(b3, 1, );
 //			 grid.setHalignment(b3,HPos.CENTER);
 //		 }
+<<<<<<< HEAD
 
+=======
+		 Group root = new Group();
+		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
+		 ScrollBar sc = new ScrollBar();
+		 root.getChildren().addAll(grid, sc);
+		 
+	        
+	        sc.setLayoutX(scene.getWidth()-sc.getWidth());
+	        sc.setOrientation(Orientation.VERTICAL);
+	        sc.valueProperty().addListener(new ChangeListener<Number>() {
+	            public void changed(ObservableValue<? extends Number> ov,
+	                Number old_val, Number new_val) {
+	                   grid.setLayoutY(-new_val.doubleValue());
+	            }
+	        });
+		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+>>>>>>> f701daf331119b3ae0867d4ada9f5064648beac2
 		 //primaryStage.setScene(scene);
 		 //primaryStage.show();
 //		    VBox vbox = new VBox(10);
