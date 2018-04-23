@@ -219,7 +219,7 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamA], 0, i);
 				 grid.add(submitButtons[i/3], 0, i+1);
 
-				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
+				 grid.setHalignment(submitButtons[i/3], HPos.CENTER);
 //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
 //
 //					@Override
