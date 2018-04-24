@@ -143,11 +143,9 @@ public class Main extends Application {
 		 for(int i = 0; i<teams.length; i++)
 		 {				
 			 teams[i]= getLabel(list.get(i).getName());
-<<<<<<< HEAD
 			 teams[i].setPrefSize(80, 10);
 			 //System.out.println(teams[i].getText());
-=======
->>>>>>> parent of 4efd46c... minor fixes
+
 			 
 		 }
 		 int numCol = getNumCol();
@@ -161,12 +159,10 @@ public class Main extends Application {
 			 score =  new TextField();
 			 score.setPrefWidth(50);
 			 teamsScore[i].getChildren().addAll(teams[i], score);
-<<<<<<< HEAD
+
 			 //teamsScore[i].getChildren().addAll(teams[i]);
 			 teamsScore[i].setAlignment(Pos.BASELINE_LEFT);
-=======
 			 teamsScore[i].setAlignment(Pos.CENTER);
->>>>>>> parent of 4efd46c... minor fixes
 		 }
 		 
 		 Button[] submitButtons = new Button[teams.length/2];
@@ -184,11 +180,8 @@ public class Main extends Application {
                      System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
                  }
              });
-<<<<<<< HEAD
              //b.setPrefHeight(5);
-=======
              b.setPrefHeight(5);
->>>>>>> parent of 4efd46c... minor fixes
 			 submitButtons[i] = b;
 		 }
 
@@ -198,7 +191,6 @@ public class Main extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
         //grid.setGridLinesVisible(true);
-<<<<<<< HEAD
         int subCol = numCol - list.size();
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
@@ -208,7 +200,6 @@ public class Main extends Application {
         }
 //        int numRows = list.size() + list.size()/2;
 //        int lstCount = 0;
-=======
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
@@ -216,7 +207,6 @@ public class Main extends Application {
         }
         int numRows = list.size() + list.size()/2;
         int lstCount = 0;
->>>>>>> parent of 4efd46c... minor fixes
         
 //        for (int i = 0; i < numRows; i++) {
 //            RowConstraints rowConst = new RowConstraints(); 
@@ -334,20 +324,16 @@ public class Main extends Application {
 //		 Scene scene = new Scene(grid, 1000, 800, Color.DARKGRAY);
 
 		 Group root = new Group();
-<<<<<<< HEAD
 		 Scene scene = new Scene(root, 1000, 800, Color.DARKGRAY);
-=======
-		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
->>>>>>> parent of 4efd46c... minor fixes
 		 ScrollBar sc = new ScrollBar();
 		 root.getChildren().addAll(grid, sc);
-	     sc.setPrefHeight(scene.getHeight());
+	     sc.setPrefSize(20, scene.getHeight());
 	     sc.setLayoutX(scene.getWidth()-sc.getWidth());
 	     sc.setOrientation(Orientation.VERTICAL);
 	     sc.valueProperty().addListener(new ChangeListener<Number>() {
 	    	 public void changed(ObservableValue<? extends Number> ov,
 	                Number old_val, Number new_val) {
-	                   grid.setLayoutY(-new_val.doubleValue());
+	                   grid.setLayoutY(-new_val.doubleValue()*list.size()/3);
 	            }
 	     });
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
