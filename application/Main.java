@@ -143,6 +143,8 @@ public class Main extends Application {
 		 for(int i = 0; i<teams.length; i++)
 		 {				
 			 teams[i]= getLabel(list.get(i).getName());
+			 teams[i].setPrefSize(80, 10);
+			 //System.out.println(teams[i].getText());
 			 
 		 }
 		 int numCol = getNumCol();
@@ -156,7 +158,8 @@ public class Main extends Application {
 			 score =  new TextField();
 			 score.setPrefWidth(50);
 			 teamsScore[i].getChildren().addAll(teams[i], score);
-			 teamsScore[i].setAlignment(Pos.CENTER);
+			 //teamsScore[i].getChildren().addAll(teams[i]);
+			 teamsScore[i].setAlignment(Pos.BASELINE_LEFT);
 		 }
 		 
 		 Button[] submitButtons = new Button[teams.length/2];
@@ -174,7 +177,7 @@ public class Main extends Application {
                      System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
                  }
              });
-             b.setPrefHeight(5);
+             //b.setPrefHeight(5);
 			 submitButtons[i] = b;
 		 }
 
@@ -184,13 +187,15 @@ public class Main extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
         //grid.setGridLinesVisible(true);
+        int subCol = numCol - list.size();
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / numCol);
+            if (i%2 == 1) colConst.setPercentWidth(30.0 / subCol);
+            else colConst.setPercentWidth(100.0 / list.size());
             grid.getColumnConstraints().add(colConst);
         }
-        int numRows = list.size() + list.size()/2;
-        int lstCount = 0;
+//        int numRows = list.size() + list.size()/2;
+//        int lstCount = 0;
         
 //        for (int i = 0; i < numRows; i++) {
 //            RowConstraints rowConst = new RowConstraints(); 
@@ -312,7 +317,7 @@ public class Main extends Application {
 //=======
 
 		 Group root = new Group();
-		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
+		 Scene scene = new Scene(root, 1000, 800, Color.DARKGRAY);
 		 ScrollBar sc = new ScrollBar();
 		 root.getChildren().addAll(grid, sc);
 	     sc.setPrefHeight(scene.getHeight());
