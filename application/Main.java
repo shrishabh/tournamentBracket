@@ -38,254 +38,7 @@ public class Main extends Application {
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
 	
 	
-	@Override
-    	public void start(Stage primaryStage) {
-    			 //Testing a piece of code - Rishabh
-    //		Screen screen = Screen.getPrimary();
-    //        Rectangle2D bounds = screen.getVisualBounds();
-    //
-    //        primaryStage.setX(bounds.getMinX());
-    //        primaryStage.setY(bounds.getMinY());
-    //        primaryStage.setWidth(bounds.getWidth());
-    //        primaryStage.setHeight(bounds.getHeight());
-    		int numTeams = list.size();
-    		List<Integer> matchup = getMatchups(numTeams);
-    		for(int i : matchup) {
-    			System.out.print(i + " "); // TODO Delete
-    		}
-    		Iterator<Integer> itr = matchup.iterator();
-    		
-    		 Label teams[] = new Label[list.size()];
-    		 for(int i = 0; i<teams.length; i++)
-    		 {				
-    			 teams[i]= getLabel(list.get(i).getName());
-    			 
-    		 }
-    		 int numCol = getNumCol();
-    		 
-    		 
-    		 HBox teamsScore[] = new HBox[teams.length];
-    		 TextField score;
-    		 for(int i = 0; i<teamsScore.length; i++)
-    		 {
-    			 teamsScore[i] = new HBox(10);
-    			 score =  new TextField();
-    			 score.setPrefWidth(50);
-    			 teamsScore[i].getChildren().addAll(teams[i], score);
-    			 teamsScore[i].setAlignment(Pos.CENTER);
-    		 }
-    		 
-    		 Button[] submitButtons = new Button[teams.length/2];
-    		 for(int i=0; i< submitButtons.length; i++)
-    		 {
-    		     Button b = new Button("Submit");
-    		     b.setId(new Integer(i).toString());
-                 GridPane.setHalignment(b, HPos.CENTER);
-                 b.setOnAction(new EventHandler<ActionEvent>() {
-                     
-                     @Override
-                     public void handle(ActionEvent event) {
-                         TextField t = (TextField) teamsScore[0].getChildren().get(1); // prints team's score
-                         TextField t2 = (TextField) teamsScore[1].getChildren().get(1); // TODO input functionality for milestone 3
-                         System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
-                     }
-                 });
-                 b.setPrefHeight(5);
-    			 submitButtons[i] = b;
-    		 }
-    
-    		GridPane grid = new GridPane();
-    		grid.setId("pane");
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setPadding(new Insets(10));
-            //grid.setGridLinesVisible(true);
-            for (int i = 0; i < numCol; i++) {
-                ColumnConstraints colConst = new ColumnConstraints();
-                colConst.setPercentWidth(100.0 / numCol);
-                grid.getColumnConstraints().add(colConst);
-            }
-            int numRows = list.size() + list.size()/2;
-            int lstCount = 0;
-            
-    //        for (int i = 0; i < numRows; i++) {
-    //            RowConstraints rowConst = new RowConstraints(); 
-    //            if (i==1) {
-    //            	rowConst.setPrefHeight(20);
-    //            	lstCount = i;
-    //            }
-    //            else {
-    //            		if (i == lstCount + 3) rowConst.setPrefHeight(20);
-    //            		else rowConst.setPercentHeight(70.0/list.size());
-    //            }
-    //            grid.getRowConstraints().add(rowConst);         
-    //        }
-            
-            for (int i = 0; i < list.size(); i++) {
-              RowConstraints rowConst = new RowConstraints(); 
-              rowConst.setPercentHeight(100.0/list.size());
-              grid.getRowConstraints().add(rowConst);     
-          }
-    		primaryStage.setTitle("Tournament Bracket");
-    		 if(teams.length == 1)
-    		 {
-    			 grid.add(teamsScore[0], 0, 0);
-    		 }
-    		 else if(teams.length >= 2) 
-    		 {
-    			 int i = 0; int j = 0;
-    			 while(itr.hasNext())
-    			 {
-    			     
-    				 int teamA = itr.next()-1;
-    				 int teamB = itr.next()-1;
-    				 grid.add(teamsScore[teamA], 0, i);
-    				 grid.add(submitButtons[i/2], 1, j,1,2);
-    				 j = j + 2;
-    
-    				 GridPane.setHalignment(submitButtons[i/2], HPos.CENTER);
-    				 grid.add(teamsScore[teamB], 0, i+1);
-                     i = i+2;
-    //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
-    //
-    //					@Override
-    //					public void handle(ActionEvent arg0) {
-    //						Label teamName1 = (Label) teamsScore[i].getChildren().get(0);
-    //						TextField t1 = (TextField) teamsScore[i].getChildren().get(1);
-    //						int score1 = Integer.parseInt(t1.getText());
-    //						
-    //						Label teamName2 = (Label) teamsScore[i+2].getChildren().get(0);
-    //						TextField t2 = (TextField) teamsScore[i+2].getChildren().get(1);
-    //						int score2 = Integer.parseInt(t2.getText());
-    //						Challenger team1 = getChallengerFromName(teamName1.getText());
-    //						Challenger team2 = getChallengerFromName(teamName2.getText());
-    //						
-    //						Challenger winner = getWinner(team1,team2);
-    //						Label newLable = getLabel(winner.getName());
-    //						HBox newHBox = new HBox(10);
-    //						TextField newScore =  new TextField();
-    //						newScore.setPrefWidth(50);
-    //						newHBox.getChildren().addAll(newLable, newScore);
-    //						newHBox.setAlignment(Pos.CENTER);
-    //						
-    //						grid.add(newHBox, 1, i+1, 1,2);
-    //					}
-    //					 
-    //				 });
-    				 
-    				 
-    			 }
-    		 }
-    //		 else if(teams.length == 4)
-    //		 {
-    //			 grid.add(teamsScore[0], 0, 0);
-    //			 Button b1 = new Button("Submit Scores");
-    //			 b1.setId("1");
-    //			 grid.add(b1, 0, 1);
-    //			 GridPane.setHalignment(b1,HPos.CENTER);
-    //			 b1.setOnAction(new EventHandler<ActionEvent>() {
-    //
-    //					@Override
-    //					public void handle(ActionEvent event) {
-    //						Label teamName1 = (Label) teamsScore[0].getChildren().get(0);
-    //						TextField t1 = (TextField) teamsScore[0].getChildren().get(1);
-    //						int score1 = Integer.parseInt(t1.getText());
-    //						
-    //						Label teamName2 = (Label) teamsScore[3].getChildren().get(0);
-    //						TextField t2 = (TextField) teamsScore[3].getChildren().get(1);
-    //						int score2 = Integer.parseInt(t2.getText());
-    //						Challenger team1 = getChallengerFromName(teamName1.getText());
-    //						Challenger team2 = getChallengerFromName(teamName2.getText());
-    //						
-    //						Challenger winner = getWinner(team1,team2);
-    //						Label newLable = getLabel(winner.getName());
-    //						HBox newHBox = new HBox(10);
-    //						TextField newScore =  new TextField();
-    //						newScore.setPrefWidth(50);
-    //						newHBox.getChildren().addAll(newLable, newScore);
-    //						newHBox.setAlignment(Pos.CENTER);
-    //						
-    //						grid.add(newHBox, 1, 0, 1,2);
-    //						
-    //						//System.out.println("Score 1 is:" + score1);
-    //					}
-    //				});
-    //			 grid.add(teamsScore[3], 0, 2);
-    //			 grid.add(teamsScore[1], 0, 3);
-    //			 Button b2 = new Button("Submit Scores");
-    //			 grid.add(b2, 0, 4);
-    //			 GridPane.setHalignment(b2,HPos.CENTER);
-    //			 grid.add(teamsScore[2], 0, 5);
-    //			 
-    //			 grid.add(teamsScore[2], 1, 0,1,2);
-    //			 Button b3 = new Button("Submit Scores");
-    //			 grid.add(b3, 1, );
-    //			 grid.setHalignment(b3,HPos.CENTER);
-    //		 }
-    //		 Scene scene = new Scene(grid, 1000, 800, Color.DARKGRAY);
-    
-    		 Group root = new Group();
-    		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
-    		 ScrollBar sc = new ScrollBar();
-    		 root.getChildren().addAll(grid, sc);
-    	     sc.setPrefSize(20, scene.getHeight());
-    	     sc.setLayoutX(scene.getWidth()-sc.getWidth());
-    	     sc.setOrientation(Orientation.VERTICAL);
-    	     sc.valueProperty().addListener(new ChangeListener<Number>() {
-    	    	 public void changed(ObservableValue<? extends Number> ov,
-    	                Number old_val, Number new_val) {
-    	                   grid.setLayoutY(-new_val.doubleValue()*list.size());
-    	            }
-    	     });
-    		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-    
-    		 //primaryStage.setScene(scene);
-    		 //primaryStage.show();
-    //		    VBox vbox = new VBox(10);
-    //	        
-    //	        
-    //	        Label label = new Label();
-    //	        label.setAlignment(Pos.CENTER);
-    //	        label.setMinHeight(25);
-    //	        label.setText("Team 1 ");
-    //	        
-    //	        Label label2 = new Label();
-    //	        label2.setAlignment(Pos.CENTER);
-    //	        label2.setMinHeight(25);
-    //	        label2.setText("Team 2 ");
-    //	        
-    //	        TextField input = new TextField();
-    //	        TextField input2 = new TextField();
-    //	        input.setMaxHeight(20); input.setMaxWidth(75);
-    //	        input2.setMaxHeight(20); input2.setMaxWidth(75);
-    //	        input.setPromptText("Score");
-    //	        input2.setPromptText("Score");
-    //	        input.setFocusTraversable(false);
-    //	        input2.setFocusTraversable(false);
-    //	        
-    //	        
-    //	        Button submitButton = new Button();
-    //	        submitButton.setText("Submit");
-    //	        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-    //
-    //	            @Override
-    //	            public void handle(ActionEvent event) {
-    //	                int score1 = Integer.parseInt(input.getText());
-    //	                int score2 = Integer.parseInt(input.getText());
-    //	                
-    //	                System.out.println(score1>score2);
-    //	            }
-    //	        });
-    //
-    //	        vbox.getChildren().addAll(label, label2, input, input2, submitButton);
-    //
-    //	
-    
-    	primaryStage.setScene(scene);
-    	primaryStage.show();
-    	}
-
-    /***
+	/***
 	 * Function to get number of columns based on how many rounds there will be. This
 	 * will be used to set constraints on the column size
 	 * @return number of columns required for the complete matchup (# of rounds)
@@ -390,8 +143,11 @@ public class Main extends Application {
 		 for(int i = 0; i<teams.length; i++)
 		 {				
 			 teams[i]= getLabel(list.get(i).getName());
+<<<<<<< HEAD
 			 teams[i].setPrefSize(80, 10);
 			 //System.out.println(teams[i].getText());
+=======
+>>>>>>> parent of 4efd46c... minor fixes
 			 
 		 }
 		 int numCol = getNumCol();
@@ -405,8 +161,12 @@ public class Main extends Application {
 			 score =  new TextField();
 			 score.setPrefWidth(50);
 			 teamsScore[i].getChildren().addAll(teams[i], score);
+<<<<<<< HEAD
 			 //teamsScore[i].getChildren().addAll(teams[i]);
 			 teamsScore[i].setAlignment(Pos.BASELINE_LEFT);
+=======
+			 teamsScore[i].setAlignment(Pos.CENTER);
+>>>>>>> parent of 4efd46c... minor fixes
 		 }
 		 
 		 Button[] submitButtons = new Button[teams.length/2];
@@ -424,7 +184,11 @@ public class Main extends Application {
                      System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
                  }
              });
+<<<<<<< HEAD
              //b.setPrefHeight(5);
+=======
+             b.setPrefHeight(5);
+>>>>>>> parent of 4efd46c... minor fixes
 			 submitButtons[i] = b;
 		 }
 
@@ -434,6 +198,7 @@ public class Main extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(10));
         //grid.setGridLinesVisible(true);
+<<<<<<< HEAD
         int subCol = numCol - list.size();
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
@@ -443,6 +208,15 @@ public class Main extends Application {
         }
 //        int numRows = list.size() + list.size()/2;
 //        int lstCount = 0;
+=======
+        for (int i = 0; i < numCol; i++) {
+            ColumnConstraints colConst = new ColumnConstraints();
+            colConst.setPercentWidth(100.0 / numCol);
+            grid.getColumnConstraints().add(colConst);
+        }
+        int numRows = list.size() + list.size()/2;
+        int lstCount = 0;
+>>>>>>> parent of 4efd46c... minor fixes
         
 //        for (int i = 0; i < numRows; i++) {
 //            RowConstraints rowConst = new RowConstraints(); 
@@ -560,7 +334,11 @@ public class Main extends Application {
 //		 Scene scene = new Scene(grid, 1000, 800, Color.DARKGRAY);
 
 		 Group root = new Group();
+<<<<<<< HEAD
 		 Scene scene = new Scene(root, 1000, 800, Color.DARKGRAY);
+=======
+		 Scene scene = new Scene(root, 800, 600, Color.DARKGRAY);
+>>>>>>> parent of 4efd46c... minor fixes
 		 ScrollBar sc = new ScrollBar();
 		 root.getChildren().addAll(grid, sc);
 	     sc.setPrefHeight(scene.getHeight());
