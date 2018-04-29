@@ -180,7 +180,6 @@ public class Main extends Application {
 		 }
 		 class ButtonList {
 		     Button b;
-		     int pos;  // will be even numbers only
 		     
 		     private ButtonList(int pos) {
 		         b = new Button("Submit");
@@ -192,12 +191,12 @@ public class Main extends Application {
 	                 public void handle(ActionEvent event) {
 	                     TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
 	                     TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
-	                     // System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
-	                     System.out.println(t.getText() + " " + t2.getText());
+	                     list.get(matchupPos[pos]).setScore(Integer.parseInt(t.getText()));
+	                     list.get(matchupPos[pos+1]).setScore(Integer.parseInt(t2.getText()));
+	                     System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
 	                 }
 	             });
 		         b.setPrefHeight(5);
-		         this.pos = pos;
 		     }
 		 }
 		 
