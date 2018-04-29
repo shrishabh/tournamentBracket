@@ -164,25 +164,32 @@ public class Main extends Application {
 			 teamsScore[i].setAlignment(Pos.BASELINE_LEFT);
 			 teamsScore[i].setAlignment(Pos.CENTER);
 		 }
+		 class ButtonList {
+		     Button b;
+		     int pos;  // will be even numbers only
+		     
+		     private ButtonList(int pos) {
+		         b = new Button("Submit");
+		         b.setId(new Integer(pos/2).toString());
+		         GridPane.setHalignment(b, HPos.CENTER);
+		         b.setOnAction(new EventHandler<ActionEvent>() {
+	                 
+	                 @Override
+	                 public void handle(ActionEvent event) {
+	                     TextField t = (TextField) teamsScore[pos].getChildren().get(1); // TODO fix to print team's score
+	                     TextField t2 = (TextField) teamsScore[pos+1].getChildren().get(1); // input functionality for milestone 3
+	                     System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
+	                 }
+	             });
+		         b.setPrefHeight(5);
+		         this.pos = pos;
+		     }
+		 }
 		 
-		 Button[] submitButtons = new Button[teams.length/2];
-		 for(int i=0; i< submitButtons.length; i++)
+		 ButtonList[] submitButtons = new ButtonList[teams.length/2];
+		 for(int i=0; i< submitButtons.length; i++)   
 		 {
-		     Button b = new Button("Submit");
-		     b.setId(new Integer(i).toString());
-             GridPane.setHalignment(b, HPos.CENTER);
-             b.setOnAction(new EventHandler<ActionEvent>() {
-                 
-                 @Override
-                 public void handle(ActionEvent event) {
-                     TextField t = (TextField) teamsScore[0].getChildren().get(1); // prints team's score
-                     TextField t2 = (TextField) teamsScore[1].getChildren().get(1); // input functionality for milestone 3
-                     System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
-                 }
-             });
-             //b.setPrefHeight(5);
-             b.setPrefHeight(5);
-			 submitButtons[i] = b;
+		     submitButtons[i] = new ButtonList(2*i);
 		 }
 
 		GridPane grid = new GridPane();
@@ -240,10 +247,10 @@ public class Main extends Application {
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, i);
-				 grid.add(submitButtons[i/2], 1, j,1,2);
+				 grid.add(submitButtons[i/2].b, 1, j,1,2);
 				 j = j + 2;
 
-				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
+				 GridPane.setHalignment(submitButtons[i/3].b, HPos.CENTER);
 //				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
 //
 //					@Override
