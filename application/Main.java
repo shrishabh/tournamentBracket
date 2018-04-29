@@ -138,6 +138,7 @@ public class Main extends Application {
 			System.out.print(i + " "); // TODO Delete
 		}
 		Iterator<Integer> itr = matchup.iterator();
+		Iterator<Integer> itr2 = matchup.iterator();
 		
 		 Label teams[] = new Label[list.size()];
 		 for(int i = 0; i<teams.length; i++)
@@ -153,6 +154,19 @@ public class Main extends Application {
 		 
 		 HBox teamsScore[] = new HBox[teams.length];
 		 TextField score;
+		 final int[] matchupPos = new int[teams.length+1];  // last one will be unused unless teams.length == 1
+		 if (teams.length == 1) {
+		     matchupPos[0] = 1;
+		     matchupPos[1] = 1;
+		 }
+		 else if (teams.length >= 2) {
+		     int count = 0;
+		     while (itr2.hasNext()) {
+		         matchupPos[count] = itr2.next()-1;
+		         count++;
+		     }
+		 }
+		 
 		 for(int i = 0; i<teamsScore.length; i++)
 		 {
 			 teamsScore[i] = new HBox(10);
@@ -176,9 +190,10 @@ public class Main extends Application {
 	                 
 	                 @Override
 	                 public void handle(ActionEvent event) {
-	                     TextField t = (TextField) teamsScore[pos].getChildren().get(1); // TODO fix to print team's score
-	                     TextField t2 = (TextField) teamsScore[pos+1].getChildren().get(1); // input functionality for milestone 3
-	                     System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
+	                     TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
+	                     TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
+	                     // System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
+	                     System.out.println(t.getText() + " " + t2.getText());
 	                 }
 	             });
 		         b.setPrefHeight(5);
