@@ -264,23 +264,31 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int k = 0;
+			 int i = 0; int j = 0; int k = 0; int count; int otherCount = 2; int otherC = 0; int otherCo = 2;
 			 while(itr.hasNext())
 			 {
-			     
+			     count = 0;
+			     j = 0;
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, k);
 				 grid.add(submitButtons[i/2].b, 1, k, 1, 2);
-				 
-				 grid.add(createPlaceHolder(), 2, k);
-				 
+				 while (count < list.size()/otherCount) {
+				     grid.add(createPlaceHolder(), otherCo, j);
+				     j+=3;
+				     count++;
+				 }
 				 GridPane.setHalignment(submitButtons[i/3].b, HPos.CENTER);
 
-				 
 				 grid.add(teamsScore[teamB], 0, k+1);
 				 i = i+2;
 				 k = k+3;
+				 otherC++;
+				 if (isPowerOfTwo(otherC)) {
+				 otherCount*=2;
+				 otherCo++;
+				 }
+
 			 }
 		 }
 
@@ -306,6 +314,12 @@ public class Main extends Application {
 	
 	
 	primaryStage.show();
+	}
+	
+	private static boolean isPowerOfTwo(int number) {
+
+	    return number > 0 && ((number & (number - 1)) == 0);
+
 	}
 	/**\
 	 * Method that takes a given file name and processes it into a list of type Challenger
