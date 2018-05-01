@@ -307,7 +307,10 @@ public class Main extends Application {
 	
 	primaryStage.show();
 	}
-
+	/**\
+	 * Method that takes a given file name and processes it into a list of type Challenger
+	 * @param fileName The name of the txt file that contains the team list.
+	 */
 	private static void processFile(String fileName) {
 		File inputFile = null;
 		Scanner sc = null;
@@ -329,7 +332,10 @@ public class Main extends Application {
 			System.exit(-1);
 		}
 	}
-	
+	/**
+	 * Checks if the given number of teams is a power of 2
+	 * @return true if the number teams is a power of 2 else false
+	 */
 	private static boolean checkForNumTeams(){
 		int numTeams = list.size();
 		boolean checkPassed = false;
@@ -342,7 +348,12 @@ public class Main extends Application {
 		return checkPassed;
 		
 	}
-	
+	/**
+	 * Checks which Challenger won in a match up between the two teams
+	 * @param team1
+	 * @param team2
+	 * @return	Returns the winning team.
+	 */
 	private Challenger getWinner(Challenger team1, Challenger team2) {
 		if (team1.getScore() > team2.getScore()) {
 			return team1;
