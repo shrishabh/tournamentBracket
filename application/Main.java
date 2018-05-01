@@ -124,6 +124,9 @@ public class Main extends Application {
 		return newLabel;
 	}
 	
+	/**
+	 * Creates a placeHolder HBox that contains a label that in the future will have a winning team from the previous round.
+	 */
 	private HBox createPlaceHolder() {
 	    HBox placeholder = new HBox(10);
 	    TextField score = new TextField();
@@ -132,6 +135,14 @@ public class Main extends Application {
         placeholder.setAlignment(Pos.CENTER);
         return placeholder;
 	}
+	/**
+	 * Creates a submit button for the 2 teams to the left of the button
+	 * @param pos	The buttons row in the grid
+	 * @param teamsScore	The HBox which contains the scores and team names
+	 * @param matchupPos	The teams match up position array
+	 * @param column		The column for the button to be added in the array
+	 * @return				The button
+	 */
 	private Button createButton(int pos, HBox[] teamsScore, int[] matchupPos, int column) {
 	    Button b = new Button("Submit");
         b.setId(new Integer(pos/2).toString());
@@ -162,6 +173,14 @@ public class Main extends Application {
         b.setPrefHeight(5);
         return b;
     }
+	
+	/**
+	 * Finds the node at the given coordinates within the gridPane
+	 * @param gridPane	The given gridPane
+	 * @param col		The column value
+	 * @param row		The row value
+	 * @return			The node at (row, col)
+	 */
 	private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
 	    for (Node node : gridPane.getChildren()) {
 	        if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
