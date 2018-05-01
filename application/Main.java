@@ -159,8 +159,9 @@ public class Main extends Application {
                 list.get(matchupPos[pos+1]).setScore(score2);
                 Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
                 
-                Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
-                l.setText(winner.getName());
+//                Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
+//                l.setText(winner.getName());
+                
 //                grid.add(l, column, 0);
                 // basic code to change the label
                 
@@ -322,27 +323,28 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int row = 0; int count; int otherCount = 2; int otherC = 0; int column = 2; // TODO somebody help
+			 int i = 0; int row = 0; int count; int otherCount = 2; int otherC = 0; int column = 2; int flip;// TODO somebody help
 			 while(itr.hasNext())
 			 {
 			     int[] numbers = new int[list.size()];
 			     count = 0;
+			     flip = 1;
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, row);
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
 				 while (count < list.size()/otherCount) {
-				     grid.add(createPlaceHolder(), column, count*3);
-				     if(count%2 == 0)
-				     {
-	                     grid.add(createButton(count*2, teamsScore, matchupPos, column+1), column+1, count*3 + 1);
-				     }
-// 				    // int pos, HBox[] teamsScore, int[] matchupPos
-//				     // teamsScore = HBox[]
-//				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
-				     count++;
+				         grid.add(createPlaceHolder(), column, count*3+flip+3*otherCount/list.size());  // 3* list.size() rows available (48)
+				         //grid.add(createPlaceHolder(), column, count*3+1);  // trying to use 12 evenly spaced for 4 games, hopefully this spacing is better?
+				         if (count % 2 == 0 && count != (list.size()/otherCount) - 1)
+				         grid.add(createButton(count*2, teamsScore, matchupPos, column+1), column+1, count*3+1);
+				         // 				    // int pos, HBox[] teamsScore, int[] matchupPos
+				         //				     // teamsScore = HBox[]
+				         //				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
+				         count++;
+				         flip = -flip;
+				     
 				 }
-				 count = 0;
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 
 				 grid.add(teamsScore[teamB], 0, row+1);
