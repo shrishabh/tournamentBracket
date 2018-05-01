@@ -35,6 +35,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
+	private static List<Challenger> winnerList = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
 	
 	
@@ -191,9 +192,12 @@ public class Main extends Application {
 	                 public void handle(ActionEvent event) {
 	                     TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
 	                     TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
-	                     list.get(matchupPos[pos]).setScore(Integer.parseInt(t.getText()));
-	                     list.get(matchupPos[pos+1]).setScore(Integer.parseInt(t2.getText()));
-	                     System.out.println(Integer.parseInt(t.getText()) + " " + Integer.parseInt(t2.getText()));
+	                     int score = Integer.parseInt(t.getText());
+	                     int score2 = Integer.parseInt(t2.getText());
+	                     list.get(matchupPos[pos]).setScore(score);
+	                     list.get(matchupPos[pos+1]).setScore(score2);
+	                     winnerList.add(getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1])));
+	                     System.out.println(score + " " + score2);
 	                 }
 	             });
 		         b.setPrefHeight(5);
