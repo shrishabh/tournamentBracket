@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,7 +38,7 @@ public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
 	private static List<Challenger> winnerList = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
-	
+	GridPane grid = new GridPane();
 	
 	/***
 	 * Function to get number of columns based on how many rounds there will be. This
@@ -131,7 +132,7 @@ public class Main extends Application {
         placeholder.setAlignment(Pos.CENTER);
         return placeholder;
 	}
-	private Button createButton(int pos, HBox[] teamsScore, int[] matchupPos) {
+	private Button createButton(int pos, HBox[] teamsScore, int[] matchupPos, int column) {
 	    Button b = new Button("Submit");
         b.setId(new Integer(pos/2).toString());
         GridPane.setHalignment(b, HPos.CENTER);
@@ -147,8 +148,9 @@ public class Main extends Application {
                 list.get(matchupPos[pos+1]).setScore(score2);
                 Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
                 
-//                Label l = (Label) teamsScore[matchupPos[pos]].getChildren().get(0);
-//                l.setText("____");
+                Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0);
+                l.setText(winner.getName());
+//                grid.add(l, column, 0);
                 // basic code to change the label
                 
                 if (!winnerList.contains(winner)) // if someone wants to submit a different score
@@ -160,7 +162,14 @@ public class Main extends Application {
         b.setPrefHeight(5);
         return b;
     }
-	
+	private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+	    for (Node node : gridPane.getChildren()) {
+	        if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+	            return node;
+	        }
+	    }
+	    return null;
+	}
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -256,10 +265,10 @@ public class Main extends Application {
 		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)   
 		 {
-		     submitButtons[i] = createButton(i*2, teamsScore, matchupPos);
+		     submitButtons[i] = createButton(i*2, teamsScore, matchupPos, 0);
 		 }
 
-		GridPane grid = new GridPane();
+
 		grid.setId("pane");
         grid.setHgap(10);
         grid.setVgap(10);
@@ -294,7 +303,7 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int row = 0; int count; int otherCount = 2; int otherC = 0; int otherCo = 2; // TODO somebody help
+			 int i = 0; int row = 0; int count; int otherCount = 2; int otherC = 0; int column = 2; // TODO somebody help
 			 while(itr.hasNext())
 			 {
 			     int[] numbers = new int[list.size()];
@@ -304,15 +313,16 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamA], 0, row);
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
 				 while (count < list.size()/otherCount) {
-				     grid.add(createPlaceHolder(), otherCo, count*3);
+				     grid.add(createPlaceHolder(), column, count*3);
 				     count++;
 				 }
 				 count = 0;
+				 column++;
 				 while (count < list.size()/(otherCount*2)) {
 				    // int pos, HBox[] teamsScore, int[] matchupPos
 				     // teamsScore = HBox[]
 				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
-                     grid.add(createButton(count*2, teamsScore, matchupPos), otherCo+1, count*3 + 1); // TODO createbutton method
+                     grid.add(createButton(count*2, teamsScore, matchupPos, column), column, count*3 + 1); // TODO createbutton method
                      count++;
                  }
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
@@ -323,7 +333,7 @@ public class Main extends Application {
 				 otherC++;
 				 if (isPowerOfTwo(otherC)) {
 				 otherCount*=2;
-				 otherCo+=2;
+				 column++;
 				 }
 
 			 }
