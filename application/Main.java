@@ -147,8 +147,8 @@ public class Main extends Application {
                 list.get(matchupPos[pos+1]).setScore(score2);
                 Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
                 
-//              Label l = (Label) teamsScore[matchupPos[pos]].getChildren().get(0);
-//              l.setText("____");
+//                Label l = (Label) teamsScore[matchupPos[pos]].getChildren().get(0);
+//                l.setText("____");
                 // basic code to change the label
                 
                 if (!winnerList.contains(winner)) // if someone wants to submit a different score
@@ -297,6 +297,7 @@ public class Main extends Application {
 			 int i = 0; int j = 0; int k = 0; int x = 1; int count; int otherCount = 2; int otherC = 0; int otherCo = 2; // TODO somebody help
 			 while(itr.hasNext())
 			 {
+			     int[] numbers = new int[list.size()];
 			     count = 0;
 			     j = 0;
 			     x = 1;
@@ -312,6 +313,8 @@ public class Main extends Application {
 				 count = 0;
 				 while (count < list.size()/(otherCount*2)) {
 				    // int pos, HBox[] teamsScore, int[] matchupPos
+				     // teamsScore = HBox[]
+				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
                      grid.add(createButton(count*2, teamsScore, matchupPos), otherCo+1, x); // TODO createbutton method
                      x+=3;
                      count++;
