@@ -343,7 +343,6 @@ public class Main extends Application {
 				     count++;
 				 }
 				 count = 0;
-				 column++;
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 
 				 grid.add(teamsScore[teamB], 0, row+1);
@@ -352,7 +351,7 @@ public class Main extends Application {
 				 otherC++;
 				 if (isPowerOfTwo(otherC)) {
 				 otherCount*=2;
-				 column++;
+				 column+=2;
 				 }
 
 			 }
