@@ -131,6 +131,36 @@ public class Main extends Application {
         placeholder.setAlignment(Pos.CENTER);
         return placeholder;
 	}
+	private Button createButton(int pos, HBox[] teamsScore, int[] matchupPos) {
+	    Button b = new Button("Submit");
+        b.setId(new Integer(pos/2).toString());
+        GridPane.setHalignment(b, HPos.CENTER);
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
+                TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
+                int score = Integer.parseInt(t.getText());
+                int score2 = Integer.parseInt(t2.getText());
+                list.get(matchupPos[pos]).setScore(score);
+                list.get(matchupPos[pos+1]).setScore(score2);
+                Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
+                
+//              Label l = (Label) teamsScore[matchupPos[pos]].getChildren().get(0);
+//              l.setText("____");
+                // basic code to change the label
+                
+                if (!winnerList.contains(winner)) // if someone wants to submit a different score
+                winnerList.add(winner);           // then the same winner won't be added multiple times
+                                                  // TODO if the winner changes, replace in winnerList
+                System.out.println(score + " " + score2);
+            }
+        });
+        b.setPrefHeight(5);
+        return b;
+    }
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -190,43 +220,43 @@ public class Main extends Application {
 			 //teamsScore[i].setAlignment(Pos.BASELINE_LEFT);
 			 teamsScore[i].setAlignment(Pos.CENTER);
 		 }
-		 class ButtonList {
-		     Button b;
-		     
-		     private ButtonList(int pos) {
-		         b = new Button("Submit");
-		         b.setId(new Integer(pos/2).toString());
-		         GridPane.setHalignment(b, HPos.CENTER);
-		         b.setOnAction(new EventHandler<ActionEvent>() {
-	                 
-	                 @Override
-	                 public void handle(ActionEvent event) {
-	                     TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
-	                     TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
-	                     int score = Integer.parseInt(t.getText());
-	                     int score2 = Integer.parseInt(t2.getText());
-	                     list.get(matchupPos[pos]).setScore(score);
-	                     list.get(matchupPos[pos+1]).setScore(score2);
-	                     Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
-	                     
-//	                     Label l = (Label) teamsScore[matchupPos[pos]].getChildren().get(0);
-//	                     l.setText("____");
-	                     // basic code to change the label
-	                     
-	                     if (!winnerList.contains(winner)) // if someone wants to submit a different score
-	                     winnerList.add(winner);           // then the same winner won't be added multiple times
-	                                                       // TODO if the winner changes, replace in winnerList
-	                     System.out.println(score + " " + score2);
-	                 }
-	             });
-		         b.setPrefHeight(5);
-		     }
-		 }
-		 
-		 ButtonList[] submitButtons = new ButtonList[teams.length/2];
+//		 class ButtonList {
+//		     Button b;
+//		     
+//		     private ButtonList(int pos) {
+//		         b = new Button("Submit");
+//		         b.setId(new Integer(pos/2).toString());
+//		         GridPane.setHalignment(b, HPos.CENTER);
+//		         b.setOnAction(new EventHandler<ActionEvent>() {
+//	                 
+//	                 @Override
+//	                 public void handle(ActionEvent event) {
+//	                     TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
+//	                     TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
+//	                     int score = Integer.parseInt(t.getText());
+//	                     int score2 = Integer.parseInt(t2.getText());
+//	                     list.get(matchupPos[pos]).setScore(score);
+//	                     list.get(matchupPos[pos+1]).setScore(score2);
+//	                     Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
+//	                     
+////	                     Label l = (Label) teamsScore[matchupPos[pos]].getChildren().get(0);
+////	                     l.setText("____");
+//	                     // basic code to change the label
+//	                     
+//	                     if (!winnerList.contains(winner)) // if someone wants to submit a different score
+//	                     winnerList.add(winner);           // then the same winner won't be added multiple times
+//	                                                       // TODO if the winner changes, replace in winnerList
+//	                     System.out.println(score + " " + score2);
+//	                 }
+//	             });
+//		         b.setPrefHeight(5);
+//		     }
+//		 }
+		 // int pos, HBox[] teamsScore, int[] matchupPos
+		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)   
 		 {
-		     submitButtons[i] = new ButtonList(2*i);
+		     submitButtons[i] = createButton(i*2, teamsScore, matchupPos);
 		 }
 
 		GridPane grid = new GridPane();
@@ -264,21 +294,29 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int j = 0; int k = 0; int count; int otherCount = 2; int otherC = 0; int otherCo = 2;
+			 int i = 0; int j = 0; int k = 0; int x = 1; int count; int otherCount = 2; int otherC = 0; int otherCo = 2; // TODO somebody help
 			 while(itr.hasNext())
 			 {
 			     count = 0;
 			     j = 0;
+			     x = 1;
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, k);
-				 grid.add(submitButtons[i/2].b, 1, k, 1, 2);
+				 grid.add(submitButtons[i/2], 1, k, 1, 2);
 				 while (count < list.size()/otherCount) {
 				     grid.add(createPlaceHolder(), otherCo, j);
 				     j+=3;
 				     count++;
 				 }
-				 GridPane.setHalignment(submitButtons[i/3].b, HPos.CENTER);
+				 count = 0;
+				 while (count < list.size()/(otherCount*2)) {
+				    // int pos, HBox[] teamsScore, int[] matchupPos
+                     grid.add(createButton(count*2, teamsScore, matchupPos), otherCo+1, x); // TODO createbutton method
+                     x+=3;
+                     count++;
+                 }
+				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 
 				 grid.add(teamsScore[teamB], 0, k+1);
 				 i = i+2;
@@ -286,7 +324,7 @@ public class Main extends Application {
 				 otherC++;
 				 if (isPowerOfTwo(otherC)) {
 				 otherCount*=2;
-				 otherCo++;
+				 otherCo+=2;
 				 }
 
 			 }
