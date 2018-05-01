@@ -294,20 +294,17 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int j = 0; int k = 0; int x = 1; int count; int otherCount = 2; int otherC = 0; int otherCo = 2; // TODO somebody help
+			 int i = 0; int row = 0; int count; int otherCount = 2; int otherC = 0; int otherCo = 2; // TODO somebody help
 			 while(itr.hasNext())
 			 {
 			     int[] numbers = new int[list.size()];
 			     count = 0;
-			     j = 0;
-			     x = 1;
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
-				 grid.add(teamsScore[teamA], 0, k);
-				 grid.add(submitButtons[i/2], 1, k, 1, 2);
+				 grid.add(teamsScore[teamA], 0, row);
+				 grid.add(submitButtons[i/2], 1, row, 1, 2);
 				 while (count < list.size()/otherCount) {
-				     grid.add(createPlaceHolder(), otherCo, j);
-				     j+=3;
+				     grid.add(createPlaceHolder(), otherCo, count*3);
 				     count++;
 				 }
 				 count = 0;
@@ -315,15 +312,14 @@ public class Main extends Application {
 				    // int pos, HBox[] teamsScore, int[] matchupPos
 				     // teamsScore = HBox[]
 				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
-                     grid.add(createButton(count*2, teamsScore, matchupPos), otherCo+1, x); // TODO createbutton method
-                     x+=3;
+                     grid.add(createButton(count*2, teamsScore, matchupPos), otherCo+1, count*3 + 1); // TODO createbutton method
                      count++;
                  }
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 
-				 grid.add(teamsScore[teamB], 0, k+1);
+				 grid.add(teamsScore[teamB], 0, row+1);
 				 i = i+2;
-				 k = k+3;
+				 row = row+3;
 				 otherC++;
 				 if (isPowerOfTwo(otherC)) {
 				 otherCount*=2;
