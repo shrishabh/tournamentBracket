@@ -134,9 +134,9 @@ public class Main extends Application {
 //        primaryStage.setHeight(bounds.getHeight());
 		int numTeams = list.size();
 		List<Integer> matchup = getMatchups(numTeams);
-		for(int i : matchup) {
-			System.out.print(i + " "); // TODO Delete
-		}
+//		for(int i : matchup) {
+//			System.out.print(i + " "); // TODO Delete
+//		}
 		Iterator<Integer> itr = matchup.iterator();
 		Iterator<Integer> itr2 = matchup.iterator();
 		
@@ -226,21 +226,8 @@ public class Main extends Application {
             colConst.setPercentWidth(100.0 / numCol);
             grid.getColumnConstraints().add(colConst);
         }
-        int numRows = list.size() + list.size()/2;
-        int lstCount = 0;
         
-//        for (int i = 0; i < numRows; i++) {
-//            RowConstraints rowConst = new RowConstraints(); 
-//            if (i==1) {
-//            	rowConst.setPrefHeight(20);
-//            	lstCount = i;
-//            }
-//            else {
-//            		if (i == lstCount + 3) rowConst.setPrefHeight(20);
-//            		else rowConst.setPercentHeight(70.0/list.size());
-//            }
-//            grid.getRowConstraints().add(rowConst);         
-//        }
+
         
         for (int i = 0; i < list.size(); i++) {
           RowConstraints rowConst = new RowConstraints(); 
@@ -254,95 +241,25 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int j = 0;
+			 int i = 0; int k = 0;
 			 while(itr.hasNext())
 			 {
 			     
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
-				 grid.add(teamsScore[teamA], 0, i);
-				 grid.add(submitButtons[i/2].b, 1, j,1,2);
-				 j = j + 2;
+				 grid.add(teamsScore[teamA], 0, k);
+				 grid.add(submitButtons[i/2].b, 1, k,1,2);
+				
 
 				 GridPane.setHalignment(submitButtons[i/3].b, HPos.CENTER);
-//				 submitButtons[i/2].setOnAction(new EventHandler<ActionEvent>(){
-//
-//					@Override
-//					public void handle(ActionEvent arg0) {
-//						Label teamName1 = (Label) teamsScore[i].getChildren().get(0);
-//						TextField t1 = (TextField) teamsScore[i].getChildren().get(1);
-//						int score1 = Integer.parseInt(t1.getText());
-//						
-//						Label teamName2 = (Label) teamsScore[i+2].getChildren().get(0);
-//						TextField t2 = (TextField) teamsScore[i+2].getChildren().get(1);
-//						int score2 = Integer.parseInt(t2.getText());
-//						Challenger team1 = getChallengerFromName(teamName1.getText());
-//						Challenger team2 = getChallengerFromName(teamName2.getText());
-//						
-//						Challenger winner = getWinner(team1,team2);
-//						Label newLable = getLabel(winner.getName());
-//						HBox newHBox = new HBox(10);
-//						TextField newScore =  new TextField();
-//						newScore.setPrefWidth(50);
-//						newHBox.getChildren().addAll(newLable, newScore);
-//						newHBox.setAlignment(Pos.CENTER);
-//						
-//						grid.add(newHBox, 1, i+1, 1,2);
-//					}
-//					 
-//				 });
+
 				 
-				 grid.add(teamsScore[teamB], 0, i+1);
+				 grid.add(teamsScore[teamB], 0, k+1);
 				 i = i+2;
+				 k = k+3;
 			 }
 		 }
-//		 else if(teams.length == 4)
-//		 {
-//			 grid.add(teamsScore[0], 0, 0);
-//			 Button b1 = new Button("Submit Scores");
-//			 b1.setId("1");
-//			 grid.add(b1, 0, 1);
-//			 GridPane.setHalignment(b1,HPos.CENTER);
-//			 b1.setOnAction(new EventHandler<ActionEvent>() {
-//
-//					@Override
-//					public void handle(ActionEvent event) {
-//						Label teamName1 = (Label) teamsScore[0].getChildren().get(0);
-//						TextField t1 = (TextField) teamsScore[0].getChildren().get(1);
-//						int score1 = Integer.parseInt(t1.getText());
-//						
-//						Label teamName2 = (Label) teamsScore[3].getChildren().get(0);
-//						TextField t2 = (TextField) teamsScore[3].getChildren().get(1);
-//						int score2 = Integer.parseInt(t2.getText());
-//						Challenger team1 = getChallengerFromName(teamName1.getText());
-//						Challenger team2 = getChallengerFromName(teamName2.getText());
-//						
-//						Challenger winner = getWinner(team1,team2);
-//						Label newLable = getLabel(winner.getName());
-//						HBox newHBox = new HBox(10);
-//						TextField newScore =  new TextField();
-//						newScore.setPrefWidth(50);
-//						newHBox.getChildren().addAll(newLable, newScore);
-//						newHBox.setAlignment(Pos.CENTER);
-//						
-//						grid.add(newHBox, 1, 0, 1,2);
-//						
-//						//System.out.println("Score 1 is:" + score1);
-//					}
-//				});
-//			 grid.add(teamsScore[3], 0, 2);
-//			 grid.add(teamsScore[1], 0, 3);
-//			 Button b2 = new Button("Submit Scores");
-//			 grid.add(b2, 0, 4);
-//			 GridPane.setHalignment(b2,HPos.CENTER);
-//			 grid.add(teamsScore[2], 0, 5);
-//			 
-//			 grid.add(teamsScore[2], 1, 0,1,2);
-//			 Button b3 = new Button("Submit Scores");
-//			 grid.add(b3, 1, );
-//			 grid.setHalignment(b3,HPos.CENTER);
-//		 }
-//		 Scene scene = new Scene(grid, 1000, 800, Color.DARKGRAY);
+
 
 		 Group root = new Group();
 		 Scene scene = new Scene(root, 1000, 800, Color.DARKGRAY);
@@ -359,47 +276,6 @@ public class Main extends Application {
 	     });
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
-		 //primaryStage.setScene(scene);
-		 //primaryStage.show();
-//		    VBox vbox = new VBox(10);
-//	        
-//	        
-//	        Label label = new Label();
-//	        label.setAlignment(Pos.CENTER);
-//	        label.setMinHeight(25);
-//	        label.setText("Team 1 ");
-//	        
-//	        Label label2 = new Label();
-//	        label2.setAlignment(Pos.CENTER);
-//	        label2.setMinHeight(25);
-//	        label2.setText("Team 2 ");
-//	        
-//	        TextField input = new TextField();
-//	        TextField input2 = new TextField();
-//	        input.setMaxHeight(20); input.setMaxWidth(75);
-//	        input2.setMaxHeight(20); input2.setMaxWidth(75);
-//	        input.setPromptText("Score");
-//	        input2.setPromptText("Score");
-//	        input.setFocusTraversable(false);
-//	        input2.setFocusTraversable(false);
-//	        
-//	        
-//	        Button submitButton = new Button();
-//	        submitButton.setText("Submit");
-//	        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-//
-//	            @Override
-//	            public void handle(ActionEvent event) {
-//	                int score1 = Integer.parseInt(input.getText());
-//	                int score2 = Integer.parseInt(input.getText());
-//	                
-//	                System.out.println(score1>score2);
-//	            }
-//	        });
-//
-//	        vbox.getChildren().addAll(label, label2, input, input2, submitButton);
-//
-//	
 
 	primaryStage.setScene(scene);
 
