@@ -314,17 +314,14 @@ public class Main extends Application {
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
 				 while (count < list.size()/otherCount) {
 				     grid.add(createPlaceHolder(), column, count*3);
+                     grid.add(createButton(count*2, teamsScore, matchupPos, column+1), column+1, count*3 + 1);
+// 				    // int pos, HBox[] teamsScore, int[] matchupPos
+//				     // teamsScore = HBox[]
+//				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
 				     count++;
 				 }
 				 count = 0;
 				 column++;
-				 while (count < list.size()/(otherCount*2)) {
-				    // int pos, HBox[] teamsScore, int[] matchupPos
-				     // teamsScore = HBox[]
-				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
-                     grid.add(createButton(count*2, teamsScore, matchupPos, column), column, count*3 + 1); // TODO createbutton method
-                     count++;
-                 }
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 
 				 grid.add(teamsScore[teamB], 0, row+1);
