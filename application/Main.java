@@ -148,7 +148,7 @@ public class Main extends Application {
                 list.get(matchupPos[pos+1]).setScore(score2);
                 Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
                 
-                Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0);
+                Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
                 l.setText(winner.getName());
 //                grid.add(l, column, 0);
                 // basic code to change the label
@@ -314,7 +314,7 @@ public class Main extends Application {
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
 				 while (count < list.size()/otherCount) {
 				     grid.add(createPlaceHolder(), column, count*3);
-				     if(count < list.size()/otherCount - 1 && count%2 == 0)
+				     if(count%2 == 0)
 				     {
 	                     grid.add(createButton(count*2, teamsScore, matchupPos, column+1), column+1, count*3 + 1);
 				     }
