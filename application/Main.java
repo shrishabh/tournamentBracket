@@ -123,6 +123,15 @@ public class Main extends Application {
 		return newLabel;
 	}
 	
+	private HBox createPlaceHolder() {
+	    HBox placeholder = new HBox(10);
+	    TextField score = new TextField();
+	    score.setPrefWidth(50);
+        placeholder.getChildren().addAll(getLabel("____"), score);
+        placeholder.setAlignment(Pos.CENTER);
+        return placeholder;
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 			 //Testing a piece of code - Rishabh
@@ -154,7 +163,6 @@ public class Main extends Application {
 		 
 		 
 		 HBox teamsScore[] = new HBox[teams.length];
-		 TextField score;
 		 final int[] matchupPos = new int[teams.length+1];  // last one will be unused unless teams.length == 1
 		 if (teams.length == 1) {
 		     matchupPos[0] = 1;
@@ -168,15 +176,18 @@ public class Main extends Application {
 		     }
 		 }
 		 
+		 TextField score;
+		 
+		 
+		 
 		 for(int i = 0; i<teamsScore.length; i++)
 		 {
 			 teamsScore[i] = new HBox(10);
-			 score =  new TextField();
-			 score.setPrefWidth(50);
+			 score = new TextField();
+	         score.setPrefWidth(50);
 			 teamsScore[i].getChildren().addAll(teams[i], score);
-
 			 //teamsScore[i].getChildren().addAll(teams[i]);
-			 teamsScore[i].setAlignment(Pos.BASELINE_LEFT);
+			 //teamsScore[i].setAlignment(Pos.BASELINE_LEFT);
 			 teamsScore[i].setAlignment(Pos.CENTER);
 		 }
 		 class ButtonList {
@@ -260,9 +271,10 @@ public class Main extends Application {
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, k);
-				 grid.add(submitButtons[i/2].b, 1, k,1,2);
-				
-
+				 grid.add(submitButtons[i/2].b, 1, k, 1, 2);
+				 
+				 grid.add(createPlaceHolder(), 2, k);
+				 
 				 GridPane.setHalignment(submitButtons[i/3].b, HPos.CENTER);
 
 				 
