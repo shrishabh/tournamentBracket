@@ -197,7 +197,11 @@ public class Main extends Application {
 	                     list.get(matchupPos[pos]).setScore(score);
 	                     list.get(matchupPos[pos+1]).setScore(score2);
 	                     Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
-	                     System.out.println(teamsScore[matchupPos[pos]].getChildren().get(0));
+	                     
+//	                     Label l = (Label) teamsScore[matchupPos[pos]].getChildren().get(0);
+//	                     l.setText("____");
+	                     // basic code to change the label
+	                     
 	                     if (!winnerList.contains(winner)) // if someone wants to submit a different score
 	                     winnerList.add(winner);           // then the same winner won't be added multiple times
 	                                                       // TODO if the winner changes, replace in winnerList
