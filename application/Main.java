@@ -324,28 +324,28 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int row = 0; int count; int otherCount = 2; int otherC = 0; int column = 2; int flip;// TODO somebody help
+			 int i = 0; int row = 0; int incReset; int powerCount = 2; int inc = 0; int flip;// TODO somebody help
 			 while(itr.hasNext())
 			 {
-			     count = 0;
+			     incReset = 0;
 			     flip = 1;
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, row);
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
-				 while (count < list.size()/otherCount) {
-				     int spacing = count*3+flip+12*otherCount/list.size();
-				     System.out.println(spacing + " " + otherCount + " " + otherC);
+				 while (incReset < list.size()/powerCount) {
+				     int spacing = incReset*3+flip+12*powerCount/list.size();
+				     System.out.println(spacing + " " + powerCount + " " + inc);
 				         grid.add(createPlaceHolder(), i+2, spacing);  // 3* list.size() rows available (48)
 				         //grid.add(createPlaceHolder(), column, count*3+1);  // trying to use 12 evenly spaced for 4 games, hopefully this spacing is better?
-				         if (count % 2 == 0 && count != (list.size()/otherCount) - 1)
+				         if (incReset % 2 == 0 && incReset != (list.size()/powerCount) - 1)
 				         {
-				        	 grid.add(createButton(count*2, teamsScore, matchupPos, i+3), i+3, spacing, 1, 2);
+				        	 grid.add(createButton(incReset*2, teamsScore, matchupPos, i+3), i+3, spacing, 1, 2);
 				         }
 				         // 				    // int pos, HBox[] teamsScore, int[] matchupPos
 				         //				     // teamsScore = HBox[]
 				         //				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
-				         count++;
+				         incReset++;
 				         flip = -flip;
 				     
 				 }
@@ -354,8 +354,8 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamB], 0, row+1);
 				 i = i+2;
 				 row = row+3;
-				 otherC++;
-				 otherCount*=2;
+				 inc++;
+				 powerCount*=2;
 
 			 }
 		 }
