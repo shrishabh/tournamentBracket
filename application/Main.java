@@ -141,29 +141,41 @@ public class Main extends Application {
 	    Button b = new Button("Submit");
         b.setId(new Integer(pos/2).toString());
         GridPane.setHalignment(b, HPos.CENTER);
+        b.setPrefHeight(5);
+        
         b.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
                 TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
                 TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
+
                 int score = Integer.parseInt(t.getText());
                 int score2 = Integer.parseInt(t2.getText());
-                list.get(matchupPos[pos]).setScore(score);
-                list.get(matchupPos[pos+1]).setScore(score2);
-                Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
-                
-                Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
-                l.setText(winner.getName());
-                
-                
-                if (!winnerList.contains(winner)) // if someone wants to submit a different score
-                winnerList.add(winner);           // then the same winner won't be added multiple times
-                                                  // TODO if the winner changes, replace in winnerList
-                System.out.println(score + " " + score2);
+
+                if (score != score2) {
+                    t.setDisable(true);
+                    t2.setDisable(true);
+                    b.setDisable(true);
+                    list.get(matchupPos[pos]).setScore(score);
+                    list.get(matchupPos[pos+1]).setScore(score2);
+                    Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
+
+//                    Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
+//                    l.setText(winner.getName());
+
+
+                    if (!winnerList.contains(winner)) // if someone wants to submit a different score
+                        winnerList.add(winner);           // then the same winner won't be added multiple times
+                    // TODO if the winner changes, replace in winnerList
+                    System.out.println(score + " " + score2);
+                } else {
+                    System.out.println("Ties are not allowed.  Please input scores again");
+                }
+
             }
         });
-        b.setPrefHeight(5);
+        
         return b;
     }
 	
@@ -376,8 +388,12 @@ public class Main extends Application {
 
 	primaryStage.setScene(scene);
 	primaryStage.show();
-	}
+	// TODO need to handle ties as well
 	
+	}
+	private void printWinners() {
+	    
+	}
 	/**
 	 * Method checks if integer is a power of 2
 	 * @param number
