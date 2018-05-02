@@ -357,7 +357,7 @@ public class Main extends Application {
 				         if (powerCount != list.size()) { // if it's not the last round where the champion is crowned
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1);  
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));
-				        	 grid.add(createButton(incReset*2, teamsScore, matchupPos, i+3), i+3, spacing*(incReset+1)-1, 1, 2);
+				        	 grid.add(createButton(incReset*2, teamsScore, matchupPos, i+2), i+3, spacing*(incReset+1)-1, 1, 2);
 				         } else 
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
 				         
