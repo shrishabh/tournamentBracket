@@ -324,7 +324,7 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int row = 0; int incReset; int powerCount = 2; int inc = 0; int flip;// TODO somebody help
+			 int i = 0; int row = 0; int incReset; int powerCount = 2; int inc = 1; int flip;// TODO somebody help
 			 while(itr.hasNext())
 			 {
 			     incReset = 0;
@@ -334,8 +334,9 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamA], 0, row);
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
 				 while (incReset < list.size()/powerCount) {
-				     int spacing = incReset*3+flip+12*powerCount/list.size();
-				     System.out.println(spacing + " " + powerCount + " " + inc);
+				     double temp = (double)(3*(list.size()/4))*(double)powerCount/list.size();
+				     int spacing = incReset*3+flip+(int)temp;  // some math to try to get spacing right
+				     System.out.println(spacing + " " + powerCount + " ");
 				         grid.add(createPlaceHolder(), i+2, spacing);  // 3* list.size() rows available (48)
 				         //grid.add(createPlaceHolder(), column, count*3+1);  // trying to use 12 evenly spaced for 4 games, hopefully this spacing is better?
 				         if (incReset % 2 == 0 && incReset != (list.size()/powerCount) - 1)
@@ -354,7 +355,8 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamB], 0, row+1);
 				 i = i+2;
 				 row = row+3;
-				 inc++;
+				 //if (flip > 0)
+				 //inc++;
 				 powerCount*=2;
 
 			 }
