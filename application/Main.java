@@ -148,48 +148,47 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 int rowPos = GridPane.getRowIndex(b);
-                if (((Label) ((HBox) getNodeFromGridPane(grid, column, rowPos))
-                        .getChildren().get(0)).getText().equals("____") || 
-                        ((Label) ((HBox) getNodeFromGridPane(grid, column, rowPos+1)).getChildren()
-                                .get(0)).getText().equals("____")) {
+                Node node = getNodeFromGridPane(grid, column, rowPos);
+                Node node2 = getNodeFromGridPane(grid, column, rowPos+1);
+                
+                Label lab = ((Label) ((HBox) node).getChildren().get(0));
+                Label lab2 = ((Label) ((HBox) node2).getChildren().get(0));
+                
+                if (lab.getText().equals("____") || lab2.getText().equals("____")) {
                     System.out.println("Please submit earlier rounds before coming to this one");
                     return;
                 }
 
-                int permaI = 0;
                 ArrayList<Integer> rowListText = getNodeRowsFromColumn(grid, column+2);
                 ArrayList<Integer> rowListButton = getNodeRowsFromColumn(grid, column+1);
                 
 
 
-                TextField t = (TextField) ((HBox) getNodeFromGridPane(grid, column, rowPos)).getChildren().get(1);
-                TextField t2 = (TextField) ((HBox) getNodeFromGridPane(grid, column, rowPos+1)).getChildren().get(1);
+                TextField t = (TextField) ((HBox) node).getChildren().get(1);
+                TextField t2 = (TextField) ((HBox) node2).getChildren().get(1);
 
                 for (int i = 0; i < rowListButton.size(); i++) {
                     if (rowListButton.get(i) == rowPos) {
                         rowPos = rowListText.get(i);
-                        permaI = 2*i;
                         break;
                     }
                 }
                 int score = Integer.parseInt(t.getText());
                 int score2 = Integer.parseInt(t2.getText());
-                System.out.println(score + " " + score2 + " " + permaI);
+                System.out.println(score + " " + score2 + " ");
                 if (score != score2) {
+                    
                     t.setDisable(true);
                     t2.setDisable(true);
                     b.setDisable(true);
-                    list.get(matchupPos[permaI]).setScore(score);
-                    list.get(matchupPos[permaI+1]).setScore(score2);
-                    Challenger winner = getWinner(list.get(matchupPos[permaI]), list.get(matchupPos[permaI+1]));
+                    Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, rowPos)).getChildren().get(0);
+                    
+                    if (score > score2) {       // lab wins
+                        l.setText(lab.getText());
+                    } else {                    // lab2 wins
+                        l.setText(lab2.getText());
+                    }
 
-                    Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, rowPos)).getChildren().get(0); //TODO- get the correct position relative to the button
-                    l.setText(winner.getName());
-
-
-                    if (!winnerList.contains(winner)) // if someone wants to submit a different score
-                        winnerList.add(winner);           // then the same winner won't be added multiple times
-                    // TODO if the winner changes, replace in winnerList
                 } else {
                     System.out.println("Ties are not allowed.  Please input scores again");
                 }
