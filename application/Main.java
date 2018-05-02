@@ -139,14 +139,36 @@ public class Main extends Application {
 	 */
 	private Button createButton(int pos, HBox[] teamsScore, int[] matchupPos, int column) {
 	    Button b = new Button("Submit");
-        b.setId(new Integer(pos/2).toString());
+        b.setId(new Integer(7*pos + 31*column).toString());
         GridPane.setHalignment(b, HPos.CENTER);
         b.setPrefHeight(5);
-        
         b.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
+                int rowPos = 0;
+                ArrayList<Integer> rowListText = getNodeRowsFromColumn(grid, column+2);
+                ArrayList<Integer> rowListButton = getNodeRowsFromColumn(grid, column+1);
+                
+                rowPos = GridPane.getRowIndex(b);
+                
+
+                for (int i : rowListText) {
+                    System.out.print(i + " ");
+                }
+                System.out.println();
+                for (int i : rowListButton) {
+                    System.out.print(i+ " ");
+                }
+                System.out.println();
+                System.out.println(rowPos);
+                for (int i = 0; i < rowListButton.size(); i++) {
+                    if (rowListButton.get(i) == rowPos) {
+                        rowPos = rowListText.get(i);
+                        break;
+                    }
+                }
+                System.out.println(rowPos + "\n");
                 TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
                 TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
 
@@ -161,14 +183,13 @@ public class Main extends Application {
                     list.get(matchupPos[pos+1]).setScore(score2);
                     Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
 
-//                    Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
-//                    l.setText(winner.getName());
+                    Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, rowPos)).getChildren().get(0); //TODO- get the correct position relative to the button
+                    l.setText(winner.getName());
 
 
                     if (!winnerList.contains(winner)) // if someone wants to submit a different score
                         winnerList.add(winner);           // then the same winner won't be added multiple times
                     // TODO if the winner changes, replace in winnerList
-                    System.out.println(score + " " + score2);
                 } else {
                     System.out.println("Ties are not allowed.  Please input scores again");
                 }
@@ -192,8 +213,23 @@ public class Main extends Application {
 	            return node;
 	        }
 	    }
+	    System.out.println("node not found"); // TODO delete
 	    return null;
+	    
 	}
+	
+	private ArrayList<Integer> getNodeRowsFromColumn(GridPane gridPane, int col) {
+	    ArrayList<Integer> rowList = new ArrayList<Integer>();
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && node != null) {
+                rowList.add(GridPane.getRowIndex(node));
+            }
+        }
+        if (rowList.isEmpty())
+            System.out.println("Somethine went wrong");
+        return rowList;
+        
+    }
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -391,9 +427,8 @@ public class Main extends Application {
 	// TODO need to handle ties as well
 	
 	}
-	private void printWinners() {
-	    
-	}
+
+	   
 	/**
 	 * Method checks if integer is a power of 2
 	 * @param number
