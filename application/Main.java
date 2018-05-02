@@ -324,7 +324,7 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int row = 0; int incReset; int powerCount = 2; int inc = 1; int spacing = 0;// TODO somebody help
+			 int i = 0; int row = 0; int incReset; int powerCount = 2; int spacing = 0;
 			 while(itr.hasNext())
 			 { 
 			     incReset = 0;
@@ -335,19 +335,18 @@ public class Main extends Application {
 				 while (incReset < list.size()/powerCount) {
 				     double numGames = (double)list.size()/(powerCount*2);
 				     if (powerCount != list.size())
-				         spacing = (int)((list.size()*1.5-2*numGames)/(numGames+1));  // some math to try to get spacing right
-				         grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));  // 3 * numGames rows available (24)
-				         if (powerCount != list.size()) {
-				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)+1);
-				        	 grid.add(createButton(incReset*2, teamsScore, matchupPos, i+3), i+3, spacing*(incReset+1), 1, 2);
-				         }
-				         // 				    // int pos, HBox[] teamsScore, int[] matchupPos
-				         //				     // teamsScore = HBox[]
-				         //				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
+				         spacing = (int)((list.size()*1.5-2*numGames)/(numGames+1));  
+				         
+				         if (powerCount != list.size()) { // if it's not the last round where the champion is crowned
+				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1);  
+				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));
+				        	 grid.add(createButton(incReset*2, teamsScore, matchupPos, i+3), i+3, spacing*(incReset+1)-1, 1, 2);
+				         } else 
+				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
+				         
 				         incReset+=2;
 				 }
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
-
 				 grid.add(teamsScore[teamB], 0, row+1);
 				 i = i+2;
 				 row = row+3;
