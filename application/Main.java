@@ -364,15 +364,26 @@ public class Main extends Application {
 
 		 Group root = new Group();
 		 Scene scene = new Scene(root, 1000, 800, Color.DARKGRAY);
-		 ScrollBar sc = new ScrollBar();
-		 root.getChildren().addAll(grid, sc);
-	     sc.setPrefSize(20, scene.getHeight());
-	     sc.setLayoutX(scene.getWidth()-sc.getWidth());
-	     sc.setOrientation(Orientation.VERTICAL);
-	     sc.valueProperty().addListener(new ChangeListener<Number>() {
+		 ScrollBar scV = new ScrollBar();  //Vertical ScrollBar
+		 ScrollBar scH = new ScrollBar(); //Horizontal ScrollBar
+		 root.getChildren().addAll(grid, scV, scH);
+	     scV.setPrefSize(20, scene.getHeight());	     
+	     scH.setPrefSize(scene.getWidth()-scV.getPrefWidth(), 20);
+	     scV.setLayoutX(scene.getWidth()-scV.getWidth());
+
+	     scV.setOrientation(Orientation.VERTICAL);
+	     scH.setOrientation(Orientation.HORIZONTAL);
+	     scH.setLayoutY(scene.getHeight()-scH.getPrefHeight());
+	     scV.valueProperty().addListener(new ChangeListener<Number>() {
 	    	 public void changed(ObservableValue<? extends Number> ov,
 	                Number old_val, Number new_val) {
 	                   grid.setLayoutY(-new_val.doubleValue()*list.size()/3);
+	            }
+	     });
+	     scH.valueProperty().addListener(new ChangeListener<Number>() {
+	    	 public void changed(ObservableValue<? extends Number> ov,
+	                Number old_val, Number new_val) {
+	                   grid.setLayoutX(-new_val.doubleValue()*list.size()/3);
 	            }
 	     });
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
