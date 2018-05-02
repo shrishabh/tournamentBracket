@@ -39,7 +39,7 @@ public class Main extends Application {
 	private static List<Challenger> winnerList = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
 	private GridPane grid = new GridPane();
-	private static List<Challenger> list = new ArrayList<Challenger>();
+	//private static List<Challenger> list = new ArrayList<Challenger>();
 	
 	/***
 	 * Function to get number of columns based on how many rounds there will be. This
@@ -327,7 +327,6 @@ public class Main extends Application {
 			 int i = 0; int row = 0; int count; int otherCount = 2; int otherC = 0; int column = 2; int flip;// TODO somebody help
 			 while(itr.hasNext())
 			 {
-			     int[] numbers = new int[list.size()];
 			     count = 0;
 			     flip = 1;
 				 int teamA = itr.next()-1;
@@ -335,11 +334,13 @@ public class Main extends Application {
 				 grid.add(teamsScore[teamA], 0, row);
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
 				 while (count < list.size()/otherCount) {
-				         grid.add(createPlaceHolder(), column, count*3+flip+3*otherCount/list.size());  // 3* list.size() rows available (48)
+				     int spacing = count*3+flip+12*otherCount/list.size();
+				     System.out.println(spacing + " " + otherCount + " " + otherC);
+				         grid.add(createPlaceHolder(), i+2, spacing);  // 3* list.size() rows available (48)
 				         //grid.add(createPlaceHolder(), column, count*3+1);  // trying to use 12 evenly spaced for 4 games, hopefully this spacing is better?
 				         if (count % 2 == 0 && count != (list.size()/otherCount) - 1)
 				         {
-				        	 grid.add(createButton(count*2, teamsScore, matchupPos, column+1), column+1, count*3+1);
+				        	 grid.add(createButton(count*2, teamsScore, matchupPos, i+3), i+3, spacing, 1, 2);
 				         }
 				         // 				    // int pos, HBox[] teamsScore, int[] matchupPos
 				         //				     // teamsScore = HBox[]
@@ -354,10 +355,7 @@ public class Main extends Application {
 				 i = i+2;
 				 row = row+3;
 				 otherC++;
-				 if (isPowerOfTwo(otherC)) {
 				 otherCount*=2;
-				 column+=2;
-				 }
 
 			 }
 		 }
