@@ -131,57 +131,57 @@ public class Main extends Application {
 	}
 	/**
 	 * Creates a submit button for the 2 teams to the left of the button
-	 * @param pos	The buttons row in the grid
+	 * @param idHelper	The buttons row in the grid
 	 * @param teamsScore	The HBox which contains the scores and team names
 	 * @param matchupPos	The teams match up position array
 	 * @param column		The column for the button to be added in the array
 	 * @return				The button
 	 */
-	private Button createButton(int pos, HBox[] teamsScore, int[] matchupPos, int column) {
+	private Button createButton(int idHelper, int[] matchupPos, int column) {
 	    Button b = new Button("Submit");
-        b.setId(new Integer(7*pos + 31*column).toString());
+	    // literally used just to create uniqe ID
+        b.setId(new Integer(7*idHelper + 31*column).toString());
         GridPane.setHalignment(b, HPos.CENTER);
         b.setPrefHeight(5);
         b.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
-                int rowPos = 0;
+                int rowPos = GridPane.getRowIndex(b);
+                if (((Label) ((HBox) getNodeFromGridPane(grid, column, rowPos))
+                        .getChildren().get(0)).getText().equals("____") || 
+                        ((Label) ((HBox) getNodeFromGridPane(grid, column, rowPos+1)).getChildren()
+                                .get(0)).getText().equals("____")) {
+                    System.out.println("Please submit earlier rounds before coming to this one");
+                    return;
+                }
+
+                int permaI = 0;
                 ArrayList<Integer> rowListText = getNodeRowsFromColumn(grid, column+2);
                 ArrayList<Integer> rowListButton = getNodeRowsFromColumn(grid, column+1);
                 
-                rowPos = GridPane.getRowIndex(b);
-                
 
-                for (int i : rowListText) {
-                    System.out.print(i + " ");
-                }
-                System.out.println();
-                for (int i : rowListButton) {
-                    System.out.print(i+ " ");
-                }
-                System.out.println();
-                System.out.println(rowPos);
+
+                TextField t = (TextField) ((HBox) getNodeFromGridPane(grid, column, rowPos)).getChildren().get(1);
+                TextField t2 = (TextField) ((HBox) getNodeFromGridPane(grid, column, rowPos+1)).getChildren().get(1);
+
                 for (int i = 0; i < rowListButton.size(); i++) {
                     if (rowListButton.get(i) == rowPos) {
                         rowPos = rowListText.get(i);
+                        permaI = 2*i;
                         break;
                     }
                 }
-                System.out.println(rowPos + "\n");
-                TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
-                TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
-
                 int score = Integer.parseInt(t.getText());
                 int score2 = Integer.parseInt(t2.getText());
-
+                System.out.println(score + " " + score2 + " " + permaI);
                 if (score != score2) {
                     t.setDisable(true);
                     t2.setDisable(true);
                     b.setDisable(true);
-                    list.get(matchupPos[pos]).setScore(score);
-                    list.get(matchupPos[pos+1]).setScore(score2);
-                    Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
+                    list.get(matchupPos[permaI]).setScore(score);
+                    list.get(matchupPos[permaI+1]).setScore(score2);
+                    Challenger winner = getWinner(list.get(matchupPos[permaI]), list.get(matchupPos[permaI+1]));
 
                     Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, rowPos)).getChildren().get(0); //TODO- get the correct position relative to the button
                     l.setText(winner.getName());
@@ -296,7 +296,7 @@ public class Main extends Application {
 		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)   
 		 {
-		     submitButtons[i] = createButton(i*2, teamsScore, matchupPos, 0);
+		     submitButtons[i] = createButton(i*2, matchupPos, 0);
 		 }
 
 
@@ -357,7 +357,7 @@ public class Main extends Application {
 				         if (powerCount != list.size()) { // if it's not the last round where the champion is crowned
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1);  
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));
-				        	 grid.add(createButton(incReset*2, teamsScore, matchupPos, i+2), i+3, spacing*(incReset+1)-1, 1, 2);
+				        	 grid.add(createButton(incReset*3, matchupPos, i+2), i+3, spacing*(incReset+1)-1, 1, 2); // TODO pos is unneeded?
 				         } else 
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
 				         
