@@ -38,7 +38,8 @@ public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
 	private static List<Challenger> winnerList = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
-	GridPane grid = new GridPane();
+	private GridPane grid = new GridPane();
+	private static List<Challenger> list = new ArrayList<Challenger>();
 	
 	/***
 	 * Function to get number of columns based on how many rounds there will be. This
@@ -395,7 +396,11 @@ public class Main extends Application {
 	
 	primaryStage.show();
 	}
-	
+	/**
+	 * Method checks if integer is a power of 2
+	 * @param number
+	 * @return
+	 */
 	private static boolean isPowerOfTwo(int number) {
 
 	    return number > 0 && ((number & (number - 1)) == 0);
