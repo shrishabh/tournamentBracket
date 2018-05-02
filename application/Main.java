@@ -324,39 +324,34 @@ public class Main extends Application {
 		 }
 		 else if(teams.length >= 2) 
 		 {
-			 int i = 0; int row = 0; int incReset; int powerCount = 2; int inc = 1; int flip;// TODO somebody help
+			 int i = 0; int row = 0; int incReset; int powerCount = 2; int inc = 1; int spacing = 0;// TODO somebody help
 			 while(itr.hasNext())
-			 {
+			 { 
 			     incReset = 0;
-			     flip = 1;
 				 int teamA = itr.next()-1;
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, row);
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
 				 while (incReset < list.size()/powerCount) {
-				     double temp = (double)(3*(list.size()/4))*(double)powerCount/list.size();
-				     int spacing = incReset*3+flip+(int)temp;  // some math to try to get spacing right
-				     System.out.println(spacing + " " + powerCount + " ");
-				         grid.add(createPlaceHolder(), i+2, spacing);  // 3* list.size() rows available (48)
-				         //grid.add(createPlaceHolder(), column, count*3+1);  // trying to use 12 evenly spaced for 4 games, hopefully this spacing is better?
-				         if (incReset % 2 == 0 && incReset != (list.size()/powerCount) - 1)
-				         {
-				        	 grid.add(createButton(incReset*2, teamsScore, matchupPos, i+3), i+3, spacing, 1, 2);
+				     double numGames = (double)list.size()/(powerCount*2);
+				     if (powerCount != list.size())
+				         spacing = (int)((list.size()*1.5-2*numGames)/(numGames+1));  // some math to try to get spacing right
+				         grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));  // 3 * numGames rows available (24)
+				         if (powerCount != list.size()) {
+				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)+1);
+				        	 grid.add(createButton(incReset*2, teamsScore, matchupPos, i+3), i+3, spacing*(incReset+1), 1, 2);
 				         }
 				         // 				    // int pos, HBox[] teamsScore, int[] matchupPos
 				         //				     // teamsScore = HBox[]
 				         //				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
-				         incReset++;
-				         flip = -flip;
-				     
+				         incReset+=2;
 				 }
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 
 				 grid.add(teamsScore[teamB], 0, row+1);
 				 i = i+2;
 				 row = row+3;
-				 //if (flip > 0)
-				 //inc++;
+				 
 				 powerCount*=2;
 
 			 }
