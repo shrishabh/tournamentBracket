@@ -15,20 +15,18 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -39,7 +37,6 @@ public class Main extends Application {
 	private static List<Challenger> winnerList = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
 	private GridPane grid = new GridPane();
-	//private static List<Challenger> list = new ArrayList<Challenger>();
 	
 	/***
 	 * Function to get number of columns based on how many rounds there will be. This
@@ -65,7 +62,6 @@ public class Main extends Application {
 		List<Integer> matchupList = new ArrayList<Integer>();
 		matchupList.add(1);
 		matchupList.add(2);
-		//System.out.println(matchupList.indexOf(1));
 		int lenList = 2;
 		int newLenList;
 		int counter;
@@ -75,7 +71,6 @@ public class Main extends Application {
 			counter = 1;
 			
 			for (int i = newLenList; i > lenList ; i--) {
-				//System.out.println((i) + "  " +(counter)+ "  "+matchupList.indexOf(counter));
 				matchupList.set(matchupList.indexOf(counter)+1, i);
 				counter = counter + 1;
 				
@@ -93,12 +88,10 @@ public class Main extends Application {
 	
 	private List<Integer> modifyList(List<Integer> matchupList,int lenList){
 		List<Integer> modifiedList = new ArrayList<Integer>();
-		//for (int i:matchupList) System.out.println(i);
 		for (int i = 1; i < lenList+1; i++) {
 			modifiedList.add(matchupList.get(i-1));
 			modifiedList.add(-100);
 		}
-		//for (int i:modifiedList) System.out.println(i);
 		return modifiedList;
 	}
 	/***
@@ -163,8 +156,6 @@ public class Main extends Application {
                 Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
                 l.setText(winner.getName());
                 
-//                grid.add(l, column, 0);
-                // basic code to change the label
                 
                 if (!winnerList.contains(winner)) // if someone wants to submit a different score
                 winnerList.add(winner);           // then the same winner won't be added multiple times
@@ -195,18 +186,17 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 			 //Testing a piece of code - Rishabh
-//		Screen screen = Screen.getPrimary();
+//		Screen screen = Screen.getPrimary();  // TODO delete if unnecessary, I want to clean this code up
 //        Rectangle2D bounds = screen.getVisualBounds();
 //
 //        primaryStage.setX(bounds.getMinX());
 //        primaryStage.setY(bounds.getMinY());
 //        primaryStage.setWidth(bounds.getWidth());
 //        primaryStage.setHeight(bounds.getHeight());
+	    
 		int numTeams = list.size();
 		List<Integer> matchup = getMatchups(numTeams);
-//		for(int i : matchup) {
-//			System.out.print(i + " "); // TODO Delete
-//		}
+
 		Iterator<Integer> itr = matchup.iterator();
 		Iterator<Integer> itr2 = matchup.iterator();
 		
@@ -215,7 +205,6 @@ public class Main extends Application {
 		 {				
 			 teams[i]= getLabel(list.get(i).getName());
 			 teams[i].setPrefSize(80, 10);
-			 //System.out.println(teams[i].getText());
 
 			 
 		 }
@@ -223,7 +212,8 @@ public class Main extends Application {
 		 
 		 
 		 HBox teamsScore[] = new HBox[teams.length];
-		 final int[] matchupPos = new int[teams.length+1];  // last one will be unused unless teams.length == 1
+		 final int[] matchupPos = new int[teams.length+1];  // last index will be unused unless teams.length == 1
+		                                                    // need to do this for code later on (delete if you don't remember)
 		 if (teams.length == 1) {
 		     matchupPos[0] = 1;
 		     matchupPos[1] = 1;
@@ -239,50 +229,22 @@ public class Main extends Application {
 		 TextField score;
 		 
 		 
-		 
+		 /** adds a HBox with a textfield and an array of labels
+		  * 
+		  * @param teams[i] is an array of labels
+		  * 
+		  */
 		 for(int i = 0; i<teamsScore.length; i++)
 		 {
 			 teamsScore[i] = new HBox(10);
 			 score = new TextField();
 	         score.setPrefWidth(50);
 			 teamsScore[i].getChildren().addAll(teams[i], score);
-			 //teamsScore[i].getChildren().addAll(teams[i]);
-			 //teamsScore[i].setAlignment(Pos.BASELINE_LEFT);
 			 teamsScore[i].setAlignment(Pos.CENTER);
 		 }
-//		 class ButtonList {
-//		     Button b;
-//		     
-//		     private ButtonList(int pos) {
-//		         b = new Button("Submit");
-//		         b.setId(new Integer(pos/2).toString());
-//		         GridPane.setHalignment(b, HPos.CENTER);
-//		         b.setOnAction(new EventHandler<ActionEvent>() {
-//	                 
-//	                 @Override
-//	                 public void handle(ActionEvent event) {
-//	                     TextField t = (TextField) teamsScore[matchupPos[pos]].getChildren().get(1); // TODO fix to print team's score
-//	                     TextField t2 = (TextField) teamsScore[matchupPos[pos+1]].getChildren().get(1); // input functionality for milestone 3
-//	                     int score = Integer.parseInt(t.getText());
-//	                     int score2 = Integer.parseInt(t2.getText());
-//	                     list.get(matchupPos[pos]).setScore(score);
-//	                     list.get(matchupPos[pos+1]).setScore(score2);
-//	                     Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
-//	                     
-////	                     Label l = (Label) teamsScore[matchupPos[pos]].getChildren().get(0);
-////	                     l.setText("____");
-//	                     // basic code to change the label
-//	                     
-//	                     if (!winnerList.contains(winner)) // if someone wants to submit a different score
-//	                     winnerList.add(winner);           // then the same winner won't be added multiple times
-//	                                                       // TODO if the winner changes, replace in winnerList
-//	                     System.out.println(score + " " + score2);
-//	                 }
-//	             });
-//		         b.setPrefHeight(5);
-//		     }
-//		 }
-		 // int pos, HBox[] teamsScore, int[] matchupPos
+
+		 
+		 // creates a a button for each game in the first round
 		 Button[] submitButtons = new Button[teams.length/2];
 		 for(int i=0; i< submitButtons.length; i++)   
 		 {
@@ -293,17 +255,20 @@ public class Main extends Application {
 		grid.setId("pane");
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(10));
-        //grid.setGridLinesVisible(true);
+        
+        grid.setPadding(new Insets(10)); // TODO comment this, I'm not sure what it does
+        
         int subCol = numCol - list.size();
+        
+        // TODO add comment for this for loop
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             if (i%2 == 1) colConst.setPercentWidth(30.0 / subCol);
             else colConst.setPercentWidth(100.0 / list.size());
             grid.getColumnConstraints().add(colConst);
         }
-//        int numRows = list.size() + list.size()/2;
-//        int lstCount = 0;
+
+        // TODO add comment for this for loop
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
@@ -311,19 +276,23 @@ public class Main extends Application {
         }
         
 
-        
+        // TODO add comment for this for loop
         for (int i = 0; i < list.size(); i++) {
           RowConstraints rowConst = new RowConstraints(); 
           rowConst.setPercentHeight(100.0/list.size());
           grid.getRowConstraints().add(rowConst);     
       }
+        
 		primaryStage.setTitle("Tournament Bracket");
+		
 		 if(teams.length == 1)
 		 {
 			 grid.add(teamsScore[0], 0, 0);
 		 }
+		 
 		 else if(teams.length >= 2) 
 		 {
+		     // there's a lot of variables but they're all needed
 			 int i = 0; int row = 0; int incReset; int powerCount = 2; int spacing = 0;
 			 while(itr.hasNext())
 			 { 
@@ -356,26 +325,47 @@ public class Main extends Application {
 			 }
 		 }
 
-
 		 Group root = new Group();
 		 Scene scene = new Scene(root, 1000, 800, Color.DARKGRAY);
-		 ScrollBar scV = new ScrollBar();  //Vertical ScrollBar
-		 ScrollBar scH = new ScrollBar(); //Horizontal ScrollBar
-		 root.getChildren().addAll(grid, scV, scH);
-	     scV.setPrefSize(20, scene.getHeight());	     
-	     scH.setPrefSize(scene.getWidth()-scV.getPrefWidth(), 20);
-	     scV.setLayoutX(scene.getWidth()-scV.getWidth());
+		 ScrollBar scVert = new ScrollBar(); 
+		 ScrollBar scHoriz = new ScrollBar(); 
+		 root.getChildren().addAll(grid, scHoriz, scVert);
 
-	     scV.setOrientation(Orientation.VERTICAL);
-	     scH.setOrientation(Orientation.HORIZONTAL);
-	     scH.setLayoutY(scene.getHeight()-scH.getPrefHeight());
-	     scV.valueProperty().addListener(new ChangeListener<Number>() {
+		 // when changing the size of the screen, the scrollbars will move as well
+		 scene.widthProperty().addListener(new ChangeListener<Number>() {
+		     @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+		         scVert.setLayoutX(newSceneWidth.doubleValue()-scVert.getWidth());
+		         
+		         scHoriz.setLayoutX(newSceneWidth.doubleValue()-scene.getWidth());
+		         scHoriz.setPrefWidth(newSceneWidth.doubleValue()-scVert.getWidth());
+		     }
+		 });
+		 scene.heightProperty().addListener(new ChangeListener<Number>() {
+		     @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+		         scVert.setLayoutY(newSceneHeight.doubleValue()-scene.getHeight());
+		         scVert.setPrefHeight(newSceneHeight.doubleValue());
+		         
+		         scHoriz.setLayoutY(newSceneHeight.doubleValue()-scHoriz.getHeight());
+		     }
+		 });
+		 
+	     scVert.setPrefSize(20, scene.getHeight());	     
+	     scVert.setLayoutX(scene.getWidth()-scVert.getWidth());
+	     scVert.setOrientation(Orientation.VERTICAL);
+	     
+	     scHoriz.setOrientation(Orientation.HORIZONTAL);
+	     scHoriz.setPrefSize(scene.getWidth()-scVert.getWidth(), 20);
+	     scHoriz.setLayoutY(scene.getHeight()-scHoriz.getPrefHeight());
+
+	     
+	     // code to make sliding the scrollbar affect the grid
+	     scVert.valueProperty().addListener(new ChangeListener<Number>() {
 	    	 public void changed(ObservableValue<? extends Number> ov,
 	                Number old_val, Number new_val) {
-	                   grid.setLayoutY(-new_val.doubleValue()*list.size()/3);
+	                   grid.setLayoutY(-new_val.doubleValue()*list.size()/3); // TODO get math right so the scrollbar looks ok
 	            }
 	     });
-	     scH.valueProperty().addListener(new ChangeListener<Number>() {
+	     scHoriz.valueProperty().addListener(new ChangeListener<Number>() {
 	    	 public void changed(ObservableValue<? extends Number> ov,
 	                Number old_val, Number new_val) {
 	                   grid.setLayoutX(-new_val.doubleValue()*list.size()/3);
@@ -385,16 +375,14 @@ public class Main extends Application {
 
 
 	primaryStage.setScene(scene);
-
-	
-	
 	primaryStage.show();
 	}
+	
 	/**
 	 * Method checks if integer is a power of 2
 	 * @param number
 	 * @return
-	 */
+	 */ // TODO delete if unneeded, will keep for now
 	private static boolean isPowerOfTwo(int number) {
 
 	    return number > 0 && ((number & (number - 1)) == 0);
