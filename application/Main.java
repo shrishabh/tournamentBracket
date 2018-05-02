@@ -159,8 +159,8 @@ public class Main extends Application {
                 list.get(matchupPos[pos+1]).setScore(score2);
                 Challenger winner = getWinner(list.get(matchupPos[pos]), list.get(matchupPos[pos+1]));
                 
-//                Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
-//                l.setText(winner.getName());
+                Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, pos)).getChildren().get(0); //TODO- get the correct position relative to the button
+                l.setText(winner.getName());
                 
 //                grid.add(l, column, 0);
                 // basic code to change the label
@@ -184,7 +184,7 @@ public class Main extends Application {
 	 */
 	private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
 	    for (Node node : gridPane.getChildren()) {
-	        if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+	        if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row && node != null) {
 	            return node;
 	        }
 	    }
@@ -337,7 +337,9 @@ public class Main extends Application {
 				         grid.add(createPlaceHolder(), column, count*3+flip+3*otherCount/list.size());  // 3* list.size() rows available (48)
 				         //grid.add(createPlaceHolder(), column, count*3+1);  // trying to use 12 evenly spaced for 4 games, hopefully this spacing is better?
 				         if (count % 2 == 0 && count != (list.size()/otherCount) - 1)
-				         grid.add(createButton(count*2, teamsScore, matchupPos, column+1), column+1, count*3+1);
+				         {
+				        	 grid.add(createButton(count*2, teamsScore, matchupPos, column+1), column+1, count*3+1);
+				         }
 				         // 				    // int pos, HBox[] teamsScore, int[] matchupPos
 				         //				     // teamsScore = HBox[]
 				         //				     // matchupPos = int[]; // TODO make new teamsScore and matchupPos
