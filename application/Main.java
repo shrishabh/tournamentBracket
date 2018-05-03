@@ -190,6 +190,7 @@ public class Main extends Application {
                         break;
                     }
                 }
+                boolean isChampionship = false;
                 int score = Integer.parseInt(t.getText());
                 int score2 = Integer.parseInt(t2.getText());
                 System.out.println(score + " " + score2 + " ");
@@ -199,13 +200,21 @@ public class Main extends Application {
                     t2.setDisable(true);
                     b.setDisable(true);
                     Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, rowPos)).getChildren().get(0);
-                    
                     if (score > score2) {       // lab wins
+                        if(l.getText() == "CHAMPION?" )
+                        {
+                        	l.setTextFill(Color.GOLD);
+                        	lab2.setTextFill(Color.SILVER);
+                        }
                         l.setText(lab.getText());
                     } else {                    // lab2 wins
+                        if(l.getText() == "CHAMPION?" )
+                        {
+                        	l.setTextFill(Color.GOLD);
+                        	lab.setTextFill(Color.SILVER);
+                        }
                         l.setText(lab2.getText());
                     }
-
                 } else {
                     System.out.println("Ties are not allowed.  Please input scores again");
                 }
@@ -215,7 +224,6 @@ public class Main extends Application {
         
         return b;
     }
-	
 	/**
 	 * Finds the node at the given coordinates within the gridPane
 	 * @param gridPane	The given gridPane
