@@ -65,7 +65,6 @@ public class Main extends Application {
 		int lenList = 2;
 		int newLenList;
 		int counter;
-		System.out.println("A");
 		if(numTeams == 1)
 		{
 			return matchupList;
