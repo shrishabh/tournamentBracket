@@ -206,7 +206,10 @@ public class Main extends Application {
                         {
                         	l.setTextFill(Color.GOLD);
                         	lab2.setTextFill(Color.SILVER);
-                        	setThird((HBox) node, (HBox) node2);
+                        	if(list.size() > 2)
+                        	{
+                        		setThird((HBox) node, (HBox) node2);
+                        	}
                         }
                         l.setText(lab.getText());
                     } else {                    // lab2 wins
@@ -214,7 +217,10 @@ public class Main extends Application {
                         {
                         	l.setTextFill(Color.GOLD);
                         	lab.setTextFill(Color.SILVER);
-                        	setThird((HBox) node, (HBox) node2);
+                        	if(list.size() > 2)
+                        	{
+                        		setThird((HBox) node, (HBox) node2);
+                        	}
                         }
                         l.setText(lab2.getText());
                     }
