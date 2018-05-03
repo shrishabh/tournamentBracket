@@ -34,7 +34,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
-	private static List<Challenger> winnerList = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
 	private GridPane grid = new GridPane();
 	
@@ -130,6 +129,16 @@ public class Main extends Application {
         return placeholder;
 	}
 	/**
+	 * Creates a placeholder HBox for the final round where the champion is crowned
+	 */
+	private HBox createFinalPlaceHolder() {
+        HBox placeholder = new HBox(10);
+        placeholder.getChildren().addAll(getLabel("CHAMPION?")); // TODO not sure what to put here, up to you
+        placeholder.setAlignment(Pos.CENTER);
+        return placeholder;
+    }
+	
+	/**
 	 * Creates a submit button for the 2 teams to the left of the button
 	 * @param idHelper	The buttons row in the grid
 	 * @param teamsScore	The HBox which contains the scores and team names
@@ -143,17 +152,25 @@ public class Main extends Application {
         b.setId(new Integer(7*idHelper + 31*column).toString());
         GridPane.setHalignment(b, HPos.CENTER);
         b.setPrefHeight(5);
-        b.setOnAction(new EventHandler<ActionEvent>() {
-            
+       
+        b.setOnAction(new EventHandler<ActionEvent>() {  // when button is clicked, this will run
             @Override
             public void handle(ActionEvent event) {
+                // defining constants that are used multiple times below
+                
                 int rowPos = GridPane.getRowIndex(b);
                 Node node = getNodeFromGridPane(grid, column, rowPos);
                 Node node2 = getNodeFromGridPane(grid, column, rowPos+1);
                 
                 Label lab = ((Label) ((HBox) node).getChildren().get(0));
                 Label lab2 = ((Label) ((HBox) node2).getChildren().get(0));
+                // TODO what if a team's name is literally "____" from the txt file?
+                // We might have to put a boolean somewhere to check for this
+                // don't really feel like doing that so if u wanna ignore that or put something more 
+                // random that would never be in a name list that's up to you
+                // TODO delete this block of comments
                 
+                // do nothing but print if challengers haven't completed their necessary games
                 if (lab.getText().equals("____") || lab2.getText().equals("____")) {
                     System.out.println("Please submit earlier rounds before coming to this one");
                     return;
@@ -212,7 +229,6 @@ public class Main extends Application {
 	            return node;
 	        }
 	    }
-	    System.out.println("node not found"); // TODO delete
 	    return null;
 	    
 	}
@@ -356,9 +372,9 @@ public class Main extends Application {
 				         if (powerCount != list.size()) { // if it's not the last round where the champion is crowned
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1);  
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));
-				        	 grid.add(createButton(incReset*3, matchupPos, i+2), i+3, spacing*(incReset+1)-1, 1, 2); // TODO pos is unneeded?
+				        	 grid.add(createButton(incReset*3, matchupPos, i+2), i+3, spacing*(incReset+1)-1, 1, 2);
 				         } else 
-				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
+				             grid.add(createFinalPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
 				         
 				         incReset+=2;
 				 }
@@ -423,21 +439,10 @@ public class Main extends Application {
 
 	primaryStage.setScene(scene);
 	primaryStage.show();
-	// TODO need to handle ties as well
 	
 	}
 
-	   
-	/**
-	 * Method checks if integer is a power of 2
-	 * @param number
-	 * @return
-	 */ // TODO delete if unneeded, will keep for now
-	private static boolean isPowerOfTwo(int number) {
-
-	    return number > 0 && ((number & (number - 1)) == 0);
-
-	}
+	
 	/**\
 	 * Method that takes a given file name and processes it into a list of type Challenger
 	 * @param fileName The name of the txt file that contains the team list.
