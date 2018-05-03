@@ -197,12 +197,20 @@ public class Main extends Application {
                         break;
                     }
                 }
-                boolean isChampionship = false;
-                int score = Integer.parseInt(t.getText());
-                int score2 = Integer.parseInt(t2.getText());
-                System.out.println(score + " " + score2 + " ");
-                if (score != score2) {
-                    
+                int score = -1; int score2 = -2;
+                boolean printed = false;
+                try {
+                    score = Integer.parseInt(t.getText());
+                    score2 = Integer.parseInt(t2.getText());
+                } catch (NumberFormatException e){
+                    System.out.println("Please enter in a valid score");
+                    printed = true;
+                }
+                if (!printed && (score < 0 || score2 < 0)) {
+                    System.out.println("Please enter in a valid score");
+                }
+                else if (score != score2) {
+
                     t.setDisable(true);
                     t2.setDisable(true);
                     b.setDisable(true);
@@ -322,7 +330,7 @@ public class Main extends Application {
             }
         }
         if (rowList.isEmpty())
-            System.out.println("Somethine went wrong");
+            System.out.println("Something went wrong");
         return rowList;
         
     }
@@ -609,16 +617,12 @@ public class Main extends Application {
 		String fileName = "challengerList.txt";
 		processFile(fileName);
 		if(checkForNumTeams()){
-			for (Challenger temp : list) {
-				//System.out.println(temp.getName());
-			}
 			launch();
 		}
 		else {
 			System.out.println("Please enter valid number of teams");
 			System.exit(-1);
 		}
-		//launch(args);
 
 	}
 }
