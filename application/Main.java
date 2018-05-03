@@ -501,20 +501,17 @@ public class Main extends Application {
 
 		 Group root = new Group();
 		 Scene scene = new Scene(root, 1000, 800, Color.DARKGRAY);
-	      root.getChildren().add(grid);
+	     root.getChildren().add(grid);
 	      
 		 if (list.size() > 8) {
 		     ScrollBar scVert = new ScrollBar(); 
-		     ScrollBar scHoriz = new ScrollBar(); 
-		     root.getChildren().addAll(scHoriz, scVert);
+		     root.getChildren().addAll(scVert);
 
 		     // when changing the size of the screen, the scrollbars will move as well
 		     scene.widthProperty().addListener(new ChangeListener<Number>() {
 		         @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
 		             scVert.setLayoutX(newSceneWidth.doubleValue()-scVert.getWidth());
 
-		             scHoriz.setLayoutX(newSceneWidth.doubleValue()-scene.getWidth());
-		             scHoriz.setPrefWidth(newSceneWidth.doubleValue()-scVert.getWidth());
 		         }
 		     });
 		     scene.heightProperty().addListener(new ChangeListener<Number>() {
@@ -522,7 +519,6 @@ public class Main extends Application {
 		             scVert.setLayoutY(newSceneHeight.doubleValue()-scene.getHeight());
 		             scVert.setPrefHeight(newSceneHeight.doubleValue());
 
-		             scHoriz.setLayoutY(newSceneHeight.doubleValue()-scHoriz.getHeight());
 		         }
 		     });
 
@@ -530,34 +526,19 @@ public class Main extends Application {
 		     scVert.setLayoutX(scene.getWidth()-scVert.getWidth());
 		     scVert.setOrientation(Orientation.VERTICAL);
 
-		     scHoriz.setOrientation(Orientation.HORIZONTAL);
-		     scHoriz.setPrefSize(scene.getWidth()-scVert.getWidth(), 20);
-		     scHoriz.setLayoutY(scene.getHeight()-scHoriz.getPrefHeight());
-
-
 		     // code to make sliding the scrollbar affect the grid
 		     scVert.valueProperty().addListener(new ChangeListener<Number>() {
 		         // new_val is a double from 0 - 100
 		         public void changed(ObservableValue<? extends Number> ov,
 		                 Number old_val, Number new_val) {
 		             double test = ((67.5*list.size())-scVert.getPrefHeight())/scVert.getPrefHeight();
-		             System.out.println(test + " " + new_val.doubleValue());
-		             grid.setLayoutY(-new_val.doubleValue()*6*test); // TODO get math right so the scrollbar looks ok
-		         } // extra / scrollbar's height
-		         // extra == total - scrollbar's height
-		         // total = 10 + 10 from hbox spacing per row, 3 rows per 2 teams --> 1.5 , height of stuff which is 25?
-		         // 45 x 1.5 = 67.5 per team(list.size())
+		             grid.setLayoutY(-new_val.doubleValue()*6*test); 
+		         } 
 
 		     });
-		     scHoriz.valueProperty().addListener(new ChangeListener<Number>() {
-		         public void changed(ObservableValue<? extends Number> ov,
-		                 Number old_val, Number new_val) {
-		             grid.setLayoutX(-new_val.doubleValue()*list.size()/3);
-		         }
-		     });
+
 		 }
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
 
 		 primaryStage.setScene(scene);
 		 primaryStage.show();
