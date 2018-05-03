@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
-	private static int[] allowedTeams = {0,1,2,4,8,16,32,64};
+	private static int[] allowedTeams = {0,1,2,4,8,16};
 	private GridPane grid = new GridPane();
 	
 	/***
