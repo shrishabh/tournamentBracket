@@ -236,10 +236,27 @@ public class Main extends Application {
 	{
 		HBox C = null; //didn't win 1st or 2nd
 		HBox D = null; //didn't win 1st or 2nd
-		//Get C and D here
+		for(int i=0; i<semiFinals.length; i++)
+		{
+			if(!((Label) A.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
+					!((Label) B.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()))
+			{
+				C = semiFinals[i];
+				i = 4;
+			}
+		}
+		for(int i=0; i<semiFinals.length; i++)
+		{
+			if(!((Label) A.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
+					!((Label) B.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
+							!((Label) C.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()))
+			{
+				D = semiFinals[i];
+				i = 4;
+			}
+		}
 		TextField t1 = (TextField) C.getChildren().get(1);
 		TextField t2 = (TextField) D.getChildren().get(1);
-		System.out.println(t1.getText() + "//" + t2.getText());
 		int scoreC = Integer.parseInt(t1.getText());
 		int scoreD = Integer.parseInt(t2.getText());
 		if(scoreC < scoreD)
