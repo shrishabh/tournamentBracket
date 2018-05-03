@@ -21,11 +21,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -130,6 +131,7 @@ public class Main extends Application {
 	    score.setPrefWidth(50);
         placeholder.getChildren().addAll(getLabel("____"), score);
         placeholder.setAlignment(Pos.CENTER);
+        
         return placeholder;
 	}
 	/**
@@ -155,8 +157,9 @@ public class Main extends Application {
 	    // literally used just to create uniqe ID
         b.setId(new Integer(7*idHelper + 31*column).toString());
         GridPane.setHalignment(b, HPos.CENTER);
+        GridPane.setHgrow(b, Priority.ALWAYS);
         b.setPrefHeight(5);
-       
+        
         b.setOnAction(new EventHandler<ActionEvent>() {  // when button is clicked, this will run
             @Override
             public void handle(ActionEvent event) {
@@ -205,10 +208,13 @@ public class Main extends Application {
                     b.setDisable(true);
                     Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, rowPos)).getChildren().get(0);
                     if (score > score2) {       // lab wins
-                        if(l.getText() == "CHAMPION?" )
+                        if(l.getText() == "CHAMPION?" )  // make sure to change this if we want something other than "CHAMPION?"
                         {
                         	l.setTextFill(Color.GOLD);
+                        	l.setStyle("-fx-font: 24 arial;");
+                        	l.autosize();
                         	lab2.setTextFill(Color.SILVER);
+                        	lab2.setStyle("-fx-font: 22 arial;");
                         	if(list.size() > 2)
                         	{
                         		setThird((HBox) node, (HBox) node2);
@@ -218,10 +224,12 @@ public class Main extends Application {
                     } else {                    // lab2 wins
                         if(l.getText() == "CHAMPION?" )
                         {
-                        	l.setTextFill(Color.GOLD);
-                        	lab.setTextFill(Color.SILVER);
-                        	if(list.size() > 2)
-                        	{
+                            l.setTextFill(Color.GOLD);
+                            l.setStyle("-fx-font: 24 arial;");
+                            lab.setTextFill(Color.SILVER);
+                            lab.setStyle("-fx-font: 22 arial;");
+                            if(list.size() > 2)
+                            {
                         		setThird((HBox) node, (HBox) node2);
                         	}
                         }
@@ -270,11 +278,22 @@ public class Main extends Application {
 		int scoreD = Integer.parseInt(t2.getText());
 		if(scoreC < scoreD)
 		{
-			((Label) D.getChildren().get(0)).setTextFill(Color.BLACK);
+			((Label) D.getChildren().get(0)).setTextFill(Color.BISQUE);
+			((Label) D.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
 		}
-		else
+		else if (scoreC > scoreD)
 		{
-			((Label) C.getChildren().get(0)).setTextFill(Color.BLACK);
+			((Label) C.getChildren().get(0)).setTextFill(Color.BISQUE);
+			((Label) C.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
+		} 
+		else 
+		{
+		    ((Label) C.getChildren().get(0)).setTextFill(Color.BISQUE);
+            ((Label) C.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
+            
+            ((Label) D.getChildren().get(0)).setTextFill(Color.BISQUE);
+            ((Label) D.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
+            
 		}
 		
 	}
