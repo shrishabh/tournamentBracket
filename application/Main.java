@@ -65,11 +65,15 @@ public class Main extends Application {
 		int lenList = 2;
 		int newLenList;
 		int counter;
+		System.out.println("A");
+		if(numTeams == 1)
+		{
+			return matchupList;
+		}
 		while (lenList != numTeams) {
 			matchupList = modifyList(matchupList,lenList);
 			newLenList = 2*lenList;
 			counter = 1;
-			
 			for (int i = newLenList; i > lenList ; i--) {
 				matchupList.set(matchupList.indexOf(counter)+1, i);
 				counter = counter + 1;
@@ -316,15 +320,10 @@ public class Main extends Application {
 //        primaryStage.setWidth(bounds.getWidth());
 //        primaryStage.setHeight(bounds.getHeight());
 		int numTeams = list.size();
-		System.out.println("A");
 		List<Integer> matchup = getMatchups(numTeams);
-		System.out.println("A");
 		Iterator<Integer> itr = matchup.iterator();
-		System.out.println("A");
 		Iterator<Integer> itr2 = matchup.iterator();
-		System.out.println("A");
 		 Label teams[] = new Label[list.size()];
-			System.out.println("A");
 		 for(int i = 0; i<teams.length; i++)
 		 {				
 			 teams[i]= getLabel(list.get(i).getName());
