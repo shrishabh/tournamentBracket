@@ -50,8 +50,7 @@ public class Main extends Application {
 		else if (length == 4 ) return 5 ;
 		else if (length == 8) return 7;
 		else if (length == 16) return 9;
-		else if (length == 32) return 11;
-		return 13;
+		return 0;
 	}
 
 	/****
@@ -543,7 +542,7 @@ public class Main extends Application {
 		                 Number old_val, Number new_val) {
 		             double test = ((67.5*list.size())-scVert.getPrefHeight())/scVert.getPrefHeight();
 		             System.out.println(test + " " + new_val.doubleValue());
-		             grid.setLayoutY(-new_val.doubleValue()*test); // TODO get math right so the scrollbar looks ok
+		             grid.setLayoutY(-new_val.doubleValue()*6*test); // TODO get math right so the scrollbar looks ok
 		         } // extra / scrollbar's height
 		         // extra == total - scrollbar's height
 		         // total = 10 + 10 from hbox spacing per row, 3 rows per 2 teams --> 1.5 , height of stuff which is 25?
