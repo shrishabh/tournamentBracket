@@ -36,6 +36,7 @@ public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
 	private static int[] allowedTeams = {0,1,2,4,8,16};
 	private GridPane grid = new GridPane();
+	private HBox[] semiFinals = new HBox[4];
 	
 	/***
 	 * Function to get number of columns based on how many rounds there will be. This
@@ -205,6 +206,7 @@ public class Main extends Application {
                         {
                         	l.setTextFill(Color.GOLD);
                         	lab2.setTextFill(Color.SILVER);
+                        	setThird((HBox) node, (HBox) node2);
                         }
                         l.setText(lab.getText());
                     } else {                    // lab2 wins
@@ -212,6 +214,7 @@ public class Main extends Application {
                         {
                         	l.setTextFill(Color.GOLD);
                         	lab.setTextFill(Color.SILVER);
+                        	setThird((HBox) node, (HBox) node2);
                         }
                         l.setText(lab2.getText());
                     }
@@ -224,6 +227,31 @@ public class Main extends Application {
         
         return b;
     }
+	/**
+	 * Turns 3rd place's Label Black to represent 3rd
+	 * @param A One of the finalists
+	 * @param B The other finalists
+	 */
+	private void setThird(HBox A, HBox B)
+	{
+		HBox C = null; //didn't win 1st or 2nd
+		HBox D = null; //didn't win 1st or 2nd
+		//Get C and D here
+		TextField t1 = (TextField) C.getChildren().get(1);
+		TextField t2 = (TextField) D.getChildren().get(1);
+		System.out.println(t1.getText() + "//" + t2.getText());
+		int scoreC = Integer.parseInt(t1.getText());
+		int scoreD = Integer.parseInt(t2.getText());
+		if(scoreC < scoreD)
+		{
+			((Label) D.getChildren().get(0)).setTextFill(Color.BLACK);
+		}
+		else
+		{
+			((Label) C.getChildren().get(0)).setTextFill(Color.BLACK);
+		}
+		
+	}
 	/**
 	 * Finds the node at the given coordinates within the gridPane
 	 * @param gridPane	The given gridPane
@@ -364,6 +392,7 @@ public class Main extends Application {
 		 else if(teams.length >= 2) 
 		 {
 		     // there's a lot of variables but they're all needed
+			 boolean half= false;
 			 int i = 0; int row = 0; int incReset; int powerCount = 2; int spacing = 0;
 			 while(itr.hasNext())
 			 { 
@@ -372,6 +401,7 @@ public class Main extends Application {
 				 int teamB = itr.next()-1;
 				 grid.add(teamsScore[teamA], 0, row);
 				 grid.add(submitButtons[i/2], 1, row, 1, 2);
+
 				 while (incReset < list.size()/powerCount) {
 				     double numGames = (double)list.size()/(powerCount*2);
 				     if (powerCount != list.size())
@@ -381,6 +411,20 @@ public class Main extends Application {
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1);  
 				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));
 				        	 grid.add(createButton(incReset*3, matchupPos, i+2), i+3, spacing*(incReset+1)-1, 1, 2);
+				        	 if(powerCount*4 == list.size() && list.size() > 2)
+				        	 {
+				        		 if(!half)
+				        		 {
+				        			 semiFinals[0] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1)-1);
+									 semiFinals[1] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1));
+									 half = true;
+				        		 }
+				        		 else
+				        		 {
+				        			 semiFinals[2] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1)-1);
+									 semiFinals[3] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1));
+				        		 } 
+				        	 }
 				         } else 
 				             grid.add(createFinalPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
 				         
