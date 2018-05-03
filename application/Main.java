@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private static List<Challenger> list = new ArrayList<Challenger>();
-	private static int[] allowedTeams = {0,1,2,4,8,16};
+	private static int[] allowedTeams = {1,2,4,8,16};
 	private GridPane grid = new GridPane();
 	private HBox[] semiFinals = new HBox[4];
 	
@@ -315,14 +315,16 @@ public class Main extends Application {
 //        primaryStage.setY(bounds.getMinY());
 //        primaryStage.setWidth(bounds.getWidth());
 //        primaryStage.setHeight(bounds.getHeight());
-	    
 		int numTeams = list.size();
+		System.out.println("A");
 		List<Integer> matchup = getMatchups(numTeams);
-
+		System.out.println("A");
 		Iterator<Integer> itr = matchup.iterator();
+		System.out.println("A");
 		Iterator<Integer> itr2 = matchup.iterator();
-		
+		System.out.println("A");
 		 Label teams[] = new Label[list.size()];
+			System.out.println("A");
 		 for(int i = 0; i<teams.length; i++)
 		 {				
 			 teams[i]= getLabel(list.get(i).getName());
@@ -347,7 +349,6 @@ public class Main extends Application {
 		         count++;
 		     }
 		 }
-		 
 		 TextField score;
 		 
 		 
@@ -406,9 +407,9 @@ public class Main extends Application {
       }
         
 		primaryStage.setTitle("Tournament Bracket");
-		
 		 if(teams.length == 1)
 		 {
+			 ((Label) teamsScore[0].getChildren().get(0)).setTextFill(Color.GOLD);
 			 grid.add(teamsScore[0], 0, 0);
 		 }
 		 
@@ -448,9 +449,15 @@ public class Main extends Application {
 									 semiFinals[3] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1));
 				        		 } 
 				        	 }
-				         } else 
+				         } 
+				         else if(spacing*(incReset+1)-1 > 0)
+				         {
 				             grid.add(createFinalPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
-				         
+				         }
+				         else
+				         {
+				        	 grid.add(createFinalPlaceHolder(), i+2, spacing*(incReset+1), 1, 2);
+				         }
 				         incReset+=2;
 				 }
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
