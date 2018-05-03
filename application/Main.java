@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -159,6 +160,7 @@ public class Main extends Application {
         GridPane.setHalignment(b, HPos.CENTER);
         GridPane.setHgrow(b, Priority.ALWAYS);
         b.setPrefHeight(5);
+        
         
         b.setOnAction(new EventHandler<ActionEvent>() {  // when button is clicked, this will run
             @Override
@@ -500,7 +502,7 @@ public class Main extends Application {
 		 }
 
 		 Group root = new Group();
-		 Scene scene = new Scene(root, 1000, 800, Color.DARKGRAY);
+		 Scene scene = new Scene(root, 2000, 1200, Color.WHITE);
 	     root.getChildren().add(grid);
 	      
 		 if (list.size() > 8) {
@@ -539,7 +541,8 @@ public class Main extends Application {
 
 		 }
 		 scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
-
+		 ScrollPane sp = new ScrollPane();
+		 sp.setContent(grid);
 		 primaryStage.setScene(scene);
 		 primaryStage.show();
 	
