@@ -205,9 +205,11 @@ public class Main extends Application {
                 } catch (NumberFormatException e){
                     System.out.println("Please enter in a valid score");
                     printed = true;
+                    return;
                 }
                 if (!printed && (score < 0 || score2 < 0)) {
                     System.out.println("Please enter in a valid score");
+                    return;
                 }
                 else if (score != score2) {
 
