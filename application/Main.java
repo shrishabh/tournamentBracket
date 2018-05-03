@@ -531,7 +531,7 @@ public class Main extends Application {
 		         // new_val is a double from 0 - 100
 		         public void changed(ObservableValue<? extends Number> ov,
 		                 Number old_val, Number new_val) {
-		             double test = ((67.5*list.size())-scVert.getPrefHeight())/scVert.getPrefHeight();
+		             double test = ((80*list.size())-scVert.getPrefHeight())/scVert.getPrefHeight();
 		             grid.setLayoutY(-new_val.doubleValue()*6*test); 
 		         } 
 
