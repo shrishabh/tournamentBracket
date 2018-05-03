@@ -221,27 +221,22 @@ public class Main extends Application {
                         if(l.getText() == "CHAMPION?" )  // make sure to change this if we want something other than "CHAMPION?"
                         {
                         	l.setTextFill(Color.GOLD);
-                        	l.setStyle("-fx-font: 24 arial;");
+                        	l.setStyle("-fx-font: 36 arial;");
                         	l.autosize();
                         	lab2.setTextFill(Color.SILVER);
                         	lab2.setStyle("-fx-font: 22 arial;");
-                        	if(list.size() > 2)
-                        	{
-                        		setThird((HBox) node, (HBox) node2);
-                        	}
+                        	setThird((HBox) node, (HBox) node2, list.size());
+                        	
                         }
                         l.setText(lab.getText());
                     } else {                    // lab2 wins
                         if(l.getText() == "CHAMPION?" )
                         {
                             l.setTextFill(Color.GOLD);
-                            l.setStyle("-fx-font: 24 arial;");
+                            l.setStyle("-fx-font: 36 arial;");
                             lab.setTextFill(Color.SILVER);
                             lab.setStyle("-fx-font: 22 arial;");
-                            if(list.size() > 2)
-                            {
-                        		setThird((HBox) node, (HBox) node2);
-                        	}
+                        	setThird((HBox) node, (HBox) node2, list.size());
                         }
                         l.setText(lab2.getText());
                     }
@@ -255,57 +250,63 @@ public class Main extends Application {
         return b;
     }
 	/**
-	 * Turns 3rd place's Label Black to represent 3rd
+	 * Turns 3rd place's Label a different color to represent 3rd
+	 * and slightly increases font size
+	 * 
 	 * @param A One of the finalists
 	 * @param B The other finalists
 	 */
-	private void setThird(HBox A, HBox B)
+	private void setThird(HBox A, HBox B, int numTeams)
 	{
-		HBox C = null; //didn't win 1st or 2nd
-		HBox D = null; //didn't win 1st or 2nd
-		for(int i=0; i<semiFinals.length; i++)
-		{
-			if(!((Label) A.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
-					!((Label) B.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()))
-			{
-				C = semiFinals[i];
-				i = 4;
-			}
-		}
-		for(int i=0; i<semiFinals.length; i++)
-		{
-			if(!((Label) A.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
-					!((Label) B.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
-							!((Label) C.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()))
-			{
-				D = semiFinals[i];
-				i = 4;
-			}
-		}
-		TextField t1 = (TextField) C.getChildren().get(1);
-		TextField t2 = (TextField) D.getChildren().get(1);
-		int scoreC = Integer.parseInt(t1.getText());
-		int scoreD = Integer.parseInt(t2.getText());
-		if(scoreC < scoreD)
-		{
-			((Label) D.getChildren().get(0)).setTextFill(Color.BISQUE);
-			((Label) D.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
-		}
-		else if (scoreC > scoreD)
-		{
-			((Label) C.getChildren().get(0)).setTextFill(Color.BISQUE);
-			((Label) C.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
-		} 
-		else 
-		{
-		    ((Label) C.getChildren().get(0)).setTextFill(Color.BISQUE);
-            ((Label) C.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
-            
-            ((Label) D.getChildren().get(0)).setTextFill(Color.BISQUE);
+	    if (numTeams == 1 || numTeams == 2) {
+	        return;
+	    }
+	    
+        HBox C = null; //didn't win 1st or 2nd
+        HBox D = null; //didn't win 1st or 2nd
+        
+        for(int i=0; i<semiFinals.length; i++)
+        {
+            if(!((Label) A.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
+                    !((Label) B.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()))
+            {
+                C = semiFinals[i];
+                i = 4;
+            }
+        }
+        for(int i=0; i<semiFinals.length; i++)
+        {
+            if(!((Label) A.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
+                    !((Label) B.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()) &&
+                    !((Label) C.getChildren().get(0)).getText().equals(((Label) semiFinals[i].getChildren().get(0)).getText()))
+            {
+                D = semiFinals[i];
+                i = 4;
+            }
+        }
+        TextField t1 = (TextField) C.getChildren().get(1);
+        TextField t2 = (TextField) D.getChildren().get(1);
+        int scoreC = Integer.parseInt(t1.getText());
+        int scoreD = Integer.parseInt(t2.getText());
+        if(scoreC < scoreD)
+        {
+            ((Label) D.getChildren().get(0)).setTextFill(Color.CHOCOLATE);
             ((Label) D.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
-            
-		}
-		
+        }
+        else if (scoreC > scoreD)
+        {
+            ((Label) C.getChildren().get(0)).setTextFill(Color.CHOCOLATE);
+            ((Label) C.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
+        } 
+        else 
+        {
+            ((Label) C.getChildren().get(0)).setTextFill(Color.CHOCOLATE);
+            ((Label) C.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
+
+            ((Label) D.getChildren().get(0)).setTextFill(Color.CHOCOLATE);
+            ((Label) D.getChildren().get(0)).setStyle("-fx-font: 20 arial;");
+
+        }
 	}
 	/**
 	 * Finds the node at the given coordinates within the gridPane
@@ -392,7 +393,6 @@ public class Main extends Application {
 			 teamsScore[i].getChildren().addAll(teams[i], score);
 			 teamsScore[i].setAlignment(Pos.CENTER);
 		 }
-
 		 
 		 // creates a a button for each game in the first round
 		 Button[] submitButtons = new Button[teams.length/2];
@@ -406,7 +406,7 @@ public class Main extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         
-        grid.setPadding(new Insets(10)); // TODO comment this, I'm not sure what it does
+        grid.setPadding(new Insets(15, 15, 15, 15)); // TODO comment this, I'm not sure what it does
         
         int subCol = numCol - list.size();
         
@@ -442,6 +442,9 @@ public class Main extends Application {
 		 
 		 else if(teams.length >= 2) 
 		 {
+		     if (teams.length == 4) { // special case
+		         semiFinals = teamsScore;
+		     }
 		     // there's a lot of variables but they're all needed
 			 boolean half= false;
 			 int i = 0; int row = 0; int incReset; int powerCount = 2; int spacing = 0;
@@ -455,43 +458,42 @@ public class Main extends Application {
 
 				 while (incReset < list.size()/powerCount) {
 				     double numGames = (double)list.size()/(powerCount*2);
-				     if (powerCount != list.size())
-				         spacing = (int)((list.size()*1.5-2*numGames)/(numGames+1));  
-				         
-				         if (powerCount != list.size()) { // if it's not the last round where the champion is crowned
-				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1);  
-				             grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));
-				        	 grid.add(createButton(incReset*3, matchupPos, i+2), i+3, spacing*(incReset+1)-1, 1, 2);
-				        	 if(powerCount*4 == list.size() && list.size() > 2)
-				        	 {
-				        		 if(!half)
-				        		 {
-				        			 semiFinals[0] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1)-1);
-									 semiFinals[1] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1));
-									 half = true;
-				        		 }
-				        		 else
-				        		 {
-				        			 semiFinals[2] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1)-1);
-									 semiFinals[3] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1));
-				        		 } 
-				        	 }
-				         } 
-				         else if(spacing*(incReset+1)-1 > 0)
+
+				     if (powerCount != list.size()) { // if it's not the last round where the champion is crowned
+				         spacing = (int)((list.size()*1.5-2*numGames)/(numGames+1)); 
+				         grid.add(createPlaceHolder(), i+2, spacing*(incReset+1)-1);  
+				         grid.add(createPlaceHolder(), i+2, spacing*(incReset+1));
+				         grid.add(createButton(incReset*3, matchupPos, i+2), i+3, spacing*(incReset+1)-1, 1, 2);
+				         if(powerCount*4 == list.size() && list.size() > 2)
 				         {
-				             grid.add(createFinalPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
+				             if(!half && list.size() != 4)
+				             {
+				                 semiFinals[0] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1)-1);
+				                 semiFinals[1] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1));
+				                 half = true;
+				             }
+				             else if (half && list.size() != 4)
+				             {
+				                 semiFinals[2] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1)-1);
+				                 semiFinals[3] = (HBox) getNodeFromGridPane(grid, i+2, spacing*(incReset+1));
+				             }
 				         }
-				         else
-				         {
-				        	 grid.add(createFinalPlaceHolder(), i+2, spacing*(incReset+1), 1, 2);
-				         }
-				         incReset+=2;
+				     } 
+				     else if(spacing*(incReset+1)-1 > 0)
+				     {
+				         grid.add(createFinalPlaceHolder(), i+2, spacing*(incReset+1)-1, 1, 2);  
+				     }
+				     else
+				     {
+				         grid.add(createFinalPlaceHolder(), i+2, spacing*(incReset+1), 1, 2);
+				     }
+				     incReset+=2;
 				 }
 				 GridPane.setHalignment(submitButtons[i/3], HPos.CENTER);
 				 grid.add(teamsScore[teamB], 0, row+1);
 				 i = i+2;
 				 row = row+3;
-				 
+
 				 powerCount*=2;
 
 			 }
