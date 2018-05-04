@@ -117,7 +117,7 @@ public class Main extends Application {
 	 */
 	private Label getLabel(String name) {
 		Label newLabel = new Label(name);
-		newLabel.setTextFill(Color.CRIMSON);
+		newLabel.setTextFill(Color.BLACK);
 		newLabel.setFont(Font.font("Arial", 18));
 		newLabel.setPrefHeight(25);
 		return newLabel;
@@ -502,7 +502,7 @@ public class Main extends Application {
 		 }
 
 		 Group root = new Group();
-		 Scene scene = new Scene(root, 2000, 1000, Color.WHITE);
+		 Scene scene = new Scene(root, 2000, 1000, Color.ALICEBLUE);
 	     root.getChildren().add(grid);
 	      
 		 if (list.size() > 8) {
