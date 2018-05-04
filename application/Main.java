@@ -27,7 +27,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -140,7 +139,7 @@ public class Main extends Application {
 	 */
 	private HBox createFinalPlaceHolder() {
         HBox placeholder = new HBox(10);
-        placeholder.getChildren().addAll(getLabel("CHAMPION?")); // TODO not sure what to put here, up to you
+        placeholder.getChildren().addAll(getLabel("CHAMPION?"));
         placeholder.setAlignment(Pos.CENTER);
         return placeholder;
     }
@@ -173,13 +172,7 @@ public class Main extends Application {
                 
                 Label lab = ((Label) ((HBox) node).getChildren().get(0));
                 Label lab2 = ((Label) ((HBox) node2).getChildren().get(0));
-                // TODO what if a team's name is literally "____" from the txt file?
-                // We might have to put a boolean somewhere to check for this
-                // don't really feel like doing that so if u wanna ignore that or put something more 
-                // random that would never be in a name list that's up to you
-                // TODO delete this block of comments
-                
-                // do nothing but print if challengers haven't completed their necessary games
+
                 if (lab.getText().equals("____") || lab2.getText().equals("____")) {
                     System.out.println("Please submit earlier rounds before coming to this one");
                     return;
@@ -220,7 +213,7 @@ public class Main extends Application {
                     b.setDisable(true);
                     Label l = (Label) ((HBox) getNodeFromGridPane(grid, column+2, rowPos)).getChildren().get(0);
                     if (score > score2) {       // lab wins
-                        if(l.getText() == "CHAMPION?" )  // make sure to change this if we want something other than "CHAMPION?"
+                        if(l.getText() == "CHAMPION?" ) 
                         {
                         	l.setTextFill(Color.GOLD);
                         	l.setStyle("-fx-font: 36 arial;");
@@ -342,14 +335,6 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-			 //Testing a piece of code - Rishabh
-//		Screen screen = Screen.getPrimary();  // TODO delete if unnecessary, I want to clean this code up
-//        Rectangle2D bounds = screen.getVisualBounds();
-//
-//        primaryStage.setX(bounds.getMinX());
-//        primaryStage.setY(bounds.getMinY());
-//        primaryStage.setWidth(bounds.getWidth());
-//        primaryStage.setHeight(bounds.getHeight());
 		int numTeams = list.size();
 		List<Integer> matchup = getMatchups(numTeams);
 		Iterator<Integer> itr = matchup.iterator();
@@ -408,11 +393,10 @@ public class Main extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         
-        grid.setPadding(new Insets(15, 15, 15, 15)); // TODO comment this, I'm not sure what it does
+        grid.setPadding(new Insets(15, 15, 15, 15));
         
         int subCol = numCol - list.size();
         
-        // TODO add comment for this for loop
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             if (i%2 == 1) colConst.setPercentWidth(30.0 / subCol);
@@ -420,7 +404,6 @@ public class Main extends Application {
             grid.getColumnConstraints().add(colConst);
         }
 
-        // TODO add comment for this for loop
         for (int i = 0; i < numCol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCol);
@@ -428,7 +411,6 @@ public class Main extends Application {
         }
         
 
-        // TODO add comment for this for loop
         for (int i = 0; i < list.size(); i++) {
           RowConstraints rowConst = new RowConstraints(); 
           rowConst.setPercentHeight(100.0/list.size());
@@ -589,26 +571,6 @@ public class Main extends Application {
 		}
 		return checkPassed;
 		
-	}
-	/**
-	 * Checks which Challenger won in a match up between the two teams
-	 * @param team1
-	 * @param team2
-	 * @return	Returns the winning team.
-	 */
-	private Challenger getWinner(Challenger team1, Challenger team2) {
-		if (team1.getScore() > team2.getScore()) {
-			return team1;
-		}
-		else if (team1.getScore() < team2.getScore()) {
-			return team2;
-		}
-		else {
-			if (team1.getSeed() > team2.getSeed()) {
-				return team1;
-			}
-			else return team2;
-		}
 	}
 	
 	public static void main(String[] args) {
