@@ -502,7 +502,7 @@ public class Main extends Application {
 		 }
 
 		 Group root = new Group();
-		 Scene scene = new Scene(root, 2000, 1000, Color.ALICEBLUE);
+		 Scene scene = new Scene(root, 1000, 800, Color.ALICEBLUE);
 	     root.getChildren().add(grid);
 	      
 		 if (list.size() > 8) {
